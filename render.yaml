@@ -1,0 +1,33 @@
+databases:
+  - name: zombie-night-db
+    plan: basic-256mb
+
+services:
+  - type: web
+    name: zombie-night
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.1
+      - key: DATABASE_URL
+        fromDatabase:
+          name: zombie-night-db
+          property: connectionString
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: ADSGRAM_SECRET
+        generateValue: true
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_ID
+        sync: false
+      - key: SUPPORT_CONTACT
+        sync: false
+      - key: APP_LINK
+        sync: false
+      - key: ADSGRAM_BLOCK_ID
+        sync: false
