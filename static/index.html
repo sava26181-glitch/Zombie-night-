@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Дожить до рассвета</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script><!--TG-SDK-->
+<style>
+:root{--bg:#0d0f18;--panel:#191c2a;--line:#2b3044;--ink:#f3ead6;--dim:#9b9fb4;--hot:#ff6b3d;--gold:#ffc857;--ok:#6fdc8c;--bad:#ff4d5e}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:15px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden;overscroll-behavior:none}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.layer{position:fixed;inset:0;display:none;flex-direction:column;padding:max(12px,env(safe-area-inset-top)) 14px max(10px,env(safe-area-inset-bottom))}
+.layer.on{display:flex}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-action:manipulation}
+#top{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.coins{color:var(--gold);font-variant-numeric:tabular-nums}
+.badge{font-size:12px;color:#14110a;background:var(--gold);padding:2px 7px;border-radius:99px;margin-left:6px}
+#page{flex:1;min-height:0;overflow-y:auto;padding:12px 0;-webkit-overflow-scrolling:touch}
+#menu.solid{background:var(--bg)}
+#page.center{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:18px}
+h1{font:900 clamp(44px,14.5vw,76px)/.92 Impact,"Arial Narrow",system-ui,sans-serif;letter-spacing:.5px;margin:0 0 10px;text-transform:uppercase;text-shadow:0 3px 0 #000}
+h1 em{font-style:normal;color:var(--hot)}
+h2{font-size:22px;margin:0 0 4px}
+.sub{color:var(--dim);margin:0 0 14px}
+.big{display:block;width:100%;min-height:58px;background:var(--hot);color:#190a04;font-weight:900;font-size:20px;border-radius:14px;box-shadow:0 5px 0 #a83a17;letter-spacing:.5px}
+.big:active{transform:translateY(3px);box-shadow:0 2px 0 #a83a17}
+.ghost{display:block;width:100%;min-height:48px;background:var(--panel);border:1px solid var(--line);border-radius:12px;font-weight:700;margin-top:9px}
+.ghost.gold{border-color:var(--gold);color:var(--gold)}
+.row{display:flex;gap:12px;margin-bottom:14px;font-variant-numeric:tabular-nums}
+.row div{flex:1;background:rgba(25,28,42,.82);border:1px solid var(--line);border-radius:12px;padding:8px 11px}
+.row b{display:block;font-size:20px}.row span{font-size:12px;color:var(--dim)}
+.card{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:11px 12px;margin-bottom:9px}
+.card .t{flex:1;min-width:0}.card b{display:block}.card small{color:var(--dim)}
+.buy{min-width:88px;min-height:44px;padding:0 10px;border-radius:10px;background:var(--gold);color:#17120a;font-weight:800;font-variant-numeric:tabular-nums}
+.buy.star{background:none;border:1px solid var(--gold);color:var(--gold)}
+.buy:disabled{background:#333849;color:#7f8499}
+.pips{display:flex;gap:2px;margin-top:5px}.pips i{height:4px;flex:1;background:#2c3145;border-radius:2px}.pips i.on{background:var(--hot)}
+.lb{display:flex;padding:9px 4px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.lb.me{color:var(--gold);font-weight:800}.lb span:first-child{width:36px;color:var(--dim)}.lb span:nth-child(2){flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#nav{display:flex;gap:3px;border-top:1px solid var(--line);padding-top:7px;background:var(--bg);margin:0 -14px;padding-left:8px;padding-right:8px}
+#nav button{flex:1;min-height:50px;font-size:11.5px;color:var(--dim);border-radius:10px}
+#nav button i{display:block;font-style:normal;font-size:20px;line-height:1.2}
+#nav button.on{color:var(--ink);background:var(--panel)}
+#hud{pointer-events:none;justify-content:flex-start}
+.bar{height:11px;background:#000a;border:1px solid #fff3;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;width:100%;transition:width .08s linear}
+#hp i{background:var(--bad)}#xp{height:6px;margin-top:4px}#xp i{background:#62c5ff}
+#hudrow{display:flex;justify-content:space-between;margin-top:7px;font-weight:800;font-variant-numeric:tabular-nums;text-shadow:0 1px 3px #000}
+#clock{font-size:21px}
+#say{position:absolute;top:21%;left:0;right:0;text-align:center;font:900 30px Impact,system-ui,sans-serif;color:var(--gold);text-shadow:0 2px 0 #000;opacity:0;transition:opacity .25s;padding:0 14px}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:#05060bd9;padding:18px;z-index:5}
+.modal.on{display:flex}
+.box{width:100%;max-width:400px;background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:18px;max-height:100%;overflow:auto}
+.box h2{text-align:center;font:900 32px Impact,system-ui,sans-serif;letter-spacing:.5px;margin-bottom:6px}
+.box .sub{text-align:center}
+.perk{width:100%;text-align:left;margin-bottom:9px;min-height:64px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:10px 13px}
+.perk:active{border-color:var(--hot)}.perk b{display:block;font-size:17px}.perk small{color:var(--dim)}
+.gain{text-align:center;color:var(--gold);font:900 44px Impact,system-ui,sans-serif;margin:4px 0 12px}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#000e;border:1px solid var(--line);padding:9px 14px;border-radius:10px;z-index:9;opacity:0;transition:opacity .2s;pointer-events:none;max-width:88%;text-align:center}
+#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<section id="menu" class="layer on">
+  <div id="top"><span id="who">Выживший</span><span class="coins" id="coins">0</span></div>
+  <div id="page" class="center"></div>
+  <nav id="nav"></nav>
+</section>
+
+<section id="hud" class="layer">
+  <div class="bar" id="hp"><i></i></div>
+  <div class="bar" id="xp"><i></i></div>
+  <div id="hudrow"><span id="kills">0</span><span id="clock">5:00</span><span id="lvl">ур. 1</span></div>
+  <div id="say"></div>
+</section>
+
+<div class="modal" id="modal"><div class="box" id="box"></div></div>
+<div id="toast"></div>
+
+<script>
+"use strict";
+const tg = window.Telegram && window.Telegram.WebApp;
+const initData = (tg && tg.initData) || "";
+const DEMO = !initData;
+if (tg) { tg.ready(); tg.expand(); try { tg.disableVerticalSwipes(); tg.setHeaderColor("#0d0f18"); tg.setBackgroundColor("#0d0f18"); } catch (e) {} }
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => Number(n).toLocaleString("ru-RU");
+function haptic(kind) { try { tg && tg.HapticFeedback.impactOccurred(kind); } catch (e) {} }
+let toastTimer;
+function toast(text) { const t = $("toast"); t.textContent = text; t.classList.add("on"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("on"), 2300); }
+
+/* ---------- Демо-режим: тот же API, но локально (вне Telegram) ---------- */
+const demo = (() => {
+  const UPG = [["damage","Патроны","+15% к урону",100],["rate","Затвор","+6% к скорострельности",120],["hp","Бронежилет","+15 к здоровью",90],["speed","Кроссовки","+4% к скорости",110],["magnet","Магнит","+20% к радиусу сбора",80],["dog","Пёс Бублик","+25% к укусу пса",150]];
+  let s = { coins: 300, best: 0, night: 1, levels: {}, streak: 0, day: 0, lastCoins: 0 };
+  try { s = Object.assign(s, JSON.parse(localStorage.getItem("night-demo") || "{}")); } catch (e) {}
+  const save = () => { try { localStorage.setItem("night-demo", JSON.stringify(s)); } catch (e) {} };
+  const today = () => Math.floor(Date.now() / 86400000);
+  const cost = (b, l) => Math.floor(b * Math.pow(1.55, l));
+  const profile = () => ({ id: 1, name: "Выживший", coins: s.coins, best: s.best, night: s.night, vip: false, friends: 0, streak: s.streak, dailyReady: s.day < today(), levels: s.levels,
+    upgrades: UPG.map(u => { const level = s.levels[u[0]] || 0; return { id: u[0], name: u[1], desc: u[2], level, max: 15, cost: level < 15 ? cost(u[3], level) : null }; }) });
+  return {
+    "/me": () => ({ profile: profile(), config: { dawn: 300, adsBlock: "", invite: "", refBonus: 500, packs: [{id:"coins_s",stars:25,coins:1500,title:"Горсть монет"},{id:"coins_m",stars:100,coins:8000,title:"Мешок монет"},{id:"coins_l",stars:350,coins:35000,title:"Сундук монет"},{id:"vip",stars:199,coins:2000,title:"VIP навсегда",vip:true}] } }),
+    "/daily": () => { if (s.day >= today()) throw new Error("Награда уже получена сегодня"); s.streak = s.day === today() - 1 ? s.streak + 1 : 1; const reward = 100 * Math.min(s.streak, 7); s.day = today(); s.coins += reward; save(); return { reward, profile: profile() }; },
+    "/upgrade": b => { const u = UPG.find(x => x[0] === b.id), l = s.levels[b.id] || 0, c = cost(u[3], l); if (s.coins < c) throw new Error("Не хватает монет"); s.coins -= c; s.levels[b.id] = l + 1; save(); return { profile: profile() }; },
+    "/run/start": () => ({ runId: "demo" }),
+    "/run/finish": b => { let coins = Math.floor((b.kills * 2 + Math.floor(b.seconds / 3)) * (1 + .25 * (s.night - 1))); if (b.dawn) coins += 300 * s.night; const score = b.kills * 10 + b.seconds * 2 + (b.dawn ? s.night * 1000 : 0); s.coins += coins; s.best = Math.max(s.best, score); if (b.dawn) s.night++; s.lastCoins = coins; save(); return { coins, score, dawn: !!b.dawn, profile: profile() }; },
+    "/ad/claim": () => { s.coins += s.lastCoins; save(); return { profile: profile() }; },
+    "/leaderboard": () => ({ me: 1, rank: 1, top: s.best ? [{ id: 1, name: "Выживший", best: s.best, night: s.night }] : [] }),
+    "/invoice": () => { throw new Error("В демо покупки отключены"); },
+  };
+})();
+
+async function api(path, body) {
+  if (DEMO) return demo[path](body || {});
+  const res = await fetch("/api" + path, { method: "POST", headers: { "Content-Type": "application/json", "X-Init-Data": initData }, body: JSON.stringify(body || {}) });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || "Нет связи с сервером");
+  return data;
+}
+
+/* ---------- Реклама ---------- */
+let adController = null;
+function adsReady() { return DEMO || !!adController; }
+function loadAds(block) {
+  if (!block || adController) return;
+  const s = document.createElement("script");
+  s.src = "https://sad.adsgram.ai/js/sad.min.js";
+  s.onload = () => { try { adController = window.Adsgram.init({ blockId: block }); } catch (e) {} };
+  document.head.appendChild(s);
+}
+function demoAd() {
+  return new Promise(ok => {
+    openModal('<h2>Реклама</h2><p class="sub">В настоящей игре здесь короткий ролик рекламодателя.</p>');
+    setTimeout(() => { closeModal(); ok(true); }, 1400);
+  });
+}
+async function showAd() {
+  if (DEMO) return demoAd();
+  if (!adController) return false;
+  try { const r = await adController.show(); return !!(r && r.done); } catch (e) { return false; }
+}
+
+/* ---------- Экраны меню ---------- */
+let P = null, CFG = null, tab = "home";
+const TABS = [["home","🌙","Ночь"],["up","🔧","Прокачка"],["shop","⭐","Магазин"],["top","🏆","Топ"],["friends","🐕","Друзья"]];
+$("nav").innerHTML = TABS.map(t => `<button data-tab="${t[0]}"><i>${t[1]}</i>${t[2]}</button>`).join("");
+$("nav").onclick = e => { const b = e.target.closest("button"); if (b) { tab = b.dataset.tab; render(); } };
+
+function setProfile(p) { P = p; $("coins").textContent = fmt(p.coins) + " монет"; $("who").innerHTML = esc(p.name || "Выживший") + (p.vip ? '<span class="badge">VIP</span>' : ""); }
+
+function render() {
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
+  const page = $("page");
+  page.classList.toggle("center", tab === "home");
+  $("menu").classList.toggle("solid", tab !== "home");
+  page.scrollTop = 0;
+  if (tab === "home") {
+    page.innerHTML = `<h1>Дожить<br>до <em>рассвета</em></h1>
+      <p class="sub">${P.night === 1 ? "Пять минут, толпа зомби и верный пёс." : "Ночь " + P.night + ". Они стали злее."}</p>
+      <div class="row"><div><b>${P.night}</b><span>ночь</span></div><div><b>${fmt(P.best)}</b><span>рекорд</span></div></div>
+      <button class="big" id="go">В НОЧЬ</button>
+      ${P.dailyReady ? `<button class="ghost gold" id="daily">Забрать награду за день</button>` : ""}
+      ${DEMO ? '<p class="sub" style="margin:10px 0 0;text-align:center;font-size:13px">Демо: без оплаты и общего рейтинга</p>' : ""}`;
+    $("go").onclick = startRun;
+    if (P.dailyReady) $("daily").onclick = async e => {
+      e.target.disabled = true;
+      try { const r = await api("/daily"); setProfile(r.profile); toast("+" + r.reward + " монет · серия " + r.profile.streak); render(); } catch (err) { toast(err.message); e.target.disabled = false; }
+    };
+  } else if (tab === "up") {
+    page.innerHTML = `<h2>Прокачка</h2><p class="sub">Остаётся навсегда, между ночами.</p>` + P.upgrades.map(u => `<div class="card"><div class="t"><b>${esc(u.name)}</b><small>${esc(u.desc)}</small><div class="pips">${Array.from({length:u.max},(_, i)=>`<i class="${i<u.level?"on":""}"></i>`).join("")}</div></div>
+      <button class="buy" data-up="${u.id}" ${u.cost === null || u.cost > P.coins ? "disabled" : ""}>${u.cost === null ? "Макс" : fmt(u.cost)}</button></div>`).join("");
+    page.onclick = async e => {
+      const b = e.target.closest("[data-up]"); if (!b || tab !== "up") return;
+      b.disabled = true;
+      try { const r = await api("/upgrade", { id: b.dataset.up }); setProfile(r.profile); haptic("medium"); render(); } catch (err) { toast(err.message); render(); }
+    };
+  } else if (tab === "shop") {
+    page.innerHTML = `<h2>Магазин</h2><p class="sub">Оплата звёздами Telegram.</p>` + CFG.packs.map(p => `<div class="card"><div class="t"><b>${esc(p.title)}</b><small>${p.vip ? "Двойные монеты навсегда + " : ""}${fmt(p.coins)} монет</small></div>
+      <button class="buy star" data-pack="${p.id}" ${p.vip && P.vip ? "disabled" : ""}>${p.vip && P.vip ? "Есть" : "⭐ " + p.stars}</button></div>`).join("");
+    page.onclick = async e => { const b = e.target.closest("[data-pack]"); if (b && tab === "shop") buy(b.dataset.pack, b); };
+  } else if (tab === "top") {
+    page.innerHTML = `<h2>Лучшие выжившие</h2><p class="sub">Загружаю…</p>`;
+    page.onclick = null;
+    api("/leaderboard").then(r => {
+      if (tab !== "top") return;
+      page.innerHTML = `<h2>Лучшие выжившие</h2><p class="sub">Твоё место: ${r.rank}</p>` + (r.top.length ? r.top.map((u, i) => `<div class="lb ${u.id === r.me ? "me" : ""}"><span>${i + 1}</span><span>${esc(u.name || "Без имени")}</span><span>${fmt(u.best)}</span></div>`).join("") : '<p class="sub">Пока пусто. Будь первым.</p>');
+    }).catch(err => { if (tab === "top") page.innerHTML = `<h2>Лучшие выжившие</h2><p class="sub">${esc(err.message)}</p>`; });
+  } else {
+    page.innerHTML = `<h2>Позови друзей</h2><p class="sub">Когда друг продержится 30 секунд, вы оба получите ${fmt(CFG.refBonus)} монет.</p>
+      <div class="row"><div><b>${P.friends}</b><span>друзей в игре</span></div><div><b>${fmt(P.friends * CFG.refBonus)}</b><span>монет заработано</span></div></div>
+      <button class="big" id="inv">ПОЗВАТЬ</button>`;
+    page.onclick = null;
+    $("inv").onclick = () => share("Спорим, не доживёшь до рассвета?");
+  }
+}
+
+function share(text) {
+  if (!CFG.invite || !tg) return toast(DEMO ? "В демо приглашения отключены" : "Ссылка пока не настроена");
+  tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(CFG.invite) + "&text=" + encodeURIComponent(text));
+}
+
+async function refresh() { const r = await api("/me"); setProfile(r.profile); CFG = r.config; loadAds(CFG.adsBlock); }
+
+async function buy(pack, btn) {
+  btn.disabled = true;
+  try {
+    const { link } = await api("/invoice", { pack });
+    tg.openInvoice(link, async status => {
+      if (status === "paid") {
+        toast("Оплачено. Начисляю…");
+        for (let i = 0; i < 6; i++) {
+          await new Promise(r => setTimeout(r, 1200));
+          const before = P.coins; await refresh();
+          if (P.coins !== before) break;
+        }
+        haptic("heavy");
+      }
+      if (tab === "shop") render();
+    });
+  } catch (err) { toast(err.message); }
+  btn.disabled = false;
+}
+
+function openModal(html) { $("box").innerHTML = html; $("modal").classList.add("on"); }
+function closeModal() { $("modal").classList.remove("on"); }
+
+/* ---------- Игра ---------- */
+const cv = $("c"), ctx = cv.getContext("2d");
+let W = 0, H = 0, DPR = 1, zoom = 1;
+function resize() { DPR = Math.min(2, window.devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * DPR; cv.height = H * DPR; zoom = Math.max(.85, Math.min(1.5, Math.min(W, H) / 400)); }
+addEventListener("resize", resize); resize();
+
+let G = null, runId = null, finishing = false;
+const input = { active: false, ox: 0, oy: 0, x: 0, y: 0, dx: 0, dy: 0 }, keys = {};
+addEventListener("keydown", e => { keys[e.code] = true; });
+addEventListener("keyup", e => { keys[e.code] = false; });
+cv.addEventListener("pointerdown", e => { if (!G) return; input.active = true; input.ox = input.x = e.clientX; input.oy = input.y = e.clientY; input.dx = input.dy = 0; });
+addEventListener("pointermove", e => {
+  if (!input.active) return;
+  let dx = e.clientX - input.ox, dy = e.clientY - input.oy; const d = Math.hypot(dx, dy), max = 56;
+  if (d > max) { input.ox += dx * (1 - max / d); input.oy += dy * (1 - max / d); dx = e.clientX - input.ox; dy = e.clientY - input.oy; }
+  input.x = e.clientX; input.y = e.clientY; input.dx = dx / max; input.dy = dy / max;
+});
+const release = () => { input.active = false; input.dx = input.dy = 0; };
+addEventListener("pointerup", release); addEventListener("pointercancel", release);
+
+let audio = null;
+function beep(freq, len, vol, type) {
+  try {
+    if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
+    const o = audio.createOscillator(), g = audio.createGain(), t = audio.currentTime;
+    o.type = type || "square"; o.frequency.setValueAtTime(freq, t); o.frequency.exponentialRampToValueAtTime(Math.max(40, freq * .5), t + len);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + len);
+    o.connect(g).connect(audio.destination); o.start(t); o.stop(t + len);
+  } catch (e) {}
+}
+
+const TYPES = {
+  walker: { hp: 20, speed: 60, dmg: 9, r: 13, color: "#8fae7a", gems: 1 },
+  runner: { hp: 12, speed: 122, dmg: 7, r: 11, color: "#d59a57", gems: 1 },
+  tank:   { hp: 120, speed: 42, dmg: 20, r: 20, color: "#6f7fb0", gems: 4 },
+  spitter:{ hp: 18, speed: 56, dmg: 6, r: 12, color: "#b58be0", gems: 2 },
+  boss:   { hp: 1300, speed: 74, dmg: 34, r: 34, color: "#c8485a", gems: 20 },
+};
+const PERKS = [
+  { id: "dmg",   name: "Экспансивные пули", d: "+30% к урону", f: g => g.s.dmg *= 1.3 },
+  { id: "rate",  name: "Быстрые руки", d: "+22% к скорострельности", f: g => g.s.delay /= 1.22 },
+  { id: "multi", name: "Второй ствол", d: "+1 пуля в залпе", max: 4, f: g => g.s.multi++ },
+  { id: "pierce",name: "Бронебойные", d: "Пуля пробивает ещё одного", max: 3, f: g => g.s.pierce++ },
+  { id: "speed", name: "Второе дыхание", d: "+14% к скорости", f: g => g.s.speed *= 1.14 },
+  { id: "heal",  name: "Аптечка", d: "Лечит 45 здоровья", f: g => g.p.hp = Math.min(g.s.hp, g.p.hp + 45) },
+  { id: "maxhp", name: "Живучесть", d: "+35 к здоровью", f: g => { g.s.hp += 35; g.p.hp += 35; } },
+  { id: "saw",   name: "Циркулярка", d: "Пила кружит вокруг тебя", max: 3, f: g => g.s.saws++ },
+  { id: "nade",  name: "Гранаты", d: "Сама летит в толпу", max: 3, f: g => g.s.nades++ },
+  { id: "dog",   name: "Злой Бублик", d: "Пёс кусает вдвое чаще", max: 2, f: g => g.s.dogRate *= 2 },
+];
+
+function newGame() {
+  const L = id => (P.levels && P.levels[id]) || 0;
+  return {
+    t: 0, kills: 0, lvl: 1, xp: 0, need: 5, spawn: 0, horde: 45, shot: 0, nade: 3, shake: 0, hurt: 0, revived: false, say: {}, over: false, pause: false,
+    night: P.night, dawn: CFG.dawn,
+    p: { x: 0, y: 0, hp: 100 + 15 * L("hp"), dirx: 1, step: 0 },
+    s: { dmg: 10 * (1 + .15 * L("damage")), delay: .42 / (1 + .06 * L("rate")), hp: 100 + 15 * L("hp"), speed: 128 * (1 + .04 * L("speed")), magnet: 70 * (1 + .2 * L("magnet")), dogDmg: 14 * (1 + .25 * L("dog")), dogRate: 1, multi: 1, pierce: 0, saws: 0, nades: 0 },
+    dog: { x: -30, y: 20, cd: 0, step: 0, dirx: 1 }, taken: {},
+    zs: [], bullets: [], shots: [], gems: [], parts: [], blasts: [], moveA: null,
+  };
+}
+
+async function startRun() {
+  try { runId = (await api("/run/start")).runId; } catch (err) { return toast(err.message); }
+  G = newGame(); finishing = false;
+  $("menu").classList.remove("on"); $("hud").classList.add("on");
+  beep(90, .4, .15, "sawtooth");
+  say("Ночь " + G.night);
+}
+
+let sayTimer;
+function say(text) { const s = $("say"); s.textContent = text; s.style.opacity = 1; clearTimeout(sayTimer); sayTimer = setTimeout(() => s.style.opacity = 0, 1700); }
+function once(key, text) { if (!G.say[key]) { G.say[key] = 1; say(text); } }
+
+function spawnZ(kind, angle) {
+  const a = angle !== undefined ? angle : G.moveA !== null && Math.random() < .6 ? G.moveA + (Math.random() - .5) * 1.8 : Math.random() * 6.283, R = Math.hypot(W, H) / 2 / zoom + 40, T = TYPES[kind], g = G;
+  const hpMul = (1 + g.t / 190) * (1 + .4 * (g.night - 1)), dmgMul = 1 + .2 * (g.night - 1);
+  g.zs.push({ x: g.p.x + Math.cos(a) * R, y: g.p.y + Math.sin(a) * R, kind, r: T.r, hp: T.hp * hpMul, max: T.hp * hpMul, speed: T.speed * (.9 + Math.random() * .2) * (1 + g.t / 650), dmg: T.dmg * dmgMul, color: T.color, gems: T.gems, cd: 0, step: Math.random() * 6, flash: 0, saw: 0 });
+}
+
+function burst(x, y, color, n, power) {
+  const g = G; if (g.parts.length > 220) return;
+  for (let i = 0; i < n; i++) { const a = Math.random() * 6.283, v = (power || 90) * (.4 + Math.random()); g.parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: .35 + Math.random() * .3, color }); }
+}
+
+function hit(z, dmg) {
+  z.hp -= dmg; z.flash = .08;
+  if (z.hp <= 0 && !z.dead) {
+    z.dead = true; G.kills++;
+    burst(z.x, z.y, "#7ec850", z.kind === "boss" ? 40 : 6);
+    for (let i = 0; i < z.gems; i++) G.gems.push({ x: z.x + (Math.random() - .5) * 20 * Math.min(z.gems, 3), y: z.y + (Math.random() - .5) * 20 * Math.min(z.gems, 3), v: 1 });
+    if (z.kind === "boss") { G.shake = .5; beep(70, .6, .25, "sawtooth"); haptic("heavy"); }
+    else beep(180 + Math.random() * 80, .06, .03);
+  }
+}
+
+function hurt(dmg) { const g = G; g.p.hp -= dmg; g.hurt = 1; g.shake = Math.max(g.shake, .13); burst(g.p.x, g.p.y, "#ff4d5e", 3); beep(120, .1, .08); haptic("light"); }
+
+function nearest(x, y, range) { let best = null, bd = range * range; for (const z of G.zs) { const d = (z.x - x) ** 2 + (z.y - y) ** 2; if (d < bd && !z.dead) { bd = d; best = z; } } return best; }
+
+function gainXp(v) {
+  const g = G; g.xp += v;
+  if (g.xp >= g.need) { g.xp -= g.need; g.lvl++; g.need = 5 + Math.floor(g.lvl * 2.6); levelUp(); }
+}
+
+function levelUp() {
+  const g = G; g.pause = true; release(); beep(520, .25, .12, "triangle"); haptic("medium");
+  const pool = PERKS.filter(p => !p.max || (g.taken[p.id] || 0) < p.max).sort(() => Math.random() - .5).slice(0, 3);
+  openModal(`<h2>Новый уровень</h2><p class="sub">Выбери одно</p>` + pool.map(p => `<button class="perk" data-p="${p.id}"><b>${p.name}</b><small>${p.d}</small></button>`).join(""));
+  $("box").onclick = e => {
+    const b = e.target.closest("[data-p]"); if (!b) return;
+    const perk = PERKS.find(x => x.id === b.dataset.p);
+    perk.f(g); g.taken[perk.id] = (g.taken[perk.id] || 0) + 1;
+    $("box").onclick = null; closeModal(); g.pause = false;
+  };
+}
+
+function step(dt) {
+  const g = G, p = g.p, s = g.s;
+  g.t += dt; g.shake = Math.max(0, g.shake - dt); g.hurt = Math.max(0, g.hurt - dt * 2);
+
+  let mx = input.dx, my = input.dy;
+  if (keys.KeyA || keys.ArrowLeft) mx -= 1; if (keys.KeyD || keys.ArrowRight) mx += 1;
+  if (keys.KeyW || keys.ArrowUp) my -= 1; if (keys.KeyS || keys.ArrowDown) my += 1;
+  const m = Math.hypot(mx, my); if (m > 1) { mx /= m; my /= m; }
+  p.x += mx * s.speed * dt; p.y += my * s.speed * dt;
+  g.moveA = m > .05 ? Math.atan2(my, mx) : null;
+  if (m > .05) { p.step += dt * 11; if (Math.abs(mx) > .1) p.dirx = Math.sign(mx); }
+
+  /* Появление врагов. Минимальный интервал согласован с серверным лимитом убийств. */
+  g.spawn -= dt;
+  if (g.spawn <= 0 && g.zs.length < 110) {
+    g.spawn = Math.max(.17, (1.05 - g.t * .0032) / (1 + .1 * (g.night - 1)));
+    const r = Math.random();
+    spawnZ(g.t > 100 && r < .1 ? "tank" : g.t > 70 && r < .24 ? "spitter" : g.t > 40 && r < .5 ? "runner" : "walker");
+  }
+  g.horde -= dt;
+  if (g.horde <= 0) { g.horde = 45; const a = Math.random() * 6.283; for (let i = 0; i < 10; i++) spawnZ("walker", a + i * .09); say("Толпа!"); }
+  if (g.t > 40) once("run", "Бегуны!");
+  if (g.t > 70) once("spit", "Плевуны!");
+  if (g.t > 100) once("tank", "Громилы!");
+  if (g.t > 120 && !g.say.b1) { g.say.b1 = 1; spawnZ("boss"); say("БОСС"); g.shake = .4; }
+  if (g.t > 240 && !g.say.b2) { g.say.b2 = 1; spawnZ("boss"); spawnZ("boss", Math.random() * 6.283); say("ДВА БОССА"); g.shake = .4; }
+  if (g.t > 275) once("dawn", "Светает. Держись!");
+
+  /* Стрельба */
+  g.shot -= dt;
+  if (g.shot <= 0) {
+    const target = nearest(p.x, p.y, 330);
+    if (target) {
+      g.shot = s.delay;
+      const base = Math.atan2(target.y - p.y, target.x - p.x);
+      p.dirx = Math.cos(base) < 0 ? -1 : 1; p.aim = base;
+      for (let i = 0; i < s.multi; i++) {
+        const a = base + (i - (s.multi - 1) / 2) * .16;
+        g.bullets.push({ x: p.x, y: p.y - 8, vx: Math.cos(a) * 560, vy: Math.sin(a) * 560, life: .65, left: s.pierce, seen: new Set() });
+      }
+    }
+  }
+  for (const b of g.bullets) {
+    b.x += b.vx * dt; b.y += b.vy * dt; b.life -= dt;
+    for (const z of g.zs) {
+      if (z.dead || b.seen.has(z) || (z.x - b.x) ** 2 + (z.y - b.y) ** 2 > (z.r + 5) ** 2) continue;
+      hit(z, s.dmg); b.seen.add(z); burst(b.x, b.y, "#c8485a", 2, 60);
+      if (b.left-- <= 0) { b.life = 0; break; }
+    }
+  }
+  g.bullets = g.bullets.filter(b => b.life > 0);
+
+  /* Гранаты и пилы */
+  if (s.nades) {
+    g.nade -= dt;
+    if (g.nade <= 0) {
+      g.nade = 4.2 - s.nades * .8;
+      const z = nearest(p.x, p.y, 320);
+      if (z) {
+        g.blasts.push({ x: z.x, y: z.y, r: 0, t: .3 }); beep(110, .25, .14, "sawtooth");
+        for (const o of g.zs) if ((o.x - z.x) ** 2 + (o.y - z.y) ** 2 < 95 ** 2) hit(o, s.dmg * 4);
+      }
+    }
+  }
+  if (s.saws) for (let i = 0; i < s.saws; i++) {
+    const a = g.t * 3.4 + i * 6.283 / s.saws, x = p.x + Math.cos(a) * 72, y = p.y + Math.sin(a) * 72;
+    for (const z of g.zs) if (!z.dead && z.saw <= 0 && (z.x - x) ** 2 + (z.y - y) ** 2 < (z.r + 14) ** 2) { z.saw = .3; hit(z, s.dmg * 1.5); }
+  }
+
+  /* Пёс */
+  const d = g.dog, prey = nearest(p.x, p.y, 240); d.cd -= dt;
+  const tx = prey ? prey.x : p.x - 34 * p.dirx, ty = prey ? prey.y : p.y + 16, dist = Math.hypot(tx - d.x, ty - d.y);
+  if (dist > (prey ? prey.r + 6 : 6)) { const v = Math.min(dist / dt, prey ? 250 : Math.max(120, dist * 3)); d.x += (tx - d.x) / dist * v * dt; d.y += (ty - d.y) / dist * v * dt; d.step += dt * 15; d.dirx = tx < d.x ? -1 : 1; }
+  if (prey && dist < prey.r + 12 && d.cd <= 0) { d.cd = .75 / s.dogRate; hit(prey, s.dogDmg); }
+
+  /* Зомби */
+  for (let i = 0; i < g.zs.length; i++) {
+    const z = g.zs[i]; if (z.dead) continue;
+    const dx = p.x - z.x, dy = p.y - z.y, dd = Math.hypot(dx, dy) || 1;
+    if (z.kind !== "spitter" || dd > 200) { z.x += dx / dd * z.speed * dt; z.y += dy / dd * z.speed * dt; }
+    else if (z.cd <= 0) { z.cd = 2.1; g.shots.push({ x: z.x, y: z.y - 18, vx: dx / dd * 205, vy: dy / dd * 205, life: 2.4, dmg: z.dmg * 1.3 }); }
+    z.step += dt * (z.speed / 7); z.flash -= dt; z.saw -= dt; z.cd -= dt;
+    for (let j = i + 1; j < g.zs.length; j++) {
+      const o = g.zs[j], ax = o.x - z.x, ay = o.y - z.y, min = z.r + o.r - 4, a2 = ax * ax + ay * ay;
+      if (a2 < min * min && a2 > .01) { const a = Math.sqrt(a2), push = (min - a) * .5 / a; z.x -= ax * push; z.y -= ay * push; o.x += ax * push; o.y += ay * push; }
+    }
+    if (dd < z.r + 12 && z.cd <= 0) { z.cd = .65; hurt(z.dmg); }
+    if (dd > 900) { const a = Math.random() * 6.283, R = Math.hypot(W, H) / 2 / zoom + 40; z.x = p.x + Math.cos(a) * R; z.y = p.y + Math.sin(a) * R; }
+  }
+  g.zs = g.zs.filter(z => !z.dead);
+  for (const o of g.shots) {
+    o.x += o.vx * dt; o.y += o.vy * dt; o.life -= dt;
+    if ((o.x - p.x) ** 2 + (o.y + 10 - p.y) ** 2 < 15 * 15) { o.life = 0; hurt(o.dmg); }
+  }
+  g.shots = g.shots.filter(o => o.life > 0);
+
+  /* Опыт */
+  for (const c of g.gems) {
+    const dx = p.x - c.x, dy = p.y - c.y, dd = Math.hypot(dx, dy) || 1;
+    if (dd < s.magnet) { c.x += dx / dd * 380 * dt; c.y += dy / dd * 380 * dt; }
+    if (dd < 18) { c.got = true; gainXp(c.v); if (g.pause) break; }
+  }
+  g.gems = g.gems.filter(c => !c.got);
+  if (g.gems.length > 160) { const v = g.gems.splice(0, g.gems.length - 160).length; if (g.gems[0]) g.gems[0].v += v; }
+
+  for (const a of g.parts) { a.x += a.vx * dt; a.y += a.vy * dt; a.vx *= .92; a.vy *= .92; a.life -= dt; }
+  g.parts = g.parts.filter(a => a.life > 0);
+  for (const b of g.blasts) { b.t -= dt; b.r += 420 * dt; }
+  g.blasts = g.blasts.filter(b => b.t > 0);
+
+  if (p.hp <= 0) { p.hp = 0; die(); }
+  else if (g.t >= g.dawn) finishRun(true);
+}
+
+function die() {
+  const g = G; g.pause = true; release(); beep(70, .7, .2, "sawtooth"); haptic("heavy");
+  if (g.revived || !adsReady()) return finishRun(false);
+  openModal(`<h2>Тебя съели</h2><p class="sub">Осталось ${clock(g.dawn - g.t)} до рассвета. Один шанс за ночь.</p>
+    <button class="big" id="rev">ВОСКРЕСНУТЬ ЗА РЕКЛАМУ</button><button class="ghost" id="giveup">Сдаться</button>`);
+  $("giveup").onclick = () => { closeModal(); finishRun(false); };
+  $("rev").onclick = async e => {
+    e.target.disabled = true;
+    closeModal();
+    const ok = await showAd();
+    if (!ok) { toast("Реклама недоступна"); return finishRun(false); }
+    g.revived = true; g.p.hp = g.s.hp * .6;
+    for (const z of g.zs) if ((z.x - g.p.x) ** 2 + (z.y - g.p.y) ** 2 < 200 ** 2) { const a = Math.atan2(z.y - g.p.y, z.x - g.p.x); z.x += Math.cos(a) * 220; z.y += Math.sin(a) * 220; }
+    g.blasts.push({ x: g.p.x, y: g.p.y, r: 0, t: .4 }); g.pause = false;
+  };
+}
+
+const clock = s => { s = Math.max(0, Math.ceil(s)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+
+async function finishRun(dawn) {
+  if (finishing) return; finishing = true;
+  const g = G; g.pause = true; g.over = true; release();
+  const body = { runId, kills: g.kills, seconds: Math.floor(g.t), dawn };
+  let r = null, error = "";
+  for (let i = 0; i < 3 && !r; i++) {
+    try { r = await api("/run/finish", body); }
+    catch (err) { error = err.message; await new Promise(ok => setTimeout(ok, 900)); }
+  }
+  $("hud").classList.remove("on");
+  if (!r) { openModal(`<h2>Нет связи</h2><p class="sub">${esc(error)}. Монеты за этот забег не начислены.</p><button class="big" id="home">В МЕНЮ</button>`); $("home").onclick = goHome; return; }
+  setProfile(r.profile);
+  const canDouble = adsReady() && r.coins > 0;
+  openModal(`<h2>${r.dawn ? "Ты дожил!" : "Ночь победила"}</h2>
+    <p class="sub">${g.kills} убито · ${clock(g.t)} · ${fmt(r.score)} очков${r.score >= r.profile.best ? " · рекорд" : ""}</p>
+    <div class="gain">+${fmt(r.coins)}</div>
+    ${canDouble ? `<button class="ghost gold" id="dbl">Удвоить за рекламу</button>` : ""}
+    <div style="height:9px"></div><button class="big" id="again">ЕЩЁ РАЗ</button>
+    <button class="ghost" id="brag">Бросить вызов другу</button><button class="ghost" id="home">В меню</button>`);
+  $("again").onclick = () => { closeModal(); G = null; startRun(); };
+  $("home").onclick = goHome;
+  $("brag").onclick = () => share(`Я набрал ${fmt(r.score)} очков. Побьёшь?`);
+  if (canDouble) $("dbl").onclick = async e => {
+    e.target.disabled = true;
+    const ok = await showAd();
+    if (!ok) { e.target.disabled = false; return toast("Реклама недоступна"); }
+    for (let i = 0; i < 6; i++) {
+      try { const c = await api("/ad/claim", { runId }); setProfile(c.profile); e.target.textContent = "Монеты удвоены"; haptic("medium"); return; }
+      catch (err) { error = err.message; await new Promise(w => setTimeout(w, 1000)); }
+    }
+    toast(error);
+  };
+}
+
+function goHome() { closeModal(); G = null; $("hud").classList.remove("on"); $("menu").classList.add("on"); tab = "home"; render(); }
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden || !G || G.pause || G.over) return;
+  const g = G; g.pause = true; release();
+  openModal(`<h2>Пауза</h2><button class="big" id="cont">ПРОДОЛЖИТЬ</button>`);
+  $("cont").onclick = () => { closeModal(); g.pause = false; };
+});
+
+/* ---------- Рисование ---------- */
+function hash(x, y) { let h = (x * 374761 + y * 668265) | 0; h = (h ^ (h >> 13)) * 127413; return ((h ^ (h >> 16)) >>> 0) / 4294967295; }
+
+function ground(cx, cy, vw, vh) {
+  ctx.fillStyle = "#1b2a24"; ctx.fillRect(cx - vw / 2, cy - vh / 2, vw, vh);
+  const S = 120, x0 = Math.floor((cx - vw / 2) / S) - 1, x1 = Math.ceil((cx + vw / 2) / S), y0 = Math.floor((cy - vh / 2) / S) - 1, y1 = Math.ceil((cy + vh / 2) / S);
+  for (let i = x0; i <= x1; i++) for (let j = y0; j <= y1; j++) {
+    const h = hash(i, j), x = i * S + hash(j, i) * 90, y = j * S + h * 90;
+    if (h < .45) { ctx.strokeStyle = "#2a3f33"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x - 4, y - 9); ctx.moveTo(x + 5, y); ctx.lineTo(x + 7, y - 8); ctx.stroke(); }
+    else if (h < .62) { ctx.fillStyle = "#26352d"; ctx.beginPath(); ctx.ellipse(x, y, 24 + h * 20, 11 + h * 8, 0, 0, 6.3); ctx.fill(); }
+    else if (h < .72) { ctx.fillStyle = "#3b4150"; ctx.fillRect(x - 11, y - 26, 22, 26); ctx.beginPath(); ctx.arc(x, y - 26, 11, Math.PI, 0); ctx.fill(); ctx.strokeStyle = "#252a36"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x, y - 29); ctx.lineTo(x, y - 12); ctx.moveTo(x - 6, y - 23); ctx.lineTo(x + 6, y - 23); ctx.stroke(); }
+    else if (h < .78) { ctx.strokeStyle = "#141c19"; ctx.lineWidth = 5; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y - 46); ctx.moveTo(x, y - 26); ctx.lineTo(x - 18, y - 46); ctx.moveTo(x, y - 34); ctx.lineTo(x + 15, y - 54); ctx.stroke(); }
+  }
+}
+
+function stick(x, y, r, step, color, dir, zombie, flash) {
+  const h = r * 2.3, sw = Math.sin(step) * r * .7, top = y - h * .72, hip = y - h * .28;
+  ctx.fillStyle = "#0005"; ctx.beginPath(); ctx.ellipse(x, y + 1, r * .85, r * .3, 0, 0, 6.3); ctx.fill();
+  ctx.strokeStyle = flash ? "#fff" : color; ctx.lineWidth = Math.max(3, r * .32); ctx.lineCap = "round"; ctx.lineJoin = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, top); ctx.lineTo(x, hip);
+  ctx.moveTo(x, hip); ctx.lineTo(x + sw, y); ctx.moveTo(x, hip); ctx.lineTo(x - sw, y);
+  if (zombie) { const j = Math.sin(step * 1.3) * r * .18; ctx.moveTo(x, top + r * .3); ctx.lineTo(x + dir * r * 1.15, top + r * .25 + j); ctx.moveTo(x, top + r * .5); ctx.lineTo(x + dir * r * 1.05, top + r * .7 - j); }
+  ctx.stroke();
+  ctx.fillStyle = flash ? "#fff" : color; ctx.beginPath(); ctx.arc(x, top - r * .5, r * .56, 0, 6.3); ctx.fill();
+  if (zombie) { ctx.fillStyle = "#ffe36b"; ctx.beginPath(); ctx.arc(x + dir * r * .22, top - r * .58, Math.max(1.4, r * .12), 0, 6.3); ctx.fill(); }
+}
+
+function drawPlayer(p) {
+  stick(p.x, p.y, 13, p.step, "#f3ead6", p.dirx, false, false);
+  const top = p.y - 21.5, a = p.aim === undefined ? (p.dirx > 0 ? 0 : Math.PI) : p.aim;
+  ctx.strokeStyle = "#f3ead6"; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(p.x, top + 4); ctx.lineTo(p.x + Math.cos(a) * 13, top + 5 + Math.sin(a) * 13); ctx.stroke();
+  ctx.strokeStyle = "#11131c"; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(p.x + Math.cos(a) * 11, top + 5 + Math.sin(a) * 11); ctx.lineTo(p.x + Math.cos(a) * 24, top + 5 + Math.sin(a) * 24); ctx.stroke();
+  const hy = top - 6.5;
+  ctx.fillStyle = "#ff6b3d"; ctx.beginPath(); ctx.arc(p.x, hy, 7.6, Math.PI, 0); ctx.fill(); ctx.fillRect(p.x + (p.dirx > 0 ? 0 : -13), hy - 2, 13, 3);
+}
+
+function drawDog(d) {
+  const b = Math.sin(d.step) * 2.5, x = d.x, y = d.y, s = d.dirx;
+  ctx.fillStyle = "#0005"; ctx.beginPath(); ctx.ellipse(x, y + 1, 13, 4, 0, 0, 6.3); ctx.fill();
+  ctx.strokeStyle = "#20222c"; ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(x - 8, y - 7); ctx.lineTo(x - 8 + b, y); ctx.moveTo(x + 7, y - 7); ctx.lineTo(x + 7 - b, y); ctx.moveTo(x - 11 * s, y - 12); ctx.lineTo(x - 17 * s, y - 18 + b); ctx.stroke();
+  ctx.fillStyle = "#eee7da"; ctx.beginPath(); ctx.ellipse(x, y - 10, 12, 6, 0, 0, 6.3); ctx.fill();
+  ctx.fillStyle = "#20222c"; ctx.beginPath(); ctx.ellipse(x - 4 * s, y - 11, 5, 4, 0, 0, 6.3); ctx.fill(); ctx.beginPath(); ctx.arc(x + 12 * s, y - 16, 6, 0, 6.3); ctx.fill();
+  ctx.fillStyle = "#eee7da"; ctx.beginPath(); ctx.arc(x + 15 * s, y - 15, 2.6, 0, 6.3); ctx.fill();
+}
+
+function drawMoon(x, y, r, a) {
+  ctx.globalAlpha = a; ctx.fillStyle = "#f4e8c6"; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.3); ctx.fill();
+  ctx.fillStyle = "#d9caa1"; for (const c of [[-.35,-.2,.18],[.3,.25,.14],[.1,-.45,.1],[-.1,.45,.09]]) { ctx.beginPath(); ctx.arc(x + c[0] * r, y + c[1] * r, c[2] * r, 0, 6.3); ctx.fill(); }
+  ctx.globalAlpha = 1;
+}
+
+function renderGame() {
+  const g = G, p = g.p, vw = W / zoom, vh = H / zoom;
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  ctx.save();
+  const sh = g.shake > 0 ? 7 * g.shake / .3 : 0;
+  ctx.translate(W / 2 + (Math.random() - .5) * sh, H / 2 + (Math.random() - .5) * sh); ctx.scale(zoom, zoom); ctx.translate(-p.x, -p.y);
+  ground(p.x, p.y, vw + 40, vh + 40);
+  for (const c of g.gems) { ctx.fillStyle = "#62c5ff"; ctx.beginPath(); ctx.moveTo(c.x, c.y - 6); ctx.lineTo(c.x + 4.5, c.y); ctx.lineTo(c.x, c.y + 6); ctx.lineTo(c.x - 4.5, c.y); ctx.fill(); }
+  const list = g.zs.map(z => ({ y: z.y, f: () => { stick(z.x, z.y, z.r, z.step, z.color, z.x < p.x ? 1 : -1, true, z.flash > 0); if (z.kind === "boss" || z.kind === "tank") { const w = z.r * 2; ctx.fillStyle = "#000a"; ctx.fillRect(z.x - w / 2, z.y - z.r * 3.1, w, 4); ctx.fillStyle = "#ff4d5e"; ctx.fillRect(z.x - w / 2, z.y - z.r * 3.1, w * Math.max(0, z.hp / z.max), 4); } } }));
+  list.push({ y: p.y, f: () => drawPlayer(p) }, { y: g.dog.y, f: () => drawDog(g.dog) });
+  list.sort((a, b) => a.y - b.y).forEach(o => o.f());
+  ctx.fillStyle = "#b6f23f"; for (const o of g.shots) { ctx.beginPath(); ctx.arc(o.x, o.y, 6, 0, 6.3); ctx.fill(); }
+  ctx.fillStyle = "#ffe36b"; for (const b of g.bullets) { ctx.beginPath(); ctx.arc(b.x, b.y, 3.2, 0, 6.3); ctx.fill(); }
+  for (let i = 0; i < g.s.saws; i++) { const a = g.t * 3.4 + i * 6.283 / g.s.saws, x = p.x + Math.cos(a) * 72, y = p.y + Math.sin(a) * 72; ctx.fillStyle = "#cfd5e2"; ctx.beginPath(); for (let k = 0; k < 16; k++) { const ang = k * .3927 + g.t * 14, r = k % 2 ? 9 : 14; ctx.lineTo(x + Math.cos(ang) * r, y + Math.sin(ang) * r); } ctx.fill(); ctx.fillStyle = "#3b4150"; ctx.beginPath(); ctx.arc(x, y, 3, 0, 6.3); ctx.fill(); }
+  for (const a of g.parts) { ctx.fillStyle = a.color; ctx.globalAlpha = Math.min(1, a.life * 3); ctx.fillRect(a.x - 2, a.y - 2, 4, 4); }
+  ctx.globalAlpha = 1;
+  for (const b of g.blasts) { ctx.strokeStyle = "#ffb15c"; ctx.lineWidth = 6; ctx.globalAlpha = Math.min(1, b.t * 4); ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, 6.3); ctx.stroke(); ctx.globalAlpha = 1; }
+  ctx.restore();
+
+  /* Ночь редеет к рассвету */
+  const day = Math.min(1, g.t / g.dawn), dark = .78 - day * .5, R = Math.max(W, H) * .78;
+  const light = ctx.createRadialGradient(W / 2, H / 2, 90 * zoom, W / 2, H / 2, R);
+  light.addColorStop(0, "rgba(8,10,24,0)"); light.addColorStop(.35, `rgba(8,10,24,${dark * .55})`); light.addColorStop(1, `rgba(8,10,24,${dark})`);
+  ctx.fillStyle = light; ctx.fillRect(0, 0, W, H);
+  if (day > .7) { ctx.fillStyle = `rgba(255,140,80,${(day - .7) * .4})`; ctx.fillRect(0, 0, W, H); }
+  if (g.hurt > 0) { ctx.fillStyle = `rgba(255,40,60,${g.hurt * .22})`; ctx.fillRect(0, 0, W, H); }
+  if (input.active) { ctx.strokeStyle = "#ffffff55"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(input.ox, input.oy, 56, 0, 6.3); ctx.stroke(); ctx.fillStyle = "#ffffff77"; ctx.beginPath(); ctx.arc(input.ox + input.dx * 56, input.oy + input.dy * 56, 24, 0, 6.3); ctx.fill(); }
+
+  $("hp").firstElementChild.style.width = (p.hp / g.s.hp * 100) + "%";
+  $("xp").firstElementChild.style.width = (g.xp / g.need * 100) + "%";
+  $("kills").textContent = g.kills + " убито"; $("clock").textContent = clock(g.dawn - g.t); $("lvl").textContent = "ур. " + g.lvl;
+}
+
+const horde = Array.from({ length: 9 }, (_, i) => ({ x: i * .13 + Math.random() * .08, r: 9 + Math.random() * 9, step: Math.random() * 6, v: 9 + Math.random() * 7 }));
+function renderIdle(dt) {
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const sky = ctx.createLinearGradient(0, 0, 0, H); sky.addColorStop(0, "#0b0e20"); sky.addColorStop(.2, "#23213f"); sky.addColorStop(.355, "#6b3350"); sky.addColorStop(.36, "#0d0f18");
+  ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = "#f3ead6"; for (let i = 0; i < 46; i++) { const a = hash(i, 3), b = hash(9, i); ctx.globalAlpha = .25 + .6 * hash(i, i + 4); ctx.fillRect(a * W, b * H * .28, 1.6, 1.6); } ctx.globalAlpha = 1;
+  const m = Math.min(W, H);
+  drawMoon(W * .74, H * .13, m * .11, 1);
+  const ground_y = H * .36;
+  ctx.fillStyle = "#14121f"; ctx.beginPath(); ctx.moveTo(0, ground_y); for (let x = 0; x <= W; x += 26) ctx.lineTo(x, ground_y - 16 - 22 * Math.abs(Math.sin(x * .021) * Math.cos(x * .007))); ctx.lineTo(W, ground_y); ctx.fill();
+  for (const z of horde) { z.x += z.v * dt / Math.max(W, 1); z.step += dt * 5; if (z.x > 1.05) z.x = -.08; stick(z.x * W, ground_y - 2, z.r, z.step, "#0a0a12", 1, true, false); }
+}
+
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+  if (G) { if (!G.pause) step(dt); if (G) renderGame(); } else renderIdle(dt);
+  requestAnimationFrame(frame);
+}
+
+(async function boot() {
+  requestAnimationFrame(frame);
+  try { await refresh(); render(); }
+  catch (err) { $("page").innerHTML = `<h2>Не получилось загрузиться</h2><p class="sub">${esc(err.message)}</p><button class="big" onclick="location.reload()">ЕЩЁ РАЗ</button>`; }
+})();
+if (DEMO) window.__night = { get G() { return G; } };
+</script>
+</body>
+</html>
