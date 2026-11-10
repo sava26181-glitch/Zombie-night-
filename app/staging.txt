@@ -1,0 +1,364 @@
+# Что показывать на экране в каждом событии: миссия узел действие актёры
+m01 a talk woman
+m01 b attack lida
+m01 c phone lida
+m01 d shove lida
+m01 e bite lida
+m01 f phone lida
+m02 a talk rudin
+m02 b talk man
+m02 c open man
+m02 d turnaway man
+m02 e talk man
+m02 f read rudin
+m03 a run
+m03 b enter
+m03 c read
+m03 d give
+m03 e attack
+m03 ok flee
+m03 fail fall
+m04 lida talk lida
+m04 b talk man
+m04 c struggle woman
+m04 d run
+m04 e enter
+m04 f hug sonya
+m04 g talk sonya
+m05 a massfire soldier
+m05 b massfire soldier
+m05 c lower soldier
+m05 d shoot
+m05 f give man
+m05 e leave
+m06 a hide
+m06 b give vera
+m06 c hide vera
+m06 d camp vera
+m06 e camp vera
+m06 f give vera
+m07 gleb talk gleb
+m07 crowd talk soldier
+m07 family open man
+m07 pass talk soldier
+m07 alone drive tim
+m07 q1 attack
+m07 ok drive
+m07 hurt fall
+m08 a talk lanskoy
+m08 b inject sonya
+m08 c talk lanskoy
+m08 lida talk lida
+m08 risk grieve lida
+m08 gone turnaway lida
+m08 $end grieve
+m09 cold talk rudin
+m09 warm talk rudin
+m09 mid talk rudin
+m09 offer give rudin
+m09 yes talk rudin
+m09 spy read rudin
+m09 no leave
+m10 a enter
+m10 dog dog
+m10 trade talk man
+m10 vialoffer talk man
+m10 sold give man
+m10 meds give man
+m10 kira radio kira
+m11 a inject man
+m11 irina inject woman
+m11 b inject man
+m11 c inject soldier
+m11 d inject woman
+m12 a accuse man
+m12 hub idle
+m12 lock search
+m12 old talk man
+m12 log read
+m12 accuse accuse man
+m12 wrong turnaway man
+m12 right accuse soldier
+m12 truth read
+m13 a dog
+m13 vera talk vera
+m13 kira talk kira
+m13 sold give soldier
+m13 secret hide
+m14 a talk lanskoy
+m14 hid talk lanskoy
+m14 know talk lanskoy
+m14 vial talk lanskoy
+m14 tests inject sonya
+m14 run hug sonya
+m15 a flee
+m15 heli heli rudin
+m15 gone heli rudin
+m15 gate lever tim
+m15 tunnel struggle tim
+m15 saved lever
+m15 risky fall
+m15 stay lever tim
+m15 tim lever tim
+m15 all flee
+m16 g grieve sonya
+m16 t grieve dog
+m16 ok talk soldier
+m16 north enter soldier
+m16 vote camp soldier
+m16 alone leave sonya
+m17 a hide soldier
+m17 rudin read rudin
+m17 warn run
+m17 sabot explode
+m17 erase type
+m17 report give rudin
+m18 a idle dog
+m18 search dog
+m18 won hug dog
+m18 lost bite
+m18 leave leave
+m19 a talk marfa
+m19 cure inject kid
+m19 lie talk marfa
+m19 work camp marfa
+m20 a talk lanskoy
+m20 ally talk lanskoy
+m20 talk talk lanskoy
+m20 threat threat lanskoy
+m20 crowd turnaway lanskoy
+m21 bit idle
+m21 confess inject vera
+m21 radio radio
+m21 kira radio kira
+m22 a talk man
+m22 time idle
+m22 sus accuse soldier
+m22 sold accuse soldier
+m22 kim accuse soldier
+m22 free turnaway soldier
+m22 court accuse soldier
+m22 wait hide
+m23 a talk marfa
+m23 fire explode
+m23 ok run
+m23 fail fall
+m23 cattle run
+m23 flee leave
+m24 inside enter rudin
+m24 a idle soldier
+m24 free open kid
+m24 serve idle soldier
+m24 code open soldier
+m24 map search
+m24 storm shoot
+m24 caught lower soldier
+m25 nodog hide
+m25 a hide
+m25 vent hide
+m25 ok type
+m25 bad flee
+m26 a enter
+m26 known read
+m26 find read
+m26 take read
+m26 burn explode
+m27 a talk rudin
+m27 own talk rudin
+m27 mute idle rudin
+m27 mom talk rudin
+m27 escape hide
+m27 dog dog
+m28 a threat rudin
+m28 spy talk rudin
+m28 rd give rudin
+m28 sign give rudin
+m28 talk threat rudin
+m28 shoot duel rudin
+m28 arrest shove rudin
+m28 die death rudin
+m29 a type
+m29 rush type
+m29 pick type
+m29 part type
+m29 full type
+m29 kids type
+m29 wipe explode
+m30 a hug sonya
+m30 nof hug sonya
+m30 safe inject sonya
+m30 risk talk sonya
+m30 leg kneel sonya
+m30 pick kneel sonya
+m30 sonya talk sonya
+m30 yes grieve sonya
+m30 leave leave sonya
+m30 self inject sonya
+m31 a shoot
+m31 signed read
+m31 cancel type
+m31 stay idle
+m31 kids give kid
+m31 hold shoot
+m31 held leave
+m31 fall fall
+m31 die death
+m32 a enter
+m32 kira radio kira
+m32 go radio
+m32 has radio
+m32 air radio kira
+m32 bite fall kira
+m32 $saved inject vera
+m32 words radio
+m32 sell give man
+m33 a radio
+m33 mom radio
+m33 lost radio
+m33 help radio
+m34 a enter sonya
+m34 alone enter sonya
+m34 blow type sonya
+m34 ok explode sonya
+m34 fail fall
+m34 last death
+m35 a dawn
+m35 e_ash explode
+m35 e_order talk rudin
+m35 e_silence grieve dog
+m35 e_all dawn vera,gleb,tim,sonya
+m35 e_cost grieve sonya
+m35 e_price grieve vera
+m35 e_quiet dawn vera,sonya
+m35 e_father hug gleb,sonya
+m35 e_orphan dawn sonya,man
+m35 e_truth accuse rudin
+m35 e_boat leave vera,sonya
+m35 e_ruin leave man
+m04 a talk man
+m07 a enter soldier
+m09 a talk rudin
+m16 a camp soldier
+
+# Что герой делает сразу после выбора: ! миссия узел номер действие актёры
+! m01 a 0 doorin
+! m01 a 1 phone woman item=phone
+! m01 b 0 shove lida
+! m01 b 1 inject lida
+! m01 e 0 whisper lida
+! m01 e 1 phone lida item=radio
+! m02 b 0 open man
+! m02 b 1 refuse man
+! m02 b 2 whisper man
+! m03 b 0 openbox
+! m03 b 1 putdown
+! m04 lida 0 leave
+! m04 lida 1 carry lida
+! m04 b 0 struggle woman
+! m04 b 1 run
+! m04 e 0 whisper sonya
+! m04 e 1 point sonya
+! m05 a 0 massfire soldier
+! m05 a 1 lower soldier
+! m05 a 2 shoot
+! m06 a 0 give vera item=plank
+! m06 a 1 hide
+! m06 d 0 give sonya item=can
+! m06 d 1 share vera item=can
+! m06 d 2 keep sonya item=can
+! m07 gleb 0 deal gleb
+! m07 gleb 1 refuse gleb
+! m07 crowd 0 shove soldier
+! m07 crowd 1 give soldier item=badge
+! m07 pass 0 refuse soldier
+! m07 pass 1 leave
+! m08 a 0 tend sonya item=bandage
+! m08 a 1 give lanskoy item=paper
+! m08 lida 0 carry lida
+! m08 lida 1 turnaway lida
+! m09 offer 0 deal rudin item=badge
+! m09 offer 1 give rudin item=badge
+! m09 offer 2 refuse rudin
+! m10 trade 0 give man item=watch
+! m10 trade 1 type kira
+! m10 vialoffer 0 give man item=vial
+! m10 vialoffer 1 ignore man
+! m11 a 0 inject man
+! m11 a 1 inject soldier
+! m11 irina 0 inject woman
+! m11 irina 1 inject man
+! m11 irina 2 inject soldier
+! m12 hub 0 search
+! m12 hub 1 whisper man
+! m12 hub 2 read item=paper
+! m12 hub 3 accuse man
+! m12 accuse 0 accuse man
+! m12 accuse 1 accuse soldier
+! m12 accuse 2 accuse rudin item=paper
+! m13 a 0 whisper vera
+! m13 a 1 whisper kira
+! m13 a 2 deal soldier item=can
+! m13 a 3 silence
+! m14 know 0 whisper lanskoy
+! m14 know 1 give lanskoy item=paper
+! m14 know 2 refuse lanskoy
+! m15 heli 0 heli rudin
+! m15 heli 1 ignore rudin
+! m15 gate 0 shove tim
+! m15 gate 1 ignore tim
+! m15 gate 2 flee
+! m16 ok 0 point soldier
+! m16 ok 1 vote soldier
+! m16 ok 2 leave sonya
+! m17 a 0 run
+! m17 a 1 throw
+! m17 rudin 0 type
+! m17 rudin 1 give rudin item=paper
+! m18 a 0 search
+! m18 a 1 leave
+! m19 a 0 inject kid
+! m19 a 1 point marfa
+! m19 a 2 deal marfa
+! m20 a 0 whisper lanskoy
+! m20 a 1 threat lanskoy
+! m20 a 2 turnaway lanskoy
+! m21 bit 0 give vera item=bandage
+! m21 bit 1 silence
+! m22 sus 0 accuse soldier
+! m22 sus 1 accuse soldier
+! m22 sus 2 refuse soldier
+! m22 kim 0 turnaway soldier
+! m22 kim 1 accuse soldier
+! m23 a 0 throw
+! m23 a 1 open
+! m23 a 2 leave
+! m24 a 0 shoot
+! m24 a 1 lower soldier
+! m24 inside 0 open kid
+! m24 inside 1 silence
+! m26 find 0 read item=paper
+! m26 find 1 burn
+! m27 a 0 refuse rudin
+! m27 a 1 silence rudin
+! m27 a 2 talk rudin
+! m28 rd 0 sign rudin
+! m28 rd 1 threat rudin
+! m28 talk 0 duel rudin
+! m28 talk 1 shove rudin
+! m28 talk 2 lower rudin
+! m29 rush 0 type
+! m29 rush 1 burn
+! m29 pick 0 type
+! m29 pick 1 type
+! m29 pick 2 burn
+! m30 pick 0 kneel sonya
+! m30 pick 1 hug sonya
+! m30 pick 2 inject sonya
+! m31 signed 0 type
+! m31 signed 1 silence
+! m32 go 0 radio
+! m32 go 1 silence
+! m32 has 0 radio kira
+! m32 has 1 give man item=paper
+! m33 a 0 radio
+! m33 a 1 radio

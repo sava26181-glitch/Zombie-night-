@@ -90,7 +90,24 @@ def tx():
         conn.close()
 
 
+# Новые колонки добавляются к уже работающей базе без потери данных.
+MIGRATIONS = [
+    ("users", "owned", "TEXT NOT NULL DEFAULT '[]'"),
+    ("users", "equipped", "TEXT NOT NULL DEFAULT '{}'"),
+    ("users", "weapons", "TEXT NOT NULL DEFAULT '[]'"),
+    ("users", "weapon", "TEXT NOT NULL DEFAULT 'pistol'"),
+    ("users", "story", "TEXT NOT NULL DEFAULT '{}'"),
+    ("users", "story_done", "TEXT NOT NULL DEFAULT '[]'"),
+    ("users", "story_pass", "INTEGER NOT NULL DEFAULT 0"),
+]
+
+
 def init():
     with tx() as t:
         for statement in SCHEMA:
             t.run(statement)
+        for table, column, definition in MIGRATIONS:
+            if IS_PG:
+                t.run(f"ALTER TABLE {table} ADD COLUMN IF NOT EXISTS {column} {definition}")
+            elif column not in {row["name"] for row in t.all(f"PRAGMA table_info({table})")}:
+                t.run(f"ALTER TABLE {table} ADD COLUMN {column} {definition}")
