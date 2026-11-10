@@ -44,7 +44,17 @@ h2{font-size:22px;margin:0 0 4px}
 #nav button.on{color:var(--ink);background:var(--panel)}
 #hud{pointer-events:none;justify-content:flex-start}
 .bar{height:11px;background:#000a;border:1px solid #fff3;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;width:100%;transition:width .08s linear}
-#hp i{background:var(--bad)}#xp{height:6px;margin-top:4px}#xp i{background:#62c5ff}
+#hp i{background:var(--bad)}#armor{height:7px;margin-top:3px}#armor i{background:#8fb7ff}#xp{height:5px;margin-top:3px}#xp i{background:#62c5ff}
+#boss{height:9px;margin-top:6px;display:none;border-color:#ff4d5e88}#boss.on{display:block}#boss i{background:#c8485a}
+#combo{position:absolute;top:102px;left:0;right:0;text-align:center;font:900 26px Impact,system-ui,sans-serif;color:var(--hot);text-shadow:0 2px 0 #000;opacity:0;transition:opacity .15s}
+#dash{position:fixed;right:18px;bottom:max(26px,env(safe-area-inset-bottom));width:82px;height:82px;border-radius:50%;background:#ff6b3dd9;border:3px solid #fff5;font-weight:900;font-size:13px;color:#190a04;pointer-events:auto;touch-action:none;display:none;--cd:0}
+#dash.on{display:block}#dash::after{content:"";position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(#05060bbb calc(var(--cd)*360deg),transparent 0);pointer-events:none}
+.snd{min-width:44px;min-height:40px;font-size:19px}
+#snd2{position:absolute;right:10px;top:max(68px,calc(env(safe-area-inset-top) + 56px));pointer-events:auto}
+#preview{display:block;width:100%;height:190px;background:linear-gradient(#23213f,#191c2a);border:1px solid var(--line);border-radius:14px;margin-bottom:12px}
+.slot{font-weight:800;margin:12px 0 7px}.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.chip{min-height:62px;padding:6px 4px;background:var(--panel);border:1px solid var(--line);border-radius:11px;font-size:13px;font-weight:700}
+.chip small{display:block;font-weight:800;margin-top:3px;color:var(--gold);font-variant-numeric:tabular-nums}.chip small.own{color:var(--dim)}.chip.on{border:2px solid var(--hot)}.chip.on small{color:var(--hot)}.chip.no small{color:#7f8499}
 #hudrow{display:flex;justify-content:space-between;margin-top:7px;font-weight:800;font-variant-numeric:tabular-nums;text-shadow:0 1px 3px #000}
 #clock{font-size:21px}
 #say{position:absolute;top:21%;left:0;right:0;text-align:center;font:900 30px Impact,system-ui,sans-serif;color:var(--gold);text-shadow:0 2px 0 #000;opacity:0;transition:opacity .25s;padding:0 14px}
@@ -56,6 +66,48 @@ h2{font-size:22px;margin:0 0 4px}
 .perk{width:100%;text-align:left;margin-bottom:9px;min-height:64px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:10px 13px}
 .perk:active{border-color:var(--hot)}.perk b{display:block;font-size:17px}.perk small{color:var(--dim)}
 .gain{text-align:center;color:var(--gold);font:900 44px Impact,system-ui,sans-serif;margin:4px 0 12px}
+#story{padding:0}#stHead{display:flex;align-items:center;gap:8px;padding:max(10px,env(safe-area-inset-top)) 12px 6px;font-weight:800}
+#stHead span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#stHead button{min-width:44px;min-height:40px;font-size:18px}
+#stStage{flex:1;min-height:60px}
+#stPanel{background:linear-gradient(transparent,#0d0f18 16%);padding:30px 16px max(14px,env(safe-area-inset-bottom))}
+#stText{font-size:17px;line-height:1.42;min-height:96px;text-shadow:0 1px 3px #000}
+#stTimer{height:5px;background:#000a;border-radius:3px;overflow:hidden;margin:10px 0;display:none}#stTimer i{display:block;height:100%;background:var(--hot);width:100%}
+.stc{display:block;width:100%;min-height:50px;text-align:left;background:rgba(25,28,42,.92);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-top:8px;font-weight:700}
+.stc:active{border-color:var(--hot)}.stnext{text-align:center;color:var(--gold);border-color:var(--gold)}
+#stQte{display:none;text-align:center}#qteBig{width:124px;height:124px;border-radius:50%;background:var(--hot);color:#190a04;font:900 34px Impact,system-ui,sans-serif;touch-action:none}
+.pad{display:grid;grid-template-columns:repeat(3,68px);grid-template-rows:repeat(2,58px);gap:7px;justify-content:center;margin-top:8px}.pad button{background:var(--panel);border:1px solid var(--line);border-radius:12px;font-size:24px}.pad .u{grid-column:2}.pad .l{grid-column:1;grid-row:2}.pad .d{grid-column:2;grid-row:2}.pad .r{grid-column:3;grid-row:2}
+#qteArrow{font:900 46px Impact,system-ui,sans-serif;color:var(--gold);height:56px}
+#stList{position:absolute;inset:0;background:var(--bg);overflow-y:auto;padding:max(10px,env(safe-area-inset-top)) 14px 24px;display:none}#stList.on{display:block}
+.acth{margin:18px 0 8px;font:900 22px Impact,system-ui,sans-serif;letter-spacing:.4px}.mrow{display:flex;align-items:center;gap:9px;width:100%;min-height:48px;text-align:left;border-bottom:1px solid var(--line);padding:6px 2px}.mrow b{flex:1;font-weight:700}.mrow small{color:var(--dim)}.mrow.off{opacity:.45}.mrow.cur b{color:var(--gold)}
+#story.on~#toast{top:62px;bottom:auto;background:#191c2af2;font-weight:800}
+button{transition:transform .09s,filter .09s,background .15s,border-color .15s,opacity .2s}
+button:active{transform:scale(.965);filter:brightness(1.2)}
+.lock{opacity:.5}.shake{animation:shake .32s}@keyframes shake{20%{transform:translateX(-6px)}45%{transform:translateX(6px)}70%{transform:translateX(-3px)}}
+.tapfx{position:fixed;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:2px solid #ffffffb0;pointer-events:none;z-index:50;animation:tapfx .38s ease-out forwards}@keyframes tapfx{to{transform:scale(5);opacity:0}}
+#stHead{justify-content:space-between}#stHead span{text-align:center;font-size:14px}#stHead span small{display:block;font-weight:600;color:var(--dim);font-size:11.5px}
+#stPanel{max-height:54%;overflow-y:auto;background:linear-gradient(transparent,#0d0f18f2 34px,#0d0f18);padding:34px 18px max(16px,env(safe-area-inset-bottom))}
+#stName{font-size:12.5px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:7px}
+#stText{font-size:17px;line-height:1.42;min-height:48px;cursor:pointer}
+#stHint{font-size:12.5px;color:var(--dim);margin-top:7px;min-height:17px}
+#stTimerRow{display:none;align-items:center;gap:9px;margin:9px 0 2px;font-weight:900;color:var(--hot);font-variant-numeric:tabular-nums}#stTimerRow.on{display:flex}
+#stTimerRow #stTimer{flex:1;display:block;margin:0}
+.stc{position:relative;font-size:16px;padding:12px 16px;opacity:0;animation:rise .26s forwards;border-left:3px solid var(--hot)}@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.stc.picked{background:var(--hot);color:#190a04;border-color:var(--hot)}.stc.dim{animation:none;opacity:.25}.stnext{border-left:1px solid var(--gold)}
+.pulse{animation:pulse .4s}@keyframes pulse{40%{border-color:var(--gold);transform:scale(1.02)}}
+#qteLabel{font-weight:900;font-size:16px;color:var(--gold);margin-bottom:8px}#qteBig{animation:beat .42s infinite alternate}@keyframes beat{to{transform:scale(1.07)}}
+.pad button.good{background:var(--ok)}.pad button.bad{background:var(--bad)}
+#stCap{position:absolute;left:14px;right:14px;top:74px;text-align:center;pointer-events:none;z-index:2;opacity:0;transition:opacity .16s}#stCap.on{opacity:1}#stCap b{display:inline-block;background:#0d0f18e0;border:1px solid var(--hot);border-radius:12px;padding:7px 13px;font-size:15px}#stCap div{margin-top:7px}#stCap span{display:inline-block;background:#0d0f18e0;border-radius:9px;padding:4px 10px;margin:2px;font-size:13px;font-weight:800;animation:rise .26s}
+#stFlash{position:absolute;left:0;right:0;top:30%;text-align:center;font:900 44px Impact,system-ui,sans-serif;opacity:0;pointer-events:none;text-shadow:0 3px 0 #000;z-index:2}#stFlash.on{animation:flash .55s}@keyframes flash{0%{opacity:0;transform:scale(.7)}25%{opacity:1;transform:scale(1.08)}100%{opacity:0}}
+#stCard{position:absolute;inset:0;background:#07080f;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;z-index:3}#stCard.on{display:flex;animation:fadein .4s}@keyframes fadein{from{opacity:0}}
+#stCard small{letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-weight:800}#stCard h2{font:900 46px/1 Impact,system-ui,sans-serif;margin:14px 0 12px}#stCard b{font-size:15px;letter-spacing:1px}#stCard p{color:var(--dim);margin-top:26px;font-size:13px}
+#chTop{position:sticky;top:-10px;background:var(--bg);padding:6px 0 10px;z-index:2;display:flex;align-items:center;gap:8px}#chTop b{flex:1;font-size:15px}#chTop small{color:var(--dim);font-weight:700}
+.prog{height:6px;background:var(--panel);border-radius:3px;overflow:hidden;margin:6px 0 16px}.prog i{display:block;height:100%;background:var(--hot)}
+.nextcard{background:var(--panel);border:1px solid var(--hot);border-radius:15px;padding:14px;margin-bottom:12px}.nextcard small{color:var(--dim);font-weight:700}.nextcard h3{margin:3px 0 11px;font-size:21px}
+.actbtn{display:flex;width:100%;align-items:center;justify-content:space-between;min-height:54px;margin-top:9px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:6px 14px;font-weight:800;font-size:16px;text-align:left}.actbtn small{color:var(--dim);white-space:nowrap;margin-left:8px}
+.mrow{border-bottom:0;padding:7px 4px;min-height:52px}.mrow i{font-style:normal;flex:0 0 30px;height:30px;border-radius:50%;background:var(--panel);text-align:center;line-height:30px;font-size:13px;font-weight:800;color:var(--dim)}.mrow span{flex:1;min-width:0}.mrow span b{display:block;font-size:15px}.mrow span small{font-weight:700}.mrow em{font-style:normal;font-size:12px;font-weight:800;color:var(--dim);white-space:nowrap}.mrow.done i{background:#6fdc8c33;color:var(--ok)}.mrow.done em{color:var(--ok)}.mrow.cur i{background:var(--hot);color:#190a04}.mrow.cur em{color:var(--hot)}.mrow.off{opacity:1}.mrow.off span b{color:var(--dim)}
+.paybox{background:#ffc85714;border:1px solid #ffc85766;border-radius:13px;padding:13px;margin:9px 0}.paybox p{margin:0 0 10px;font-size:14px}
+.who{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}.who b{flex:1}.who small{font-weight:800}.legend{display:flex;gap:14px;justify-content:center;font-size:12px;color:var(--dim);margin-bottom:6px}.legend i{font-style:normal}.picks{background:var(--panel);border-radius:11px;padding:9px 12px;margin-top:6px}.picks b{font-size:13px}
+.flow{display:block;width:100%;margin:6px 0 10px}.pick{font-size:13px;color:var(--dim);margin:3px 0}
 #toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#000e;border:1px solid var(--line);padding:9px 14px;border-radius:10px;z-index:9;opacity:0;transition:opacity .2s;pointer-events:none;max-width:88%;text-align:center}
 #toast.on{opacity:1}
 </style>
@@ -64,16 +116,33 @@ h2{font-size:22px;margin:0 0 4px}
 <canvas id="c"></canvas>
 
 <section id="menu" class="layer on">
-  <div id="top"><span id="who">Выживший</span><span class="coins" id="coins">0</span></div>
+  <div id="top"><span id="who">Выживший</span><span><button class="snd" id="snd1" aria-label="Звук">🔊</button><span class="coins" id="coins">0</span></span></div>
   <div id="page" class="center"></div>
   <nav id="nav"></nav>
 </section>
 
 <section id="hud" class="layer">
   <div class="bar" id="hp"><i></i></div>
+  <div class="bar" id="armor"><i></i></div>
   <div class="bar" id="xp"><i></i></div>
+  <div class="bar" id="boss"><i></i></div>
   <div id="hudrow"><span id="kills">0</span><span id="clock">5:00</span><span id="lvl">ур. 1</span></div>
   <div id="say"></div>
+  <div id="combo"></div>
+  <button class="snd" id="snd2" aria-label="Звук">🔊</button>
+</section>
+<button id="dash">РЫВОК</button>
+
+<section id="story" class="layer">
+  <div id="stHead"><button id="stBack" aria-label="Главы">☰</button><span id="stTitle"></span><button id="stPeople" aria-label="Герои">👥</button><button class="snd" id="snd3" aria-label="Звук">🔊</button></div>
+  <div id="stStage"></div>
+  <div id="stCap"></div>
+  <div id="stFlash"></div>
+  <div id="stPanel"><div id="stName"></div><div id="stText"></div><div id="stTimerRow"><span id="stSec"></span><div id="stTimer"><i></i></div></div><div id="stHint"></div><div id="stChoices"></div>
+    <div id="stQte"><div id="qteLabel"></div><div id="qteArrow"></div><button id="qteBig">ЖМИ</button><div class="pad" id="qtePad"><button class="u" data-d="▲">▲</button><button class="l" data-d="◀">◀</button><button class="d" data-d="▼">▼</button><button class="r" data-d="▶">▶</button></div></div>
+  </div>
+  <div id="stList"></div>
+  <div id="stCard"></div>
 </section>
 
 <div class="modal" id="modal"><div class="box" id="box"></div></div>
@@ -94,18 +163,31 @@ function toast(text) { const t = $("toast"); t.textContent = text; t.classList.a
 
 /* ---------- Демо-режим: тот же API, но локально (вне Telegram) ---------- */
 const demo = (() => {
-  const UPG = [["damage","Патроны","+15% к урону",100],["rate","Затвор","+6% к скорострельности",120],["hp","Бронежилет","+15 к здоровью",90],["speed","Кроссовки","+4% к скорости",110],["magnet","Магнит","+20% к радиусу сбора",80],["dog","Пёс Бублик","+25% к укусу пса",150]];
-  let s = { coins: 300, best: 0, night: 1, levels: {}, streak: 0, day: 0, lastCoins: 0 };
+  const UPG = [["damage","Патроны","+15% к урону",100],["rate","Затвор","+6% к скорострельности",120],["hp","Закалка","+15 к здоровью",90],["armor","Бронежилет","+10 к броне",130],["speed","Кроссовки","+4% к скорости",110],["magnet","Магнит","+20% к радиусу сбора",80],["dog","Пёс Бублик","+25% к укусу пса",150]];
+  const DEF = { hat: "cap", outfit: "plain", dog: "bublik", tracer: "yellow" };
+  const SK = [["cap","hat","Кепка",0],["helmet","hat","Каска",800],["ushanka","hat","Ушанка",1200],["cowboy","hat","Шляпа",1800],["mohawk","hat","Ирокез",2500],["crown","hat","Корона",0,150],["plain","outfit","Обычный",0],["camo","outfit","Камуфляж",600],["hazmat","outfit","Химзащита",1200],["ninja","outfit","Алый",2000],["gold","outfit","Золотой",0,99],["bublik","dog","Бублик",0],["ryzhik","dog","Рыжик",500],["ugolek","dog","Уголёк",900],["robot","dog","Робопёс",0,75],["yellow","tracer","Жёлтые",0],["toxic","tracer","Ядовитые",700],["plasma","tracer","Плазма",1500],["fire","tracer","Огненные",0,50]].map(x => { const o = { id: x[0], slot: x[1], name: x[2] }; if (x[4]) o.stars = x[4]; else o.coins = x[3]; return o; });
+  let s = { coins: 1500, best: 0, night: 1, levels: {}, streak: 0, day: 0, lastCoins: 0, owned: [], equipped: {}, weapons: [], weapon: "pistol" };
   try { s = Object.assign(s, JSON.parse(localStorage.getItem("night-demo") || "{}")); } catch (e) {}
+  const ARMS = [["pistol","Пистолет","Надёжный и простой",0],["shotgun","Дробовик","Сносит толпу вблизи",1500],["smg","Автомат","Очень быстрая стрельба",2500],["sniper","Снайперка","Двойной урон по боссам, пробивает ряд",4000],["flame","Огнемёт","Жжёт всех рядом, бьёт близко",5000],["rocket","Базука","Взрыв задевает всех вокруг",6500],["rail","Рельсотрон","Луч пробивает всех на линии, сильнее по боссам",0,249]].map(x => { const o = { id: x[0], name: x[1], desc: x[2] }; if (x[4]) o.stars = x[4]; else o.coins = x[3]; return o; });
+  if (!s.weaponGift) { s.weaponGift = 1; s.coins += 8000; s.weapons = s.weapons || []; s.weapon = s.weapon || "pistol"; }
   const save = () => { try { localStorage.setItem("night-demo", JSON.stringify(s)); } catch (e) {} };
   const today = () => Math.floor(Date.now() / 86400000);
   const cost = (b, l) => Math.floor(b * Math.pow(1.55, l));
-  const profile = () => ({ id: 1, name: "Выживший", coins: s.coins, best: s.best, night: s.night, vip: false, friends: 0, streak: s.streak, dailyReady: s.day < today(), levels: s.levels,
+  const profile = () => ({ id: 1, name: "Выживший", coins: s.coins, best: s.best, night: s.night, vip: false, friends: 0, streak: s.streak, dailyReady: s.day < today(), levels: s.levels, owned: s.owned, equipped: Object.assign({}, DEF, s.equipped), weapons: s.weapons, weapon: s.weapon,
     upgrades: UPG.map(u => { const level = s.levels[u[0]] || 0; return { id: u[0], name: u[1], desc: u[2], level, max: 15, cost: level < 15 ? cost(u[3], level) : null }; }) });
   return {
-    "/me": () => ({ profile: profile(), config: { dawn: 300, adsBlock: "", invite: "", refBonus: 500, packs: [{id:"coins_s",stars:25,coins:1500,title:"Горсть монет"},{id:"coins_m",stars:100,coins:8000,title:"Мешок монет"},{id:"coins_l",stars:350,coins:35000,title:"Сундук монет"},{id:"vip",stars:199,coins:2000,title:"VIP навсегда",vip:true}] } }),
+    "/me": () => ({ profile: profile(), config: { dawn: 300, adsBlock: "", invite: "", refBonus: 500, skins: SK, weapons: ARMS, packs: [{id:"coins_s",stars:25,coins:1500,title:"Горсть монет"},{id:"coins_m",stars:100,coins:8000,title:"Мешок монет"},{id:"coins_l",stars:350,coins:35000,title:"Сундук монет"},{id:"vip",stars:199,coins:2000,title:"VIP навсегда",vip:true}] } }),
     "/daily": () => { if (s.day >= today()) throw new Error("Награда уже получена сегодня"); s.streak = s.day === today() - 1 ? s.streak + 1 : 1; const reward = 100 * Math.min(s.streak, 7); s.day = today(); s.coins += reward; save(); return { reward, profile: profile() }; },
     "/upgrade": b => { const u = UPG.find(x => x[0] === b.id), l = s.levels[b.id] || 0, c = cost(u[3], l); if (s.coins < c) throw new Error("Не хватает монет"); s.coins -= c; s.levels[b.id] = l + 1; save(); return { profile: profile() }; },
+    "/skin/buy": b => { const k = SK.find(x => x.id === b.id); if (!k.coins) throw new Error("Только за звёзды"); if (s.coins < k.coins) throw new Error("Не хватает монет"); s.coins -= k.coins; s.owned.push(k.id); s.equipped[k.slot] = k.id; save(); return { profile: profile() }; },
+    "/skin/equip": b => { const k = SK.find(x => x.id === b.id); s.equipped[k.slot] = k.id; save(); return { profile: profile() }; },
+    "/weapon/buy": b => { const k = ARMS.find(x => x.id === b.id); if (!k.coins) throw new Error("Только за звёзды"); if (s.coins < k.coins) throw new Error("Не хватает монет"); s.coins -= k.coins; s.weapons.push(k.id); s.weapon = k.id; save(); return { profile: profile() }; },
+    "/weapon/equip": b => { s.weapon = b.id; save(); return { profile: profile() }; },
+    "/story/index": () => { let sv = {}; try { sv = JSON.parse(localStorage.getItem("night-story") || "{}"); } catch (e) {} const A = window.__STORY || []; return { acts: A.map(a => ({ n: a.n, title: a.title, open: true, missions: a.missions.map(m => ({ id: m.id, title: m.title, who: m.who, need: m.need })) })), save: sv, done: s.storyDone || [], endings: A.reduce((c, a) => c + a.missions.reduce((d, m) => d + Object.values(m.nodes).filter(n => n.ending).length, 0), 0), reward: 100, stars: 149, coins: 15000 }; },
+    "/story/act": b => ({ act: window.__STORY.find(a => a.n === b.n) }),
+    "/story/save": b => { try { localStorage.setItem("night-story", JSON.stringify(b.state)); } catch (e) {} return { ok: true }; },
+    "/story/reward": b => { s.storyDone = s.storyDone || []; let given = 0; if (!s.storyDone.includes(b.mission)) { s.storyDone.push(b.mission); s.coins += 100; given = 100; save(); } return { given, profile: profile(), done: s.storyDone }; },
+    "/story/unlock": () => ({ profile: profile() }),
     "/run/start": () => ({ runId: "demo" }),
     "/run/finish": b => { let coins = Math.floor((b.kills * 2 + Math.floor(b.seconds / 3)) * (1 + .25 * (s.night - 1))); if (b.dawn) coins += 300 * s.night; const score = b.kills * 10 + b.seconds * 2 + (b.dawn ? s.night * 1000 : 0); s.coins += coins; s.best = Math.max(s.best, score); if (b.dawn) s.night++; s.lastCoins = coins; save(); return { coins, score, dawn: !!b.dawn, profile: profile() }; },
     "/ad/claim": () => { s.coins += s.lastCoins; save(); return { profile: profile() }; },
@@ -146,7 +228,7 @@ async function showAd() {
 
 /* ---------- Экраны меню ---------- */
 let P = null, CFG = null, tab = "home";
-const TABS = [["home","🌙","Ночь"],["up","🔧","Прокачка"],["shop","⭐","Магазин"],["top","🏆","Топ"],["friends","🐕","Друзья"]];
+const TABS = [["home","🌙","Ночь"],["up","🔧","Прокачка"],["hero","🧢","Герой"],["shop","⭐","Магазин"],["top","🏆","Топ"],["friends","🐕","Друзья"]];
 $("nav").innerHTML = TABS.map(t => `<button data-tab="${t[0]}"><i>${t[1]}</i>${t[2]}</button>`).join("");
 $("nav").onclick = e => { const b = e.target.closest("button"); if (b) { tab = b.dataset.tab; render(); } };
 
@@ -161,26 +243,53 @@ function render() {
   if (tab === "home") {
     page.innerHTML = `<h1>Дожить<br>до <em>рассвета</em></h1>
       <p class="sub">${P.night === 1 ? "Пять минут, толпа зомби и верный пёс." : "Ночь " + P.night + ". Они стали злее."}</p>
-      <div class="row"><div><b>${P.night}</b><span>ночь</span></div><div><b>${fmt(P.best)}</b><span>рекорд</span></div></div>
+      <div class="row"><div><b>${P.night}</b><span>ночь</span></div><div><b>${fmt(P.best)}</b><span>рекорд</span></div><div id="gunbox"><b style="font-size:15px;line-height:24px">${esc(CFG.weapons.find(w => w.id === P.weapon).name)}</b><span>оружие</span></div></div>
       <button class="big" id="go">В НОЧЬ</button>
+      <button class="ghost" id="storyBtn">🎭 Сюжет: Три зелёные лягушки</button>
       ${P.dailyReady ? `<button class="ghost gold" id="daily">Забрать награду за день</button>` : ""}
       ${DEMO ? '<p class="sub" style="margin:10px 0 0;text-align:center;font-size:13px">Демо: без оплаты и общего рейтинга</p>' : ""}`;
     $("go").onclick = startRun;
+    $("storyBtn").onclick = openStory;
+    $("gunbox").onclick = () => { tab = "up"; render(); };
     if (P.dailyReady) $("daily").onclick = async e => {
       e.target.disabled = true;
       try { const r = await api("/daily"); setProfile(r.profile); toast("+" + r.reward + " монет · серия " + r.profile.streak); render(); } catch (err) { toast(err.message); e.target.disabled = false; }
     };
   } else if (tab === "up") {
-    page.innerHTML = `<h2>Прокачка</h2><p class="sub">Остаётся навсегда, между ночами.</p>` + P.upgrades.map(u => `<div class="card"><div class="t"><b>${esc(u.name)}</b><small>${esc(u.desc)}</small><div class="pips">${Array.from({length:u.max},(_, i)=>`<i class="${i<u.level?"on":""}"></i>`).join("")}</div></div>
-      <button class="buy" data-up="${u.id}" ${u.cost === null || u.cost > P.coins ? "disabled" : ""}>${u.cost === null ? "Макс" : fmt(u.cost)}</button></div>`).join("");
+    page.innerHTML = `<h2>Оружие</h2><p class="sub">Покупаешь один раз, берёшь с собой в ночь.</p>` + CFG.weapons.map(w => {
+      const own = (!w.stars && !w.coins) || P.weapons.includes(w.id), on = P.weapon === w.id;
+      return `<div class="card"><div class="t"><b>${esc(w.name)}</b><small>${esc(w.desc)}</small></div><button class="buy ${w.stars && !own ? "star" : ""} ${on || (!own && w.coins > P.coins) ? "lock" : ""}" data-weapon="${w.id}" ${on ? 'data-why="Это оружие уже в руках"' : !own && w.coins > P.coins ? `data-why="Не хватает ${fmt(w.coins - P.coins)} монет"` : ""}>${on ? "В руках" : own ? "Взять" : w.stars ? "⭐ " + w.stars : fmt(w.coins)}</button></div>`;
+    }).join("") + `<h2 style="margin-top:18px">Прокачка</h2><p class="sub">Остаётся навсегда, между ночами.</p>` + P.upgrades.map(u => `<div class="card"><div class="t"><b>${esc(u.name)}</b><small>${esc(u.desc)}</small><div class="pips">${Array.from({length:u.max},(_, i)=>`<i class="${i<u.level?"on":""}"></i>`).join("")}</div></div>
+      <button class="buy ${u.cost === null || u.cost > P.coins ? "lock" : ""}" data-up="${u.id}" ${u.cost === null ? 'data-why="Это улучшение уже на максимуме"' : u.cost > P.coins ? `data-why="Не хватает ${fmt(u.cost - P.coins)} монет"` : ""}>${u.cost === null ? "Макс" : fmt(u.cost)}</button></div>`).join("");
     page.onclick = async e => {
+      const gun = e.target.closest("[data-weapon]");
+      if (gun && tab === "up") {
+        const w = CFG.weapons.find(x => x.id === gun.dataset.weapon), own = (!w.stars && !w.coins) || P.weapons.includes(w.id);
+        if (!own && w.stars) return buy("weapon_" + w.id, gun);
+        try { const r = await api(own ? "/weapon/equip" : "/weapon/buy", { id: w.id }); setProfile(r.profile); haptic("medium"); const top = page.scrollTop; render(); page.scrollTop = top; } catch (err) { toast(err.message); }
+        return;
+      }
       const b = e.target.closest("[data-up]"); if (!b || tab !== "up") return;
       b.disabled = true;
       try { const r = await api("/upgrade", { id: b.dataset.up }); setProfile(r.profile); haptic("medium"); render(); } catch (err) { toast(err.message); render(); }
     };
+  } else if (tab === "hero") {
+    const eq = P.equipped, slots = [["hat","Голова"],["outfit","Одежда"],["dog","Пёс"],["tracer","Пули"]];
+    page.innerHTML = `<canvas id="preview"></canvas>` + slots.map(([slot, label]) => `<div class="slot">${label}</div><div class="chips">` + CFG.skins.filter(k => k.slot === slot).map(k => {
+      const free = !k.stars && !k.coins, own = free || P.owned.includes(k.id), on = eq[slot] === k.id;
+      const tag = on ? "Надето" : own ? "Надеть" : k.stars ? "⭐ " + k.stars : fmt(k.coins);
+      return `<button class="chip ${on ? "on" : ""} ${!own && k.coins > P.coins ? "no" : ""}" data-skin="${k.id}">${esc(k.name)}<small class="${own && !on ? "own" : ""}">${tag}</small></button>`;
+    }).join("") + `</div>`).join("") + `<p class="sub" style="margin-top:12px;font-size:13px">Внешний вид не влияет на силу героя.</p>`;
+    page.onclick = async e => {
+      const b = e.target.closest("[data-skin]"); if (!b || tab !== "hero") return;
+      const k = CFG.skins.find(x => x.id === b.dataset.skin), own = (!k.stars && !k.coins) || P.owned.includes(k.id);
+      if (P.equipped[k.slot] === k.id) return toast("Уже надето");
+      if (!own && k.stars) return buy("skin_" + k.id, b);
+      try { const r = await api(own ? "/skin/equip" : "/skin/buy", { id: k.id }); setProfile(r.profile); haptic("medium"); const top = page.scrollTop; render(); page.scrollTop = top; } catch (err) { toast(err.message); }
+    };
   } else if (tab === "shop") {
     page.innerHTML = `<h2>Магазин</h2><p class="sub">Оплата звёздами Telegram.</p>` + CFG.packs.map(p => `<div class="card"><div class="t"><b>${esc(p.title)}</b><small>${p.vip ? "Двойные монеты навсегда + " : ""}${fmt(p.coins)} монет</small></div>
-      <button class="buy star" data-pack="${p.id}" ${p.vip && P.vip ? "disabled" : ""}>${p.vip && P.vip ? "Есть" : "⭐ " + p.stars}</button></div>`).join("");
+      <button class="buy star ${p.vip && P.vip ? "lock" : ""}" data-pack="${p.id}" ${p.vip && P.vip ? 'data-why="VIP уже куплен"' : ""}>${p.vip && P.vip ? "Есть" : "⭐ " + p.stars}</button></div>`).join("");
     page.onclick = async e => { const b = e.target.closest("[data-pack]"); if (b && tab === "shop") buy(b.dataset.pack, b); };
   } else if (tab === "top") {
     page.innerHTML = `<h2>Лучшие выжившие</h2><p class="sub">Загружаю…</p>`;
@@ -214,12 +323,13 @@ async function buy(pack, btn) {
         toast("Оплачено. Начисляю…");
         for (let i = 0; i < 6; i++) {
           await new Promise(r => setTimeout(r, 1200));
-          const before = P.coins; await refresh();
-          if (P.coins !== before) break;
+          const mark = () => P.coins + "|" + P.owned.length + "|" + P.weapons.length, before = mark(); await refresh();
+          if (mark() !== before) break;
+          if (pack === "story_pass") { SI = await api("/story/index"); if (SI.acts.every(a => a.open)) break; }
         }
         haptic("heavy");
       }
-      if (tab === "shop") render();
+      if (tab === "shop" || tab === "hero" || tab === "up") render(); if (stOn) showChapters();
     });
   } catch (err) { toast(err.message); }
   btn.disabled = false;
@@ -229,42 +339,134 @@ function openModal(html) { $("box").innerHTML = html; $("modal").classList.add("
 function closeModal() { $("modal").classList.remove("on"); }
 
 /* ---------- Игра ---------- */
-const cv = $("c"), ctx = cv.getContext("2d");
+const cv = $("c"); let ctx = cv.getContext("2d");
 let W = 0, H = 0, DPR = 1, zoom = 1;
 function resize() { DPR = Math.min(2, window.devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * DPR; cv.height = H * DPR; zoom = Math.max(.85, Math.min(1.5, Math.min(W, H) / 400)); }
 addEventListener("resize", resize); resize();
 
 let G = null, runId = null, finishing = false;
 const input = { active: false, ox: 0, oy: 0, x: 0, y: 0, dx: 0, dy: 0 }, keys = {};
-addEventListener("keydown", e => { keys[e.code] = true; });
+addEventListener("keydown", e => { keys[e.code] = true; if (e.code === "Space") dash(); });
 addEventListener("keyup", e => { keys[e.code] = false; });
-cv.addEventListener("pointerdown", e => { if (!G) return; input.active = true; input.ox = input.x = e.clientX; input.oy = input.y = e.clientY; input.dx = input.dy = 0; });
+cv.addEventListener("pointerdown", e => { if (!G || input.active) return; input.id = e.pointerId; input.active = true; input.ox = input.x = e.clientX; input.oy = input.y = e.clientY; input.dx = input.dy = 0; });
 addEventListener("pointermove", e => {
-  if (!input.active) return;
+  if (!input.active || e.pointerId !== input.id) return;
   let dx = e.clientX - input.ox, dy = e.clientY - input.oy; const d = Math.hypot(dx, dy), max = 56;
   if (d > max) { input.ox += dx * (1 - max / d); input.oy += dy * (1 - max / d); dx = e.clientX - input.ox; dy = e.clientY - input.oy; }
   input.x = e.clientX; input.y = e.clientY; input.dx = dx / max; input.dy = dy / max;
 });
-const release = () => { input.active = false; input.dx = input.dy = 0; };
+const release = e => { if (e && e.pointerId !== undefined && e.pointerId !== input.id) return; input.active = false; input.dx = input.dy = 0; };
 addEventListener("pointerup", release); addEventListener("pointercancel", release);
 
-let audio = null;
+/* Музыка синтезируется в браузере: своя, без файлов и чужих прав. */
+function musicStep(ac, out, noise, t, step, mode, level, sec) {
+  const CH = [[55, 0], [55, 0], [43.65, 0], [41.2, 1]];  // Am Am F E
+  const bar = Math.floor(step / 16) % 4, s16 = step % 16, chord = CH[bar], root = chord[0];
+  const third = chord[1] ? 1.26 : (bar === 2 ? 1.26 : 1.189), fifth = 1.498;
+  function tone(freq, start, len, vol, type, cutoff) {
+    const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = freq;
+    g.gain.setValueAtTime(.0001, start); g.gain.linearRampToValueAtTime(vol, start + Math.min(.015, len / 3)); g.gain.exponentialRampToValueAtTime(.0001, start + len);
+    if (cutoff) { const f = ac.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = cutoff; o.connect(f).connect(g); } else o.connect(g);
+    g.connect(out); o.start(start); o.stop(start + len + .02);
+  }
+  function hiss(start, len, vol, freq) {
+    const n = ac.createBufferSource(), g = ac.createGain(), f = ac.createBiquadFilter(); n.buffer = noise; f.type = "highpass"; f.frequency.value = freq;
+    g.gain.setValueAtTime(vol, start); g.gain.exponentialRampToValueAtTime(.0001, start + len); n.connect(f).connect(g).connect(out); n.start(start, Math.random() * .5, len + .02);
+  }
+  if (s16 === 0) { const L = sec * 16; for (const m of [2, 2 * third, 2 * fifth]) tone(root * m, t, L, mode === "menu" ? .05 : .035, "sawtooth", mode === "menu" ? 520 : 760); }
+  if (mode === "menu") {
+    if (s16 % 4 === 0) tone(root * 4 * [1, fifth, third, fifth][s16 / 4], t, sec * 7, .06, "triangle");
+    return;
+  }
+  if ([0, 3, 6, 8, 11, 13].includes(s16)) tone(root * 2, t, sec * 1.8, .15, "sawtooth", 320 + level * 170);
+  if (s16 % 4 === 0) { const o = ac.createOscillator(), g = ac.createGain(); o.frequency.setValueAtTime(130, t); o.frequency.exponentialRampToValueAtTime(42, t + .1); g.gain.setValueAtTime(.3, t); g.gain.exponentialRampToValueAtTime(.0001, t + .18); o.connect(g).connect(out); o.start(t); o.stop(t + .2); }
+  if (s16 % 2 === 0) hiss(t, .035, .045, 7000);
+  if (level >= 1 && (s16 === 4 || s16 === 12)) hiss(t, .13, .13, 1400);
+  if (level >= 1) { const arp = [1, third, fifth, 2, fifth, third, 1, fifth][s16 % 8]; tone(root * 8 * arp, t, sec * .9, .035, "square", 2200); }
+  if (level >= 2) { const lead = [2, 0, 0, 1.78, 0, 0, 1.5, 0, 1.68, 0, 1.5, 0, 1.26, 0, 1.335, 0][s16]; if (lead && bar % 2 === 1) tone(root * 8 * lead, t, sec * 2.2, .05, "triangle"); }
+  if (level >= 3 && s16 % 2 === 1) tone(root * 16, t, sec * .5, .025, "sawtooth", 3000);
+}
+
+const Sound = (() => {
+  let ac = null, master = null, sfx = null, noise = null, timer = null, muted = false, mode = "menu", level = 0, step = 0, next = 0, bpm = 76;
+  try { muted = localStorage.getItem("night-mute") === "1"; } catch (e) {}
+  function buildNoise(c) { const b = c.createBuffer(1, c.sampleRate, c.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; return b; }
+  function tick() {
+    if (!ac || ac.state !== "running") return;
+    if (next < ac.currentTime) next = ac.currentTime + .05;
+    while (next < ac.currentTime + .22) {
+      const sec = 60 / bpm / 4;
+      musicStep(ac, master, noise, next, step, mode, level, sec);
+      next += sec; step++;
+    }
+  }
+  function apply() { if (master) { const t = ac.currentTime; master.gain.setTargetAtTime(muted ? 0 : .95, t, .03); sfx.gain.setTargetAtTime(muted ? 0 : .9, t, .03); } document.querySelectorAll(".snd").forEach(b => b.textContent = muted ? "🔇" : "🔊"); }
+  function unlock() {
+    try {
+      if (!ac) {
+        ac = new (window.AudioContext || window.webkitAudioContext)();
+        const comp = ac.createDynamicsCompressor(); comp.connect(ac.destination);
+        master = ac.createGain(); master.gain.value = 0; master.connect(comp);
+        sfx = ac.createGain(); sfx.gain.value = 0; sfx.connect(comp);
+        noise = buildNoise(ac); timer = setInterval(tick, 60); apply();
+      }
+      if (ac.state === "suspended" && !document.hidden) ac.resume();
+    } catch (e) {}
+  }
+  return {
+    unlock, apply,
+    get ctx() { return ac; }, get sfx() { return sfx; },
+    toggle() { muted = !muted; try { localStorage.setItem("night-mute", muted ? "1" : "0"); } catch (e) {} unlock(); apply(); },
+    setMode(m) { if (m !== mode) { mode = m; step = 0; bpm = m === "menu" ? 76 : 126; level = 0; } },
+    setGame(lv, b) { level = lv; bpm = b; },
+    sleep(on) { try { if (ac) on ? ac.suspend() : ac.resume(); } catch (e) {} },
+    buildNoise,
+  };
+})();
+addEventListener("pointerdown", Sound.unlock, true);
+/* Любое касание вне боя получает отклик: круг, щелчок, вибрация. */
+addEventListener("pointerdown", e => {
+  if (G && !G.pause) return;
+  const fx = document.createElement("div"); fx.className = "tapfx"; fx.style.left = e.clientX + "px"; fx.style.top = e.clientY + "px"; document.body.appendChild(fx); setTimeout(() => fx.remove(), 400);
+  if (e.target.closest("button")) { beep(430, .05, .05, "triangle"); haptic("light"); }
+}, true);
+addEventListener("click", e => {
+  const b = e.target.closest(".lock"); if (!b) return;
+  e.preventDefault(); e.stopPropagation();
+  b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); haptic("heavy"); beep(150, .1, .08);
+  toast(b.dataset.why || "Пока недоступно");
+}, true);
+addEventListener("keydown", Sound.unlock, true);
+for (const id of ["snd1", "snd2", "snd3"]) $(id).addEventListener("click", e => { e.stopPropagation(); Sound.toggle(); });
+Sound.apply();
+
 function beep(freq, len, vol, type) {
+  const audio = Sound.ctx; if (!audio || audio.state !== "running") return;
   try {
-    if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
     const o = audio.createOscillator(), g = audio.createGain(), t = audio.currentTime;
     o.type = type || "square"; o.frequency.setValueAtTime(freq, t); o.frequency.exponentialRampToValueAtTime(Math.max(40, freq * .5), t + len);
     g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + len);
-    o.connect(g).connect(audio.destination); o.start(t); o.stop(t + len);
+    o.connect(g).connect(Sound.sfx); o.start(t); o.stop(t + len);
   } catch (e) {}
 }
+
+const WEAPONS = {
+  pistol:  { dmg: 1,    delay: 1,    shots: 1, fan: .16, inacc: 0,   speed: 560,  life: .65, pierce: 0,  size: 3.2, gun: [24, 5, "#11131c"] },
+  shotgun: { dmg: .75,  delay: 2.1,  shots: 6, fan: .17, inacc: .05, speed: 620,  life: .36, pierce: 0,  size: 2.8, gun: [28, 7, "#6b4a2f"], sound: [150, .12, .11] },
+  smg:     { dmg: .55,  delay: .38,  shots: 1, fan: .12, inacc: .13, speed: 640,  life: .55, pierce: 0,  size: 2.6, gun: [27, 5, "#39415a"] },
+  sniper:  { dmg: 5.5,  delay: 3,    shots: 1, fan: .1,  inacc: 0,   speed: 1100, life: .58, pierce: 4,  size: 3.6, gun: [38, 4, "#232a3d"], big: 2, prefer: true, sound: [520, .18, .13] },
+  flame:   { dmg: .28,  delay: .1,   shots: 2, fan: .28, inacc: .2,  speed: 340,  life: .42, pierce: 99, size: 7,   gun: [26, 8, "#a33b22"], color: "rgba(255,130,50,.72)" },
+  rocket:  { dmg: 3,    delay: 3.1,  shots: 1, fan: .22, inacc: 0,   speed: 360,  life: 1.2, pierce: 0,  size: 6.5, gun: [33, 9, "#46603a"], aoe: 100, color: "#ffb15c", sound: [95, .24, .16] },
+  rail:    { dmg: 7,    delay: 2.6,  shots: 1, fan: .1,  inacc: 0,   speed: 0,    life: 0,   pierce: 99, size: 0,   gun: [36, 7, "#3c6cff"], beam: 640, big: 1.5, prefer: true, sound: [760, .22, .13] },
+};
 
 const TYPES = {
   walker: { hp: 20, speed: 60, dmg: 9, r: 13, color: "#8fae7a", gems: 1 },
   runner: { hp: 12, speed: 122, dmg: 7, r: 11, color: "#d59a57", gems: 1 },
   tank:   { hp: 120, speed: 42, dmg: 20, r: 20, color: "#6f7fb0", gems: 4 },
+  bomber: { hp: 16, speed: 84, dmg: 18, r: 12, color: "#ff8c42", gems: 2 },
   spitter:{ hp: 18, speed: 56, dmg: 6, r: 12, color: "#b58be0", gems: 2 },
-  boss:   { hp: 1300, speed: 74, dmg: 34, r: 34, color: "#c8485a", gems: 20 },
+  boss:   { hp: 1000, speed: 74, dmg: 34, r: 34, color: "#c8485a", gems: 20 },
 };
 const PERKS = [
   { id: "dmg",   name: "Экспансивные пули", d: "+30% к урону", f: g => g.s.dmg *= 1.3 },
@@ -276,25 +478,33 @@ const PERKS = [
   { id: "maxhp", name: "Живучесть", d: "+35 к здоровью", f: g => { g.s.hp += 35; g.p.hp += 35; } },
   { id: "saw",   name: "Циркулярка", d: "Пила кружит вокруг тебя", max: 3, f: g => g.s.saws++ },
   { id: "nade",  name: "Гранаты", d: "Сама летит в толпу", max: 3, f: g => g.s.nades++ },
-  { id: "dog",   name: "Злой Бублик", d: "Пёс кусает вдвое чаще", max: 2, f: g => g.s.dogRate *= 2 },
+  { id: "armor", name: "Тяжёлая броня", d: "+30 к броне и полная починка", f: g => { g.s.armor += 30; g.p.armor = g.s.armor; } },
+  { id: "bolt",  name: "Молния", d: "Бьёт по нескольким зомби сразу", max: 3, f: g => g.s.bolts++ },
+  { id: "vamp",  name: "Жажда", d: "Убийства лечат тебя", max: 2, f: g => g.s.vamp++ },
+  { id: "thorn", name: "Шипы", d: "Кто кусает, получает урон", max: 2, f: g => g.s.thorns++ },
+  { id: "sprint",name: "Спринтер", d: "Рывок заряжается быстрее", max: 2, f: g => g.s.dashCd *= .7 },
+  { id: "dog",   name: "Злой пёс", d: "Пёс кусает вдвое чаще", max: 2, f: g => g.s.dogRate *= 2 },
 ];
 
 function newGame() {
   const L = id => (P.levels && P.levels[id]) || 0;
   return {
-    t: 0, kills: 0, lvl: 1, xp: 0, need: 5, spawn: 0, horde: 45, shot: 0, nade: 3, shake: 0, hurt: 0, revived: false, say: {}, over: false, pause: false,
+    t: 0, kills: 0, lvl: 1, xp: 0, need: 4, spawn: 0, horde: 16, combo: 0, comboT: 0, noHit: 9, dashT: 0, dashCd: 0, dashX: 1, dashY: 0, frenzy: 0, barrel: 6, bolt: 2, blood: false, shot: 0, nade: 3, shake: 0, hurt: 0, revived: false, say: {}, over: false, pause: false,
     night: P.night, dawn: CFG.dawn,
-    p: { x: 0, y: 0, hp: 100 + 15 * L("hp"), dirx: 1, step: 0 },
-    s: { dmg: 10 * (1 + .15 * L("damage")), delay: .42 / (1 + .06 * L("rate")), hp: 100 + 15 * L("hp"), speed: 128 * (1 + .04 * L("speed")), magnet: 70 * (1 + .2 * L("magnet")), dogDmg: 14 * (1 + .25 * L("dog")), dogRate: 1, multi: 1, pierce: 0, saws: 0, nades: 0 },
+    p: { x: 0, y: 0, hp: 100 + 15 * L("hp"), armor: 20 + 10 * L("armor"), dirx: 1, step: 0 },
+    skin: Object.assign({}, P.equipped), weapon: P.weapon, w: WEAPONS[P.weapon] || WEAPONS.pistol, beams: [],
+    s: { dmg: 12 * (1 + .15 * L("damage")), delay: .36 / (1 + .06 * L("rate")), hp: 100 + 15 * L("hp"), speed: 128 * (1 + .04 * L("speed")), magnet: 70 * (1 + .2 * L("magnet")), dogDmg: 14 * (1 + .25 * L("dog")), dogRate: 1, multi: 1, pierce: 0, saws: 0, nades: 0, armor: 20 + 10 * L("armor"), bolts: 0, vamp: 0, thorns: 0, dashCd: 3 },
     dog: { x: -30, y: 20, cd: 0, step: 0, dirx: 1 }, taken: {},
-    zs: [], bullets: [], shots: [], gems: [], parts: [], blasts: [], moveA: null,
+    barrels: [], drops: [], bolts: [], zs: [], bullets: [], shots: [], gems: [], parts: [], blasts: [], moveA: null,
   };
 }
 
 async function startRun() {
   try { runId = (await api("/run/start")).runId; } catch (err) { return toast(err.message); }
   G = newGame(); finishing = false;
-  $("menu").classList.remove("on"); $("hud").classList.add("on");
+  $("menu").classList.remove("on"); $("hud").classList.add("on"); $("dash").classList.add("on");
+  Sound.setMode("game");
+  for (let i = 0; i < 7; i++) spawnZ("walker", i * .9);
   beep(90, .4, .15, "sawtooth");
   say("Ночь " + G.night);
 }
@@ -305,7 +515,7 @@ function once(key, text) { if (!G.say[key]) { G.say[key] = 1; say(text); } }
 
 function spawnZ(kind, angle) {
   const a = angle !== undefined ? angle : G.moveA !== null && Math.random() < .6 ? G.moveA + (Math.random() - .5) * 1.8 : Math.random() * 6.283, R = Math.hypot(W, H) / 2 / zoom + 40, T = TYPES[kind], g = G;
-  const hpMul = (1 + g.t / 190) * (1 + .4 * (g.night - 1)), dmgMul = 1 + .2 * (g.night - 1);
+  const hpMul = kind === "boss" ? (1 + g.t / 600) * (1 + .3 * (g.night - 1)) : (1 + g.t / 190) * (1 + .4 * (g.night - 1)), dmgMul = 1 + .2 * (g.night - 1);
   g.zs.push({ x: g.p.x + Math.cos(a) * R, y: g.p.y + Math.sin(a) * R, kind, r: T.r, hp: T.hp * hpMul, max: T.hp * hpMul, speed: T.speed * (.9 + Math.random() * .2) * (1 + g.t / 650), dmg: T.dmg * dmgMul, color: T.color, gems: T.gems, cd: 0, step: Math.random() * 6, flash: 0, saw: 0 });
 }
 
@@ -318,14 +528,71 @@ function hit(z, dmg) {
   z.hp -= dmg; z.flash = .08;
   if (z.hp <= 0 && !z.dead) {
     z.dead = true; G.kills++;
+    const g = G;
+    g.combo++; g.comboT = 2.4;
+    if (g.combo % 25 === 0 || Math.random() < .035) dropBonus(z.x, z.y);
+    if (g.s.vamp && g.kills % (13 - g.s.vamp * 4) === 0) g.p.hp = Math.min(g.s.hp, g.p.hp + 6);
+    if (z.kind === "bomber") explode(z.x, z.y, 82, g.s.dmg * 3, z.dmg);
     burst(z.x, z.y, "#7ec850", z.kind === "boss" ? 40 : 6);
-    for (let i = 0; i < z.gems; i++) G.gems.push({ x: z.x + (Math.random() - .5) * 20 * Math.min(z.gems, 3), y: z.y + (Math.random() - .5) * 20 * Math.min(z.gems, 3), v: 1 });
-    if (z.kind === "boss") { G.shake = .5; beep(70, .6, .25, "sawtooth"); haptic("heavy"); }
+    for (let i = 0; i < z.gems; i++) G.gems.push({ x: z.x + (Math.random() - .5) * 20 * Math.min(z.gems, 3), y: z.y + (Math.random() - .5) * 20 * Math.min(z.gems, 3), v: G.blood ? 2 : 1 });
+    if (z.kind === "boss") { dropBonus(z.x, z.y); say("Босс повержен!"); G.shake = .5; beep(70, .6, .25, "sawtooth"); haptic("heavy"); }
     else beep(180 + Math.random() * 80, .06, .03);
   }
 }
 
-function hurt(dmg) { const g = G; g.p.hp -= dmg; g.hurt = 1; g.shake = Math.max(g.shake, .13); burst(g.p.x, g.p.y, "#ff4d5e", 3); beep(120, .1, .08); haptic("light"); }
+function fireBeam(x, y, a, len, dmg, big) {
+  const g = G, cx = Math.cos(a), cy = Math.sin(a);
+  g.beams.push({ x1: x, y1: y, x2: x + cx * len, y2: y + cy * len, life: .16 });
+  for (const z of g.zs) {
+    if (z.dead) continue;
+    const dx = z.x - x, dy = z.y - 12 - y, along = dx * cx + dy * cy;
+    if (along > 0 && along < len && Math.abs(dx * cy - dy * cx) < z.r + 7) { hit(z, dmg * (z.kind === "boss" || z.kind === "tank" ? big : 1)); burst(z.x, z.y - 12, "#8fb7ff", 3, 90); }
+  }
+  for (const o of g.barrels) { const dx = o.x - x, dy = o.y - 12 - y, along = dx * cx + dy * cy; if (!o.gone && along > 0 && along < len && Math.abs(dx * cy - dy * cx) < 16) popBarrel(o); }
+}
+
+function hurt(dmg) {
+  const g = G; if (g.dashT > 0) return;
+  g.noHit = 0; g.combo = 0;
+  const soak = Math.min(g.p.armor, dmg); g.p.armor -= soak; dmg -= soak; g.p.hp -= dmg;
+  g.shake = Math.max(g.shake, .13); haptic("light");
+  if (dmg > 0) { g.hurt = 1; burst(g.p.x, g.p.y - 10, "#ff4d5e", 3); beep(120, .1, .08); }
+  else { burst(g.p.x, g.p.y - 10, "#8fb7ff", 4); beep(340, .06, .06, "triangle"); }
+}
+
+function explode(x, y, R, dmg, toPlayer) {
+  const g = G;
+  g.blasts.push({ x, y, r: 0, t: .3 }); g.shake = Math.max(g.shake, .22); burst(x, y, "#ffb15c", 14, 170); beep(90, .28, .16, "sawtooth");
+  for (const z of g.zs) if (!z.dead && (z.x - x) ** 2 + (z.y - y) ** 2 < R * R) hit(z, dmg);
+  for (const b of g.barrels) if (!b.gone && (b.x - x) ** 2 + (b.y - y) ** 2 < R * R) popBarrel(b);
+  if (toPlayer && (g.p.x - x) ** 2 + (g.p.y - y) ** 2 < R * R) hurt(toPlayer);
+}
+
+function popBarrel(b) { b.gone = true; explode(b.x, b.y, 118, G.s.dmg * 5 + 35, 0); }
+
+const BONUS = {
+  med:    { c: "#ff4d5e", l: "+", say: "Аптечка" },
+  vest:   { c: "#8fb7ff", l: "Б", say: "Броня починена" },
+  bomb:   { c: "#ffb15c", l: "!", say: "Бомба!" },
+  frenzy: { c: "#ffe36b", l: "»", say: "Ярость!" },
+};
+function dropBonus(x, y) { const k = Object.keys(BONUS); if (G.drops.length < 6) G.drops.push({ x, y, kind: k[Math.floor(Math.random() * k.length)], life: 11 }); }
+function takeBonus(d) {
+  const g = G; d.life = 0; say(BONUS[d.kind].say); beep(640, .18, .12, "triangle"); haptic("medium");
+  if (d.kind === "med") g.p.hp = Math.min(g.s.hp, g.p.hp + 40);
+  if (d.kind === "vest") g.p.armor = g.s.armor;
+  if (d.kind === "frenzy") g.frenzy = 7;
+  if (d.kind === "bomb") { g.blasts.push({ x: g.p.x, y: g.p.y, r: 0, t: .5 }); g.shake = .5; for (const z of g.zs) if ((z.x - g.p.x) ** 2 + (z.y - g.p.y) ** 2 < 420 ** 2) hit(z, g.s.dmg * 7); }
+}
+
+function dash() {
+  const g = G; if (!g || g.pause || g.over || g.dashCd > 0) return;
+  let x = input.dx, y = input.dy;
+  if (keys.KeyA || keys.ArrowLeft) x -= 1; if (keys.KeyD || keys.ArrowRight) x += 1; if (keys.KeyW || keys.ArrowUp) y -= 1; if (keys.KeyS || keys.ArrowDown) y += 1;
+  const m = Math.hypot(x, y); if (m < .05) { x = g.p.dirx; y = 0; } else { x /= m; y /= m; }
+  g.dashX = x; g.dashY = y; g.dashT = .2; g.dashCd = g.s.dashCd; beep(260, .14, .09, "sawtooth"); haptic("light");
+}
+$("dash").addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); dash(); });
 
 function nearest(x, y, range) { let best = null, bd = range * range; for (const z of G.zs) { const d = (z.x - x) ** 2 + (z.y - y) ** 2; if (d < bd && !z.dead) { bd = d; best = z; } } return best; }
 
@@ -354,22 +621,30 @@ function step(dt) {
   if (keys.KeyA || keys.ArrowLeft) mx -= 1; if (keys.KeyD || keys.ArrowRight) mx += 1;
   if (keys.KeyW || keys.ArrowUp) my -= 1; if (keys.KeyS || keys.ArrowDown) my += 1;
   const m = Math.hypot(mx, my); if (m > 1) { mx /= m; my /= m; }
-  p.x += mx * s.speed * dt; p.y += my * s.speed * dt;
+  g.dashCd = Math.max(0, g.dashCd - dt); g.frenzy = Math.max(0, g.frenzy - dt); g.noHit += dt;
+  if (g.dashT > 0) { g.dashT -= dt; p.x += g.dashX * s.speed * 3.6 * dt; p.y += g.dashY * s.speed * 3.6 * dt; burst(p.x, p.y - 8, "#ffffff", 1, 30); }
+  else { p.x += mx * s.speed * dt; p.y += my * s.speed * dt; }
+  if (g.noHit > 5) p.armor = Math.min(s.armor, p.armor + s.armor * .14 * dt);
+  if (g.comboT > 0 && (g.comboT -= dt) <= 0) g.combo = 0;
+  g.blood = g.t > 165 && g.t < 190;
+  Sound.setGame(g.blood || g.zs.some(z => z.kind === "boss") ? 3 : g.t > 120 ? 2 : g.t > 14 ? 1 : 0, 126 + Math.min(22, g.t * .075) + (g.blood ? 6 : 0));
   g.moveA = m > .05 ? Math.atan2(my, mx) : null;
   if (m > .05) { p.step += dt * 11; if (Math.abs(mx) > .1) p.dirx = Math.sign(mx); }
 
   /* Появление врагов. Минимальный интервал согласован с серверным лимитом убийств. */
   g.spawn -= dt;
   if (g.spawn <= 0 && g.zs.length < 110) {
-    g.spawn = Math.max(.17, (1.05 - g.t * .0032) / (1 + .1 * (g.night - 1)));
+    g.spawn = Math.max(.17, (.6 - g.t * .0014) / (1 + .1 * (g.night - 1)) * (g.blood ? .6 : 1));
     const r = Math.random();
-    spawnZ(g.t > 100 && r < .1 ? "tank" : g.t > 70 && r < .24 ? "spitter" : g.t > 40 && r < .5 ? "runner" : "walker");
+    spawnZ(g.t > 90 && r < .09 ? "tank" : g.t > 30 && r < .19 ? "bomber" : g.t > 55 && r < .31 ? "spitter" : g.t > 18 && r < .55 ? "runner" : "walker");
   }
   g.horde -= dt;
-  if (g.horde <= 0) { g.horde = 45; const a = Math.random() * 6.283; for (let i = 0; i < 10; i++) spawnZ("walker", a + i * .09); say("Толпа!"); }
-  if (g.t > 40) once("run", "Бегуны!");
-  if (g.t > 70) once("spit", "Плевуны!");
-  if (g.t > 100) once("tank", "Громилы!");
+  if (g.horde <= 0) { g.horde = 35; const a = Math.random() * 6.283; for (let i = 0; i < 10; i++) spawnZ("walker", a + i * .09); say("Толпа!"); }
+  if (g.t > 18) once("run", "Бегуны!");
+  if (g.t > 30) once("bomb", "Осторожно: бомберы!");
+  if (g.blood) once("blood", "Кровавая луна!");
+  if (g.t > 55) once("spit", "Плевуны!");
+  if (g.t > 90) once("tank", "Громилы!");
   if (g.t > 120 && !g.say.b1) { g.say.b1 = 1; spawnZ("boss"); say("БОСС"); g.shake = .4; }
   if (g.t > 240 && !g.say.b2) { g.say.b2 = 1; spawnZ("boss"); spawnZ("boss", Math.random() * 6.283); say("ДВА БОССА"); g.shake = .4; }
   if (g.t > 275) once("dawn", "Светает. Держись!");
@@ -377,14 +652,19 @@ function step(dt) {
   /* Стрельба */
   g.shot -= dt;
   if (g.shot <= 0) {
-    const target = nearest(p.x, p.y, 330);
+    const w = g.w, reach = w.beam || w.speed * w.life;
+    let target = nearest(p.x, p.y, Math.min(reach, 430));
+    if (target && w.prefer) for (const z of g.zs) if (!z.dead && z.max > target.max && (z.x - p.x) ** 2 + (z.y - p.y) ** 2 < 470 ** 2) target = z;
     if (target) {
-      g.shot = s.delay;
+      g.shot = s.delay * w.delay * (g.frenzy > 0 ? .45 : 1);
       const base = Math.atan2(target.y - p.y, target.x - p.x);
       p.dirx = Math.cos(base) < 0 ? -1 : 1; p.aim = base;
-      for (let i = 0; i < s.multi; i++) {
-        const a = base + (i - (s.multi - 1) / 2) * .16;
-        g.bullets.push({ x: p.x, y: p.y - 8, vx: Math.cos(a) * 560, vy: Math.sin(a) * 560, life: .65, left: s.pierce, seen: new Set() });
+      if (w.sound) beep(w.sound[0], w.sound[1], w.sound[2], "sawtooth");
+      const dmg = s.dmg * w.dmg, count = w.shots + s.multi - 1;
+      for (let i = 0; i < count; i++) {
+        const a = base + (i - (count - 1) / 2) * w.fan + (Math.random() - .5) * w.inacc;
+        if (w.beam) { fireBeam(p.x, p.y - 8, a, w.beam, dmg, w.big); continue; }
+        g.bullets.push({ x: p.x, y: p.y - 8, vx: Math.cos(a) * w.speed, vy: Math.sin(a) * w.speed, life: w.life * (w.inacc ? .85 + Math.random() * .3 : 1), left: s.pierce + w.pierce, seen: new Set(), dmg, big: w.big || 1, aoe: w.aoe, size: w.size, color: w.color });
       }
     }
   }
@@ -392,11 +672,36 @@ function step(dt) {
     b.x += b.vx * dt; b.y += b.vy * dt; b.life -= dt;
     for (const z of g.zs) {
       if (z.dead || b.seen.has(z) || (z.x - b.x) ** 2 + (z.y - b.y) ** 2 > (z.r + 5) ** 2) continue;
-      hit(z, s.dmg); b.seen.add(z); burst(b.x, b.y, "#c8485a", 2, 60);
+      b.seen.add(z);
+      if (b.aoe) { b.life = 0; hit(z, b.dmg); explode(b.x, b.y, b.aoe, b.dmg, 0); break; }
+      hit(z, b.dmg * (z.kind === "boss" || z.kind === "tank" ? b.big : 1)); burst(b.x, b.y, "#c8485a", 2, 60);
       if (b.left-- <= 0) { b.life = 0; break; }
     }
   }
+  for (const b of g.bullets) for (const o of g.barrels) if (b.life > 0 && !o.gone && (o.x - b.x) ** 2 + (o.y - b.y) ** 2 < 17 * 17) { b.life = 0; popBarrel(o); }
   g.bullets = g.bullets.filter(b => b.life > 0);
+  for (const b of g.beams) b.life -= dt;
+  g.beams = g.beams.filter(b => b.life > 0);
+  g.barrel -= dt;
+  if (g.barrel <= 0) { g.barrel = 8; if (g.barrels.length < 6) { const a = Math.random() * 6.283, R = 170 + Math.random() * 130; g.barrels.push({ x: p.x + Math.cos(a) * R, y: p.y + Math.sin(a) * R }); } }
+  g.barrels = g.barrels.filter(b => !b.gone && (b.x - p.x) ** 2 + (b.y - p.y) ** 2 < 800 ** 2);
+  for (const d of g.drops) { d.life -= dt; if ((d.x - p.x) ** 2 + (d.y - p.y) ** 2 < 30 * 30) takeBonus(d); }
+  g.drops = g.drops.filter(d => d.life > 0);
+  if (s.bolts) {
+    g.bolt -= dt;
+    if (g.bolt <= 0) {
+      g.bolt = 3 - s.bolts * .5; let from = { x: p.x, y: p.y - 16 }; const seen = new Set();
+      for (let n = 0; n < 2 + s.bolts * 2; n++) {
+        let t = null, bd = 260 * 260;
+        for (const z of g.zs) { const q = (z.x - from.x) ** 2 + (z.y - from.y) ** 2; if (!z.dead && !seen.has(z) && q < bd) { bd = q; t = z; } }
+        if (!t) break;
+        seen.add(t); g.bolts.push({ x1: from.x, y1: from.y, x2: t.x, y2: t.y - 12, life: .14 }); hit(t, s.dmg * 2.2); from = { x: t.x, y: t.y - 12 };
+      }
+      if (seen.size) beep(900, .08, .05, "sawtooth");
+    }
+    for (const b of g.bolts) b.life -= dt;
+    g.bolts = g.bolts.filter(b => b.life > 0);
+  }
 
   /* Гранаты и пилы */
   if (s.nades) {
@@ -425,6 +730,7 @@ function step(dt) {
   for (let i = 0; i < g.zs.length; i++) {
     const z = g.zs[i]; if (z.dead) continue;
     const dx = p.x - z.x, dy = p.y - z.y, dd = Math.hypot(dx, dy) || 1;
+    if (z.kind === "bomber" && dd < 36) { hit(z, 1e9); continue; }
     if (z.kind !== "spitter" || dd > 200) { z.x += dx / dd * z.speed * dt; z.y += dy / dd * z.speed * dt; }
     else if (z.cd <= 0) { z.cd = 2.1; g.shots.push({ x: z.x, y: z.y - 18, vx: dx / dd * 205, vy: dy / dd * 205, life: 2.4, dmg: z.dmg * 1.3 }); }
     z.step += dt * (z.speed / 7); z.flash -= dt; z.saw -= dt; z.cd -= dt;
@@ -432,7 +738,7 @@ function step(dt) {
       const o = g.zs[j], ax = o.x - z.x, ay = o.y - z.y, min = z.r + o.r - 4, a2 = ax * ax + ay * ay;
       if (a2 < min * min && a2 > .01) { const a = Math.sqrt(a2), push = (min - a) * .5 / a; z.x -= ax * push; z.y -= ay * push; o.x += ax * push; o.y += ay * push; }
     }
-    if (dd < z.r + 12 && z.cd <= 0) { z.cd = .65; hurt(z.dmg); }
+    if (dd < z.r + 12 && z.cd <= 0) { z.cd = .65; hurt(z.dmg); if (s.thorns) hit(z, s.dmg * 1.4 * s.thorns); }
     if (dd > 900) { const a = Math.random() * 6.283, R = Math.hypot(W, H) / 2 / zoom + 40; z.x = p.x + Math.cos(a) * R; z.y = p.y + Math.sin(a) * R; }
   }
   g.zs = g.zs.filter(z => !z.dead);
@@ -443,6 +749,8 @@ function step(dt) {
   g.shots = g.shots.filter(o => o.life > 0);
 
   /* Опыт */
+  for (const b of g.barrels) { ctx.fillStyle = "#0005"; ctx.beginPath(); ctx.ellipse(b.x, b.y + 1, 13, 4, 0, 0, 6.3); ctx.fill(); ctx.fillStyle = "#c8393c"; ctx.fillRect(b.x - 10, b.y - 26, 20, 26); ctx.fillStyle = "#ffd23f"; ctx.fillRect(b.x - 10, b.y - 17, 20, 7); ctx.fillStyle = "#7c1f24"; ctx.fillRect(b.x - 10, b.y - 27, 20, 3); }
+  for (const d of g.drops) { if (d.life < 3 && Math.floor(d.life * 6) % 2) continue; const B = BONUS[d.kind], y = d.y - 13 + Math.sin(g.t * 5) * 2.5; ctx.fillStyle = B.c; ctx.fillRect(d.x - 12, y - 12, 24, 24); ctx.fillStyle = "#14110a"; ctx.font = "900 17px system-ui,sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(B.l, d.x, y + 1); }
   for (const c of g.gems) {
     const dx = p.x - c.x, dy = p.y - c.y, dd = Math.hypot(dx, dy) || 1;
     if (dd < s.magnet) { c.x += dx / dd * 380 * dt; c.y += dy / dd * 380 * dt; }
@@ -471,7 +779,7 @@ function die() {
     closeModal();
     const ok = await showAd();
     if (!ok) { toast("Реклама недоступна"); return finishRun(false); }
-    g.revived = true; g.p.hp = g.s.hp * .6;
+    g.revived = true; g.p.hp = g.s.hp * .6; g.p.armor = g.s.armor;
     for (const z of g.zs) if ((z.x - g.p.x) ** 2 + (z.y - g.p.y) ** 2 < 200 ** 2) { const a = Math.atan2(z.y - g.p.y, z.x - g.p.x); z.x += Math.cos(a) * 220; z.y += Math.sin(a) * 220; }
     g.blasts.push({ x: g.p.x, y: g.p.y, r: 0, t: .4 }); g.pause = false;
   };
@@ -481,7 +789,7 @@ const clock = s => { s = Math.max(0, Math.ceil(s)); return Math.floor(s / 60) + 
 
 async function finishRun(dawn) {
   if (finishing) return; finishing = true;
-  const g = G; g.pause = true; g.over = true; release();
+  const g = G; g.pause = true; g.over = true; release(); $("dash").classList.remove("on"); Sound.setMode("menu");
   const body = { runId, kills: g.kills, seconds: Math.floor(g.t), dawn };
   let r = null, error = "";
   for (let i = 0; i < 3 && !r; i++) {
@@ -513,9 +821,10 @@ async function finishRun(dawn) {
   };
 }
 
-function goHome() { closeModal(); G = null; $("hud").classList.remove("on"); $("menu").classList.add("on"); tab = "home"; render(); }
+function goHome() { closeModal(); G = null; $("dash").classList.remove("on"); Sound.setMode("menu"); $("hud").classList.remove("on"); $("menu").classList.add("on"); tab = "home"; render(); }
 
 document.addEventListener("visibilitychange", () => {
+  Sound.sleep(document.hidden);
   if (!document.hidden || !G || G.pause || G.over) return;
   const g = G; g.pause = true; release();
   openModal(`<h2>Пауза</h2><button class="big" id="cont">ПРОДОЛЖИТЬ</button>`);
@@ -550,22 +859,55 @@ function stick(x, y, r, step, color, dir, zombie, flash) {
   if (zombie) { ctx.fillStyle = "#ffe36b"; ctx.beginPath(); ctx.arc(x + dir * r * .22, top - r * .58, Math.max(1.4, r * .12), 0, 6.3); ctx.fill(); }
 }
 
-function drawPlayer(p) {
-  stick(p.x, p.y, 13, p.step, "#f3ead6", p.dirx, false, false);
-  const top = p.y - 21.5, a = p.aim === undefined ? (p.dirx > 0 ? 0 : Math.PI) : p.aim;
-  ctx.strokeStyle = "#f3ead6"; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(p.x, top + 4); ctx.lineTo(p.x + Math.cos(a) * 13, top + 5 + Math.sin(a) * 13); ctx.stroke();
-  ctx.strokeStyle = "#11131c"; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(p.x + Math.cos(a) * 11, top + 5 + Math.sin(a) * 11); ctx.lineTo(p.x + Math.cos(a) * 24, top + 5 + Math.sin(a) * 24); ctx.stroke();
-  const hy = top - 6.5;
-  ctx.fillStyle = "#ff6b3d"; ctx.beginPath(); ctx.arc(p.x, hy, 7.6, Math.PI, 0); ctx.fill(); ctx.fillRect(p.x + (p.dirx > 0 ? 0 : -13), hy - 2, 13, 3);
+const OUTFITS = { plain: "#f3ead6", camo: "#86a35f", hazmat: "#ffd23f", ninja: "#e0475a", gold: "#ffcf4a" };
+const TRACERS = { yellow: "#ffe36b", toxic: "#7dff6a", plasma: "#62c5ff", fire: "#ff7a3d" };
+const DOGS = { bublik: ["#eee7da", "#20222c"], ryzhik: ["#e08a3c", "#7a3f12"], ugolek: ["#4a4e60", "#1c1e28"], robot: ["#aeb7c9", "#5c6a85"] };
+
+function drawHat(kind, x, y, dir) {
+  const fill = (c, f) => { ctx.fillStyle = c; ctx.beginPath(); f(); ctx.fill(); };
+  if (kind === "cap") { fill("#ff6b3d", () => ctx.arc(x, y, 7.6, Math.PI, 0)); ctx.fillRect(x + (dir > 0 ? 0 : -13), y - 2, 13, 3); }
+  else if (kind === "helmet") { fill("#566b45", () => ctx.arc(x, y - 1, 9, Math.PI, 0)); ctx.fillStyle = "#3f5033"; ctx.fillRect(x - 11, y - 2, 22, 3); }
+  else if (kind === "ushanka") { fill("#7a5a3c", () => ctx.arc(x, y - 1, 9, Math.PI, 0)); ctx.fillStyle = "#b08a62"; ctx.fillRect(x - 10, y - 3, 20, 4); ctx.fillRect(x - 11, y - 1, 4, 10); ctx.fillRect(x + 7, y - 1, 4, 10); }
+  else if (kind === "cowboy") { fill("#a8763e", () => ctx.ellipse(x, y - 1, 16, 3.4, 0, 0, 6.3)); fill("#8c5f2e", () => ctx.arc(x, y - 3, 7.5, Math.PI, 0)); ctx.fillRect(x - 7.5, y - 3, 15, 2); }
+  else if (kind === "mohawk") { ctx.fillStyle = "#ff3b7f"; for (let i = -2; i <= 2; i++) { ctx.beginPath(); ctx.moveTo(x + i * 3.2 - 2.4, y - 4); ctx.lineTo(x + i * 3.2, y - 15 + Math.abs(i) * 1.5); ctx.lineTo(x + i * 3.2 + 2.4, y - 4); ctx.fill(); } }
+  else if (kind === "crown") { ctx.fillStyle = "#ffd24a"; ctx.beginPath(); ctx.moveTo(x - 9, y - 1); ctx.lineTo(x - 9, y - 11); ctx.lineTo(x - 4.5, y - 5.5); ctx.lineTo(x, y - 13); ctx.lineTo(x + 4.5, y - 5.5); ctx.lineTo(x + 9, y - 11); ctx.lineTo(x + 9, y - 1); ctx.fill(); ctx.fillStyle = "#e0475a"; ctx.beginPath(); ctx.arc(x, y - 4, 1.8, 0, 6.3); ctx.fill(); }
 }
 
-function drawDog(d) {
-  const b = Math.sin(d.step) * 2.5, x = d.x, y = d.y, s = d.dirx;
+function drawPlayer(p, skin, armored, dashing) {
+  const body = OUTFITS[skin.outfit] || OUTFITS.plain;
+  if (dashing) { ctx.globalAlpha = .35; stick(p.x - (p.dashX || 0) * 18, p.y - (p.dashY || 0) * 18, 13, p.step, body, p.dirx, false, false); ctx.globalAlpha = 1; }
+  stick(p.x, p.y, 13, p.step, body, p.dirx, false, false);
+  const top = p.y - 21.5, a = p.aim === undefined ? (p.dirx > 0 ? 0 : Math.PI) : p.aim;
+  if (armored) { ctx.strokeStyle = "#8fb7ff"; ctx.lineWidth = 8; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(p.x, top + 3); ctx.lineTo(p.x, top + 13); ctx.stroke(); }
+  ctx.strokeStyle = body; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(p.x, top + 4); ctx.lineTo(p.x + Math.cos(a) * 13, top + 5 + Math.sin(a) * 13); ctx.stroke();
+  const gun = (WEAPONS[p.weaponId] || WEAPONS.pistol).gun;
+  ctx.strokeStyle = gun[2]; ctx.lineWidth = gun[1]; ctx.beginPath(); ctx.moveTo(p.x + Math.cos(a) * 11, top + 5 + Math.sin(a) * 11); ctx.lineTo(p.x + Math.cos(a) * gun[0], top + 5 + Math.sin(a) * gun[0]); ctx.stroke();
+  drawHat(skin.hat, p.x, top - 6.5, p.dirx);
+}
+
+function drawDog(d, skin) {
+  const b = Math.sin(d.step) * 2.5, x = d.x, y = d.y, s = d.dirx, c = DOGS[skin.dog] || DOGS.bublik;
   ctx.fillStyle = "#0005"; ctx.beginPath(); ctx.ellipse(x, y + 1, 13, 4, 0, 0, 6.3); ctx.fill();
-  ctx.strokeStyle = "#20222c"; ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(x - 8, y - 7); ctx.lineTo(x - 8 + b, y); ctx.moveTo(x + 7, y - 7); ctx.lineTo(x + 7 - b, y); ctx.moveTo(x - 11 * s, y - 12); ctx.lineTo(x - 17 * s, y - 18 + b); ctx.stroke();
-  ctx.fillStyle = "#eee7da"; ctx.beginPath(); ctx.ellipse(x, y - 10, 12, 6, 0, 0, 6.3); ctx.fill();
-  ctx.fillStyle = "#20222c"; ctx.beginPath(); ctx.ellipse(x - 4 * s, y - 11, 5, 4, 0, 0, 6.3); ctx.fill(); ctx.beginPath(); ctx.arc(x + 12 * s, y - 16, 6, 0, 6.3); ctx.fill();
-  ctx.fillStyle = "#eee7da"; ctx.beginPath(); ctx.arc(x + 15 * s, y - 15, 2.6, 0, 6.3); ctx.fill();
+  ctx.strokeStyle = c[1]; ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(x - 8, y - 7); ctx.lineTo(x - 8 + b, y); ctx.moveTo(x + 7, y - 7); ctx.lineTo(x + 7 - b, y); ctx.moveTo(x - 11 * s, y - 12); ctx.lineTo(x - 17 * s, y - 18 + b); ctx.stroke();
+  ctx.fillStyle = c[0]; ctx.beginPath(); ctx.ellipse(x, y - 10, 12, 6, 0, 0, 6.3); ctx.fill();
+  ctx.fillStyle = c[1]; ctx.beginPath(); ctx.ellipse(x - 4 * s, y - 11, 5, 4, 0, 0, 6.3); ctx.fill(); ctx.beginPath(); ctx.arc(x + 12 * s, y - 16, 6, 0, 6.3); ctx.fill();
+  ctx.fillStyle = skin.dog === "robot" ? "#62f0ff" : c[0]; ctx.beginPath(); ctx.arc(x + 15 * s, y - 15, 2.6, 0, 6.3); ctx.fill();
+}
+
+let previewT = 0;
+function drawPreview(dt) {
+  const el = $("preview"); if (!el) return;
+  previewT += dt;
+  const dpr = Math.min(2, devicePixelRatio || 1), w = el.clientWidth, h = el.clientHeight;
+  if (el.width !== Math.round(w * dpr)) { el.width = Math.round(w * dpr); el.height = Math.round(h * dpr); }
+  const main = ctx; ctx = el.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+  ctx.translate(w / 2, h * .82); ctx.scale(3, 3);
+  drawPlayer({ x: -24, y: 0, dirx: 1, weaponId: P.weapon, step: Math.sin(previewT * 1.6) * .6, aim: -.12 + Math.sin(previewT) * .08 }, P.equipped, false, false);
+  drawDog({ x: 42, y: 0, dirx: -1, step: previewT * 7 }, P.equipped);
+  const tr = TRACERS[P.equipped.tracer] || TRACERS.yellow, q = (previewT * 90) % 90;
+  ctx.fillStyle = tr; ctx.beginPath(); ctx.arc(4 + q * .3, -18, 2.2, 0, 6.3); ctx.fill();
+  ctx = main;
 }
 
 function drawMoon(x, y, r, a) {
@@ -583,13 +925,15 @@ function renderGame() {
   ground(p.x, p.y, vw + 40, vh + 40);
   for (const c of g.gems) { ctx.fillStyle = "#62c5ff"; ctx.beginPath(); ctx.moveTo(c.x, c.y - 6); ctx.lineTo(c.x + 4.5, c.y); ctx.lineTo(c.x, c.y + 6); ctx.lineTo(c.x - 4.5, c.y); ctx.fill(); }
   const list = g.zs.map(z => ({ y: z.y, f: () => { stick(z.x, z.y, z.r, z.step, z.color, z.x < p.x ? 1 : -1, true, z.flash > 0); if (z.kind === "boss" || z.kind === "tank") { const w = z.r * 2; ctx.fillStyle = "#000a"; ctx.fillRect(z.x - w / 2, z.y - z.r * 3.1, w, 4); ctx.fillStyle = "#ff4d5e"; ctx.fillRect(z.x - w / 2, z.y - z.r * 3.1, w * Math.max(0, z.hp / z.max), 4); } } }));
-  list.push({ y: p.y, f: () => drawPlayer(p) }, { y: g.dog.y, f: () => drawDog(g.dog) });
+  list.push({ y: p.y, f: () => drawPlayer(Object.assign(p, { dashX: g.dashX, dashY: g.dashY, weaponId: g.weapon }), g.skin, p.armor > 0, g.dashT > 0) }, { y: g.dog.y, f: () => drawDog(g.dog, g.skin) });
   list.sort((a, b) => a.y - b.y).forEach(o => o.f());
   ctx.fillStyle = "#b6f23f"; for (const o of g.shots) { ctx.beginPath(); ctx.arc(o.x, o.y, 6, 0, 6.3); ctx.fill(); }
-  ctx.fillStyle = "#ffe36b"; for (const b of g.bullets) { ctx.beginPath(); ctx.arc(b.x, b.y, 3.2, 0, 6.3); ctx.fill(); }
+  const tracer = g.frenzy > 0 ? "#ffffff" : TRACERS[g.skin.tracer] || TRACERS.yellow; for (const b of g.bullets) { ctx.fillStyle = b.color || tracer; ctx.beginPath(); ctx.arc(b.x, b.y, b.size, 0, 6.3); ctx.fill(); }
+  for (const b of g.beams) { ctx.globalAlpha = Math.min(1, b.life * 9); ctx.strokeStyle = "#8fb7ff"; ctx.lineWidth = 10; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(b.x1, b.y1); ctx.lineTo(b.x2, b.y2); ctx.stroke(); ctx.strokeStyle = "#fff"; ctx.lineWidth = 3; ctx.stroke(); ctx.globalAlpha = 1; }
   for (let i = 0; i < g.s.saws; i++) { const a = g.t * 3.4 + i * 6.283 / g.s.saws, x = p.x + Math.cos(a) * 72, y = p.y + Math.sin(a) * 72; ctx.fillStyle = "#cfd5e2"; ctx.beginPath(); for (let k = 0; k < 16; k++) { const ang = k * .3927 + g.t * 14, r = k % 2 ? 9 : 14; ctx.lineTo(x + Math.cos(ang) * r, y + Math.sin(ang) * r); } ctx.fill(); ctx.fillStyle = "#3b4150"; ctx.beginPath(); ctx.arc(x, y, 3, 0, 6.3); ctx.fill(); }
   for (const a of g.parts) { ctx.fillStyle = a.color; ctx.globalAlpha = Math.min(1, a.life * 3); ctx.fillRect(a.x - 2, a.y - 2, 4, 4); }
   ctx.globalAlpha = 1;
+  ctx.strokeStyle = "#b9e6ff"; ctx.lineWidth = 3; for (const b of g.bolts) { ctx.beginPath(); ctx.moveTo(b.x1, b.y1); ctx.lineTo((b.x1 + b.x2) / 2 + (Math.random() - .5) * 18, (b.y1 + b.y2) / 2 + (Math.random() - .5) * 18); ctx.lineTo(b.x2, b.y2); ctx.stroke(); }
   for (const b of g.blasts) { ctx.strokeStyle = "#ffb15c"; ctx.lineWidth = 6; ctx.globalAlpha = Math.min(1, b.t * 4); ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, 6.3); ctx.stroke(); ctx.globalAlpha = 1; }
   ctx.restore();
 
@@ -598,11 +942,18 @@ function renderGame() {
   const light = ctx.createRadialGradient(W / 2, H / 2, 90 * zoom, W / 2, H / 2, R);
   light.addColorStop(0, "rgba(8,10,24,0)"); light.addColorStop(.35, `rgba(8,10,24,${dark * .55})`); light.addColorStop(1, `rgba(8,10,24,${dark})`);
   ctx.fillStyle = light; ctx.fillRect(0, 0, W, H);
+  if (g.blood) { ctx.fillStyle = "rgba(190,20,40,.2)"; ctx.fillRect(0, 0, W, H); }
   if (day > .7) { ctx.fillStyle = `rgba(255,140,80,${(day - .7) * .4})`; ctx.fillRect(0, 0, W, H); }
   if (g.hurt > 0) { ctx.fillStyle = `rgba(255,40,60,${g.hurt * .22})`; ctx.fillRect(0, 0, W, H); }
   if (input.active) { ctx.strokeStyle = "#ffffff55"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(input.ox, input.oy, 56, 0, 6.3); ctx.stroke(); ctx.fillStyle = "#ffffff77"; ctx.beginPath(); ctx.arc(input.ox + input.dx * 56, input.oy + input.dy * 56, 24, 0, 6.3); ctx.fill(); }
 
   $("hp").firstElementChild.style.width = (p.hp / g.s.hp * 100) + "%";
+  const bosses = g.zs.filter(z => z.kind === "boss"), bossBar = $("boss");
+  bossBar.classList.toggle("on", bosses.length > 0);
+  if (bosses.length) bossBar.firstElementChild.style.width = (bosses.reduce((a, z) => a + Math.max(0, z.hp), 0) / bosses.reduce((a, z) => a + z.max, 0) * 100) + "%";
+  $("armor").firstElementChild.style.width = (g.s.armor ? p.armor / g.s.armor * 100 : 0) + "%";
+  $("dash").style.setProperty("--cd", g.dashCd / g.s.dashCd);
+  const cb = $("combo"); cb.style.opacity = g.combo >= 5 ? 1 : 0; if (g.combo >= 5) cb.textContent = "Серия " + g.combo;
   $("xp").firstElementChild.style.width = (g.xp / g.need * 100) + "%";
   $("kills").textContent = g.kills + " убито"; $("clock").textContent = clock(g.dawn - g.t); $("lvl").textContent = "ур. " + g.lvl;
 }
@@ -620,10 +971,638 @@ function renderIdle(dt) {
   for (const z of horde) { z.x += z.v * dt / Math.max(W, 1); z.step += dt * 5; if (z.x > 1.05) z.x = -.08; stick(z.x * W, ground_y - 2, z.r, z.step, "#0a0a12", 1, true, false); }
 }
 
+/* ---------- Рисованные персонажи ---------- */
+const LOOKS = {
+  vera:  { skin: "#eec3a0", hair: "#a8522a", style: "pony", top: "#c9342f", accent: "#f2e36b", pants: "#26324f", shoes: "#20222c", wear: "medic", b: 1 },
+  gleb:  { skin: "#d9ab86", hair: "#3a2a22", style: "short", top: "#35508e", accent: "#ffd24a", pants: "#222c4a", shoes: "#14161e", wear: "police", hat: "police", stubble: 1, b: 1.16 },
+  tim:   { skin: "#f0c8a4", hair: "#2a2028", style: "messy", top: "#ee8a2e", accent: "#fff0dc", pants: "#3f5f8c", shoes: "#e9e4d8", wear: "hoodie", pack: 1, b: .96 },
+  sonya: { skin: "#f4cfb0", hair: "#7a4a24", style: "pigtails", top: "#f4c531", accent: "#d99a13", pants: "#4b6fa8", shoes: "#d9405a", wear: "rain", b: .9, h: .68 },
+  lida:  { skin: "#f0caa8", hair: "#e3bf63", style: "bob", top: "#c9342f", accent: "#f2e36b", pants: "#26324f", shoes: "#20222c", wear: "medic", b: .96 },
+  rudin: { skin: "#d6b08e", hair: "#9ea2a8", style: "short", top: "#4b5546", accent: "#c93d3d", pants: "#39402f", shoes: "#14130f", wear: "officer", hat: "officer", scar: 1, b: 1.1 },
+  lanskoy:{ skin: "#ecccae", hair: "#c9c9c9", style: "bald", top: "#eef1f4", accent: "#6b8fb0", pants: "#3a3f4a", shoes: "#20222c", wear: "lab", glasses: 1, b: .95 },
+  kira:  { skin: "#e5b892", hair: "#8f4ad0", style: "bob", top: "#2a2c3a", accent: "#62e0ff", pants: "#222430", shoes: "#d9405a", wear: "hoodie", phones: 1, b: .94 },
+  marfa: { skin: "#d9a982", hair: "#6a6a6a", style: "short", top: "#7c4a3a", accent: "#d9b25a", pants: "#4a342a", shoes: "#20180f", wear: "plain", hat: "scarf", b: 1.08 },
+  man:   { skin: "#dfb491", hair: "#50392a", style: "short", top: "#5c6f60", accent: "#3d4a40", pants: "#39384a", shoes: "#20222c", wear: "plain", b: 1.04 },
+  woman: { skin: "#eec4a4", hair: "#3b2a22", style: "bob", top: "#8a5a9c", accent: "#5f3b70", pants: "#33344a", shoes: "#20222c", wear: "plain", b: .92 },
+  kid:   { skin: "#f4cfb0", hair: "#3a2a22", style: "messy", top: "#4aa0a0", accent: "#2f7272", pants: "#39384a", shoes: "#d0d0d0", wear: "plain", b: .86, h: .66 },
+  soldier:{ skin: "#d9ab86", hair: "#333", style: "short", top: "#5f6b45", accent: "#3e4730", pants: "#4e5839", shoes: "#14130f", wear: "soldier", hat: "helmet", b: 1.12 },
+  zombie:{ skin: "#9db38d", hair: "#30342a", style: "messy", top: "#5a5560", accent: "#3a3640", pants: "#3a3a44", shoes: "#23232b", wear: "torn", zombie: 1, b: 1 },
+};
+const POSES = {
+  stand: {}, walk: {}, run: { lean: .22 },
+  talk: { a1: .35, a2: -.75, b1: -.1 },
+  aim: { a1: 1.5, a2: -.08, b1: 1.15, b2: -.5, lean: .05, l1: .12, r1: -.2 },
+  armsup: { a1: 2.5, a2: -.5, b1: 2.3, b2: -.5, lean: -.1 },
+  reach: { a1: 1.45, a2: -.1, b1: .9, b2: -.3, lean: .16, l1: .3, r1: -.25, r2: -.2 },
+  push: { a1: 1.5, b1: 1.35, lean: .28, l1: .4, r1: -.45, r2: -.2 },
+  kneel: { lean: .15, drop: 42, l1: 1.5, l2: -1.5, r1: .1, r2: -1.65, a1: .55, a2: -.8, b1: .3, head: .2 },
+  crouch: { lean: .34, drop: 34, l1: 1.15, l2: -1.45, r1: .7, r2: -1.5, a1: .8, a2: -1, b1: .5, b2: -.9, head: -.2 },
+  lie: { rot: 1.57, a1: .25, b1: -.2 },
+  hug: { a1: 1.15, a2: -.55, b1: 1.2, b2: -.55, lean: .12 },
+  give: { a1: 1.25, a2: -.25, b1: .05, lean: .08 },
+  lever: { a1: 1.55, a2: -.12, b1: 1.5, b2: -.15, lean: -.22, l1: .42, r1: -.32 },
+  type: { a1: .75, a2: -.85, b1: .7, b2: -.85, lean: .12, head: .12 },
+  sit: { drop: 44, l1: 1.5, l2: -1.5, r1: 1.42, r2: -1.42, a1: .55, a2: -.55, b1: .5, b2: -.55, lean: .06 },
+  point: { a1: 1.6, a2: 0, b1: .1, l1: .15, r1: -.1 },
+  bite: { a1: 1.3, a2: -.6, b1: 1.2, b2: -.6, lean: .42, head: .3, l1: .3, r1: -.3 },
+  hurt: { a1: .9, a2: -1.5, b1: .15, lean: -.24, head: -.3, l1: -.15, r1: .22 },
+  hold: { a1: .55, a2: -1.1, b1: .5, b2: -1.05, lean: .05, head: .18 },
+  grief: { lean: .5, drop: 42, l1: 1.5, l2: -1.5, r1: .1, r2: -1.65, a1: 1, a2: -1.5, b1: .9, b2: -1.5, head: .5 },
+  mic: { a1: .95, a2: -1.5, b1: .1, head: .05 },
+  nod: { a1: .2, a2: -.2, b1: .1, head: .22 },
+  palms: { a1: 1.25, a2: -.9, b1: 1.15, b2: -.9, lean: -.1, head: -.08 },
+  shake: { a1: 1.45, a2: -.12, b1: .05, lean: .08 },
+  write: { a1: .85, a2: -.75, b1: .75, b2: -.7, lean: .24, head: .28 },
+  carry: { a1: .9, a2: -.9, b1: .95, b2: -.9, lean: .16 },
+  throw: { a1: 2.7, a2: -.15, b1: .6, b2: -.3, lean: -.16, l1: .3, r1: -.28 },
+  raise: { a1: 2.9, a2: -.1, b1: .1 },
+};
+const POSE_KEYS = ["a1", "a2", "b1", "b2", "l1", "l2", "r1", "r2", "lean", "drop", "rot", "head"];
+function mixPose(p, q, k) { const o = {}; for (const key of POSE_KEYS) o[key] = (p[key] || 0) + ((q[key] || 0) - (p[key] || 0)) * k; return o; }
+function polar(x, y, a, len) { return [x + Math.sin(a) * len, y + Math.cos(a) * len]; }
+const INK = "#141019";
+function limb(pts, w, col) {
+  ctx.lineCap = ctx.lineJoin = "round";
+  const path = () => { ctx.beginPath(); pts.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); };
+  ctx.strokeStyle = INK; ctx.lineWidth = w + 5; path(); ctx.stroke();
+  ctx.strokeStyle = col; ctx.lineWidth = w; path(); ctx.stroke();
+}
+function shape(col, draw, outline) { ctx.beginPath(); draw(); ctx.fillStyle = col; ctx.fill(); if (outline !== 0) { ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.lineJoin = "round"; ctx.stroke(); } }
+function drawFace(k, o) {
+  const talk = o.talk ? Math.abs(Math.sin(sceneT * 11 + o.seed)) : 0, blink = (sceneT + o.seed) % 3.4 < .12;
+  shape(k.skin, () => { ctx.moveTo(-15, -13); ctx.bezierCurveTo(-19, 8, -13, 24, 3, 25); ctx.bezierCurveTo(17, 24, 21, 8, 19, -12); ctx.bezierCurveTo(16, -28, -11, -30, -15, -13); });
+  shape(k.skin, () => ctx.ellipse(-14, 2, 4.5, 6.5, 0, 0, 6.3));
+  ctx.fillStyle = "#00000022"; ctx.beginPath(); ctx.moveTo(-15, -6); ctx.bezierCurveTo(-18, 8, -12, 22, 0, 24); ctx.bezierCurveTo(-4, 12, -6, 2, -6, -8); ctx.fill();
+  if (k.zombie) {
+    ctx.fillStyle = "#f5f5e6"; ctx.beginPath(); ctx.ellipse(11, -2, 5, 4.8, 0, 0, 6.3); ctx.ellipse(1, -2, 4.5, 4.4, 0, 0, 6.3); ctx.fill();
+    ctx.fillStyle = "#8f1d24"; ctx.beginPath(); ctx.arc(11.5, -1, 1.5, 0, 6.3); ctx.arc(1.5, -1, 1.3, 0, 6.3); ctx.fill();
+    ctx.fillStyle = "#27121a"; ctx.beginPath(); ctx.ellipse(6, 14, 7.5, 5 + talk * 2, 0, 0, 6.3); ctx.fill();
+    ctx.fillStyle = "#e7e3c8"; for (let i = 0; i < 4; i++) ctx.fillRect(1 + i * 3.1, 10, 2, 3.3);
+    ctx.fillStyle = "#6c7f60"; ctx.fillRect(-6, 3, 6, 2); return;
+  }
+  if (blink) { ctx.strokeStyle = INK; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(7, -2); ctx.lineTo(15, -2); ctx.moveTo(-3, -2); ctx.lineTo(4, -2); ctx.stroke(); }
+  else {
+    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.ellipse(11, -1.5, 4.2, 3.5, 0, 0, 6.3); ctx.ellipse(.8, -1.5, 3.5, 3.3, 0, 0, 6.3); ctx.fill();
+    ctx.fillStyle = "#3a2618"; ctx.beginPath(); ctx.arc(12, -1.3, 3, 0, 6.3); ctx.arc(1.8, -1.3, 2.7, 0, 6.3); ctx.fill();
+    ctx.strokeStyle = INK; ctx.lineWidth = 1.7; ctx.beginPath(); ctx.moveTo(6.6, -4.4); ctx.quadraticCurveTo(11, -6.4, 15.5, -4); ctx.moveTo(-2.8, -4.2); ctx.quadraticCurveTo(.8, -6, 4.5, -4.2); ctx.stroke();
+    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(13, -2.4, .9, 0, 6.3); ctx.arc(2.7, -2.3, .8, 0, 6.3); ctx.fill();
+  }
+  const angry = k.scar || o.tense ? 2.5 : 0;
+  ctx.strokeStyle = k.hair === "#c9c9c9" ? "#8a8a8a" : k.style === "bald" ? "#555" : k.hair; ctx.lineWidth = 2.8; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(6, -10 + angry); ctx.lineTo(16, -11); ctx.moveTo(-5, -11); ctx.lineTo(3, -10 + angry); ctx.stroke();
+  ctx.strokeStyle = "#a3714f"; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.moveTo(8, 2); ctx.quadraticCurveTo(12, 8, 7, 9); ctx.stroke();
+  if (talk > .12) { ctx.fillStyle = "#6b2230"; ctx.beginPath(); ctx.ellipse(8, 16, 4.5, 1 + talk * 3.6, 0, 0, 6.3); ctx.fill(); }
+  else { ctx.strokeStyle = "#7a3d32"; ctx.lineWidth = 2.1; ctx.beginPath(); ctx.moveTo(3, 16); ctx.quadraticCurveTo(8, o.sad ? 14 : 18, 13, 16); ctx.stroke(); }
+  if (k.stubble) { ctx.fillStyle = "#3a2a2233"; ctx.beginPath(); ctx.ellipse(6, 18, 12, 7, 0, 0, 6.3); ctx.fill(); }
+  if (k.scar) { ctx.strokeStyle = "#a04a44"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(14, -10); ctx.lineTo(9, 9); ctx.stroke(); }
+  if (k.glasses) { ctx.strokeStyle = INK; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(11, -2, 6.4, 0, 6.3); ctx.moveTo(5, -2); ctx.lineTo(-.5 + 6, -2); ctx.moveTo(-5, -2); ctx.arc(.5, -2, 5.4, 3.14, 9.4); ctx.moveTo(-5, -2); ctx.lineTo(-13, -4); ctx.stroke(); }
+}
+function drawHairBack(k) {
+  const c = k.hair;
+  if (k.style === "pony") shape(c, () => { ctx.moveTo(-14, -14); ctx.bezierCurveTo(-42, -16, -44, 24, -30, 42); ctx.bezierCurveTo(-26, 26, -20, 14, -12, 8); });
+  if (k.style === "pigtails") { shape(c, () => ctx.ellipse(-22, 12, 9, 17, .25, 0, 6.3)); shape(c, () => ctx.ellipse(24, 14, 8, 15, -.2, 0, 6.3)); }
+  if (k.style === "bob") shape(c, () => { ctx.moveTo(-20, -6); ctx.bezierCurveTo(-30, 18, -24, 26, -10, 27); ctx.lineTo(10, 26); ctx.lineTo(4, -12); });
+}
+function drawHairFront(k) {
+  const c = k.hair;
+  if (k.style === "bald") { shape(c, () => { ctx.moveTo(-17, -4); ctx.bezierCurveTo(-21, -12, -18, -18, -12, -18); ctx.lineTo(-8, -8); }); return; }
+  if (k.style === "short") shape(c, () => { ctx.moveTo(-17, 0); ctx.bezierCurveTo(-23, -30, 8, -40, 19, -18); ctx.bezierCurveTo(10, -22, 2, -22, -6, -16); ctx.bezierCurveTo(-9, -10, -11, -5, -17, 0); });
+  if (k.style === "messy") shape(c, () => { ctx.moveTo(-18, 2); ctx.lineTo(-22, -14); ctx.lineTo(-15, -13); ctx.lineTo(-17, -29); ctx.lineTo(-6, -22); ctx.lineTo(-2, -36); ctx.lineTo(6, -24); ctx.lineTo(16, -32); ctx.lineTo(16, -20); ctx.lineTo(24, -18); ctx.lineTo(14, -13); ctx.lineTo(4, -17); ctx.lineTo(-7, -11); ctx.closePath(); });
+  if (k.style === "pony" || k.style === "pigtails" || k.style === "bob") shape(c, () => { ctx.moveTo(-17, 4); ctx.bezierCurveTo(-23, -30, 12, -38, 20, -14); ctx.bezierCurveTo(10, -24, 0, -24, -4, -14); ctx.bezierCurveTo(-8, -6, -12, -2, -17, 4); });
+  if (k.hat === "police") { shape("#25345f", () => { ctx.moveTo(-20, -15); ctx.bezierCurveTo(-24, -36, 14, -42, 24, -24); ctx.lineTo(20, -14); ctx.closePath(); }); shape("#14161e", () => { ctx.moveTo(4, -16); ctx.lineTo(29, -13); ctx.lineTo(24, -9); ctx.lineTo(2, -11); ctx.closePath(); }); ctx.fillStyle = "#ffd24a"; ctx.beginPath(); ctx.arc(7, -27, 4, 0, 6.3); ctx.fill(); }
+  if (k.hat === "officer") { shape("#3d4639", () => { ctx.moveTo(-22, -15); ctx.bezierCurveTo(-34, -42, 24, -46, 28, -26); ctx.lineTo(20, -14); ctx.closePath(); }); shape("#c93d3d", () => { ctx.moveTo(-20, -18); ctx.lineTo(21, -16); ctx.lineTo(20, -12); ctx.lineTo(-20, -13); ctx.closePath(); }, 0); shape("#14130f", () => { ctx.moveTo(6, -13); ctx.lineTo(30, -10); ctx.lineTo(25, -6); ctx.lineTo(4, -9); ctx.closePath(); }); ctx.fillStyle = "#ffd24a"; ctx.beginPath(); ctx.arc(8, -29, 3.4, 0, 6.3); ctx.fill(); }
+  if (k.hat === "helmet") { shape("#55603f", () => { ctx.moveTo(-24, -8); ctx.bezierCurveTo(-28, -40, 22, -44, 26, -8); ctx.closePath(); }); ctx.strokeStyle = INK; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-8, 4); ctx.lineTo(12, 26); ctx.stroke(); }
+  if (k.hat === "scarf") shape("#b24c58", () => { ctx.moveTo(-21, 12); ctx.bezierCurveTo(-28, -36, 22, -40, 23, -10); ctx.bezierCurveTo(14, -24, -4, -26, -7, -4); ctx.bezierCurveTo(-8, 12, -6, 20, -12, 28); ctx.closePath(); });
+  if (k.phones) { ctx.strokeStyle = INK; ctx.lineWidth = 7; ctx.lineCap = "round"; ctx.beginPath(); ctx.arc(-1, -8, 25, 3.5, 5.9); ctx.stroke(); ctx.strokeStyle = k.accent; ctx.lineWidth = 3; ctx.stroke(); shape(k.accent, () => ctx.ellipse(-14, 2, 6.5, 9, 0, 0, 6.3)); }
+}
+function drawItem(item) {
+  if (item === "rifle") { shape("#242630", () => ctx.rect(-14, -4, 70, 8)); shape("#6b4a2f", () => ctx.rect(-32, -3, 22, 10)); shape("#242630", () => ctx.rect(12, 4, 8, 15)); }
+  if (item === "pistol") { shape("#242630", () => ctx.rect(-2, -4, 28, 8)); shape("#3a3540", () => ctx.rect(0, 2, 8, 13)); }
+  if (item === "syringe") { shape("#cfe9f6", () => ctx.rect(0, -3, 26, 6)); ctx.strokeStyle = INK; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(26, 0); ctx.lineTo(40, 0); ctx.stroke(); }
+  if (item === "paper") shape("#f2ead8", () => ctx.rect(-4, -20, 30, 38));
+  if (item === "phone") shape("#242630", () => ctx.rect(-4, -14, 13, 25));
+  if (item === "box") { shape("#b58a55", () => ctx.rect(4, -16, 36, 30)); ctx.fillStyle = "#f2e36b"; ctx.fillRect(18, -16, 8, 30); }
+  if (item === "can") { shape("#b8c2cf", () => ctx.roundRect(2, -13, 24, 26, 3)); ctx.fillStyle = "#c93d3d"; ctx.fillRect(2, -6, 24, 12); }
+  if (item === "plank") shape("#a97c4a", () => ctx.rect(-60, -5, 150, 10));
+  if (item === "badge") { shape("#ffd24a", () => { ctx.moveTo(4, -12); ctx.lineTo(26, -12); ctx.lineTo(26, 3); ctx.lineTo(15, 13); ctx.lineTo(4, 3); ctx.closePath(); }); }
+  if (item === "radio") { shape("#2c3324", () => ctx.rect(-3, -18, 17, 33)); ctx.fillStyle = "#62e0ff"; ctx.fillRect(0, -13, 11, 7); }
+  if (item === "bandage") shape("#f1eee4", () => ctx.ellipse(13, 0, 13, 11, 0, 0, 6.3));
+  if (item === "vial") { shape("#7bd9ff", () => ctx.roundRect(2, -5, 30, 10, 4)); ctx.fillStyle = "#3f4658"; ctx.fillRect(27, -6, 8, 12); }
+  if (item === "watch") { shape("#d9b25a", () => ctx.arc(12, 0, 11, 0, 6.3)); ctx.strokeStyle = INK; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(12, 0); ctx.lineTo(12, -7); ctx.moveTo(12, 0); ctx.lineTo(17, 2); ctx.stroke(); }
+  if (item === "torch") { shape("#a97c4a", () => ctx.rect(0, -3, 26, 7)); shape("#ff8a2e", () => { ctx.moveTo(26, -10); ctx.quadraticCurveTo(50 + Math.sin(sceneT * 18) * 5, 0, 26, 10); ctx.closePath(); }, 0); }
+  if (item === "mic") { shape("#30323e", () => ctx.rect(0, -3, 22, 6)); shape("#9aa2b5", () => ctx.arc(26, 0, 7, 0, 6.3)); }
+}
+/* Высота фигуры около 210 единиц, поворот задаётся dir. */
+function drawPerson(name, x, y, s, dir, p, o) {
+  const k = LOOKS[name] || LOOKS.man, H0 = k.h || 1, B = k.b, W0 = k.wear;
+  o = Object.assign({ step: 0, moving: 0, seed: x * .01 }, o);
+  ctx.save();
+  ctx.fillStyle = "#0008"; ctx.beginPath(); ctx.ellipse(x, y + 3, 42 * s * H0 * (p.rot > 1 ? 2 : 1), 9 * s, 0, 0, 6.3); ctx.fill();
+  const bob = o.moving ? Math.abs(Math.sin(o.step)) * 4 : Math.sin(sceneT * 1.9 + o.seed) * 1.3;
+  ctx.translate(x, y + (p.drop || 0) * s * H0); ctx.scale(dir * s * H0, s * H0);
+  if (p.rot) { ctx.translate(-20 * Math.min(1, p.rot / 1.57), -16 * Math.min(1, p.rot / 1.57)); ctx.rotate(p.rot); }
+  ctx.translate(0, -bob);
+  let a1 = p.a1, a2 = p.a2, b1 = p.b1, b2 = p.b2, l1 = p.l1, l2 = p.l2, r1 = p.r1, r2 = p.r2;
+  if (o.moving) { const amp = o.moving > 1 ? .95 : .55, sw = Math.sin(o.step) * amp, kn = -Math.max(0, Math.cos(o.step)) * amp * 1.2 - .1, kf = -Math.max(0, -Math.cos(o.step)) * amp * 1.2 - .1; l1 += sw; r1 -= sw; l2 += kn; r2 += kf; if (!o.keepArms) { a1 -= sw * .9; b1 += sw * .9; a2 -= o.moving > 1 ? 1.2 : .3; b2 -= o.moving > 1 ? 1.2 : .3; } }
+  const hip = [0, -96], lw = 15 * B, aw = 12 * B, knee = polar(hip[0], hip[1], l1, 46), foot = polar(knee[0], knee[1], l1 + l2, 46), kneeR = polar(4, hip[1], r1, 46), footR = polar(kneeR[0], kneeR[1], r1 + r2, 46);
+  ctx.save(); ctx.translate(0, hip[1]); ctx.rotate(p.lean); ctx.translate(0, -hip[1]);
+  const sh = [19 * B, -156], el2 = polar(sh[0], sh[1], b1 - .05, 37), hd2 = polar(el2[0], el2[1], b1 - .05 - b2, 35);
+  limb([sh, el2, hd2], aw, W0 === "torn" ? k.skin : k.top);
+  shape(k.skin, () => ctx.arc(hd2[0], hd2[1], 7.5 * B, 0, 6.3));
+  if (k.pack) shape("#36435e", () => ctx.roundRect(-34, -164, 24, 58, 8));
+  ctx.restore();
+  limb([[4, hip[1]], kneeR, footR], lw, k.pants);
+  shape(k.shoes, () => ctx.ellipse(footR[0] + 7, footR[1] + 1, 15, 7, Math.sin(r1 + r2) * -.8, 0, 6.3));
+  limb([hip, knee, foot], lw, k.pants);
+  shape(k.shoes, () => ctx.ellipse(foot[0] + 7, foot[1] + 1, 15, 7, Math.sin(l1 + l2) * -.8, 0, 6.3));
+  ctx.save(); ctx.translate(0, hip[1]); ctx.rotate(p.lean); ctx.translate(0, -hip[1]);
+  const lab = W0 === "lab";
+  shape(k.top, () => { ctx.moveTo(-23 * B, -162); ctx.quadraticCurveTo(0, -172, 25 * B, -162); ctx.lineTo(21 * B, lab ? -72 : -90); ctx.lineTo(-20 * B, lab ? -72 : -90); ctx.closePath(); });
+  if (W0 === "medic") { ctx.fillStyle = k.accent; ctx.fillRect(-21 * B, -124, 43 * B, 7); ctx.fillStyle = "#fff"; ctx.fillRect(6, -152, 14, 14); ctx.fillStyle = "#c9342f"; ctx.fillRect(11, -150, 4, 10); ctx.fillRect(8, -147, 10, 4); }
+  if (W0 === "police") { ctx.fillStyle = "#1d2a52"; ctx.fillRect(-2, -164, 5, 70); ctx.fillStyle = k.accent; ctx.beginPath(); ctx.moveTo(10, -148); ctx.lineTo(19, -148); ctx.lineTo(18, -138); ctx.lineTo(14.5, -134); ctx.lineTo(11, -138); ctx.fill(); ctx.fillStyle = "#14161e"; ctx.fillRect(-21 * B, -100, 43 * B, 8); }
+  if (W0 === "hoodie") { ctx.fillStyle = "#00000026"; ctx.beginPath(); ctx.moveTo(-13, -112); ctx.lineTo(16, -112); ctx.lineTo(20, -92); ctx.lineTo(-16, -92); ctx.fill(); ctx.strokeStyle = k.accent; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(3, -160); ctx.lineTo(3, -138); ctx.moveTo(11, -160); ctx.lineTo(11, -142); ctx.stroke(); shape(k.top, () => ctx.ellipse(-8, -166, 22, 10, -.1, 0, 6.3)); }
+  if (W0 === "rain") { ctx.fillStyle = k.accent; for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.arc(9, -152 + i * 15, 2.7, 0, 6.3); ctx.fill(); } }
+  if (W0 === "officer") { ctx.fillStyle = "#c93d3d"; ctx.fillRect(13, -152, 12, 4); ctx.fillStyle = "#ffd24a"; ctx.fillRect(13, -146, 12, 3); ctx.fillStyle = "#23281d"; ctx.fillRect(-21 * B, -100, 43 * B, 8); ctx.strokeStyle = "#23281d"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(2, -164); ctx.lineTo(2, -100); ctx.stroke(); }
+  if (W0 === "soldier") { shape(k.accent, () => ctx.roundRect(-18 * B, -156, 37 * B, 54, 6)); ctx.fillStyle = "#2c3322"; ctx.fillRect(-10, -136, 9, 15); ctx.fillRect(4, -136, 9, 15); }
+  if (lab) { shape("#c8d7e4", () => { ctx.moveTo(-3, -166); ctx.lineTo(13, -166); ctx.lineTo(9, -100); ctx.lineTo(1, -100); ctx.closePath(); }, 0); ctx.strokeStyle = "#9eb3c6"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-3, -166); ctx.lineTo(-1, -72); ctx.moveTo(13, -166); ctx.lineTo(16, -72); ctx.stroke(); }
+  if (W0 === "torn") { ctx.fillStyle = "#0a090f"; for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(-19 + i * 9, -89); ctx.lineTo(-14 + i * 9, -104 + (i % 2) * 5); ctx.lineTo(-10 + i * 9, -89); ctx.fill(); } ctx.fillStyle = "#6b2230"; ctx.beginPath(); ctx.ellipse(6, -140, 7, 11, .4, 0, 6.3); ctx.fill(); }
+  shape(k.skin, () => ctx.rect(-5, -176, 14, 16), 0);
+  ctx.save(); ctx.translate(4, -197); ctx.rotate(p.head); drawHairBack(k); drawFace(k, o); drawHairFront(k); ctx.restore();
+  const sa = [-17 * B, -156], el = polar(sa[0], sa[1], a1 - .05, 37), hd = polar(el[0], el[1], a1 - .05 - a2, 35);
+  limb([sa, el, hd], aw, W0 === "torn" ? k.skin : k.top);
+  if (o.item) { ctx.save(); ctx.translate(hd[0], hd[1]); ctx.rotate(Math.PI / 2 - (a1 - a2)); drawItem(o.item); ctx.restore(); }
+  shape(k.skin, () => ctx.arc(hd[0], hd[1], 7.5 * B, 0, 6.3));
+  ctx.restore();
+  ctx.restore();
+}
+function drawNiceDog(x, y, s, dir, step, moving) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(dir * s, s);
+  const legs = moving ? Math.sin(step) * 12 : 0, wag = Math.sin(sceneT * 14) * 8;
+  ctx.fillStyle = "#0008"; ctx.beginPath(); ctx.ellipse(0, 3, 60, 8, 0, 0, 6.3); ctx.fill();
+  limb([[-38, -48], [-58, -70 + wag]], 8, "#eee7da");
+  limb([[-30, -32], [-34 - legs, -1]], 10, "#d2c9ba"); limb([[28, -32], [32 + legs, -1]], 10, "#d2c9ba");
+  shape("#eee7da", () => ctx.roundRect(-46, -62, 92, 38, 18));
+  shape("#20222c", () => ctx.ellipse(-16, -48, 18, 12, .2, 0, 6.3), 0);
+  limb([[-24, -30], [-22 + legs, -1]], 10, "#eee7da"); limb([[36, -30], [42 - legs, -1]], 10, "#eee7da");
+  shape("#eee7da", () => ctx.ellipse(52, -74, 24, 21, 0, 0, 6.3));
+  shape("#20222c", () => ctx.ellipse(40, -78, 12, 15, .2, 0, 6.3), 0);
+  shape("#20222c", () => ctx.ellipse(36, -90, 10, 18, .5 + Math.sin(sceneT * 3) * .06, 0, 6.3));
+  shape("#eee7da", () => ctx.ellipse(70, -66, 15, 11, 0, 0, 6.3));
+  ctx.fillStyle = "#1a1a22"; ctx.beginPath(); ctx.arc(82, -70, 5.5, 0, 6.3); ctx.arc(57, -80, 3.6, 0, 6.3); ctx.fill();
+  ctx.strokeStyle = "#d9405a"; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(33, -55); ctx.lineTo(62, -53); ctx.stroke();
+  ctx.restore();
+}
+
+/* Постановка: кто где стоит, куда идёт и что происходит. [время, x, поза, поворот] */
+const ACT = {
+  idle: { h: [[0, .34, "stand", 1]], b: [[0, .72, "stand", -1]], dur: .6, talk: 0 },
+  talk: { h: [[0, .3, "talk", 1]], b: [[0, .72, "talk", -1]], dur: 1.3, talk: 1 },
+  enter: { h: [[0, -.2, "walk", 1], [1.4, .36, "stand", 1]], b: [[0, .74, "stand", -1]], dur: 1.5 },
+  leave: { h: [[0, .4, "stand", 1], [.3, .4, "walk", 1], [2, 1.2, "walk", 1]], b: [[0, .25, "stand", 1], [.3, .25, "walk", 1], [2, 1.05, "walk", 1]], dur: 2 },
+  turnaway: { h: [[0, .32, "talk", 1], [1, .32, "hold", 1]], b: [[0, .72, "talk", -1], [.5, .72, "walk", 1], [2, 1.25, "walk", 1]], dur: 2 },
+  run: { h: [[0, .42, "run", 1]], runner: 2, streak: 1, dur: 1.6 },
+  flee: { h: [[0, .62, "run", 1]], z: [5, .12, .28, "bite"], runner: 2, streak: 1, zrun: 1, dur: 1.9, tense: 1 },
+  attack: { h: [[0, .28, "stand", 1], [.45, .28, "armsup", 1]], b: [[0, .46, "stand", 1], [.7, .46, "hurt", 1]], z: [3, 1.15, .62, "bite"], fx: [[.9, "shake"]], dur: 1.5, tense: 1 },
+  bite: { h: [[0, .24, "reach", 1]], b: [[0, .52, "stand", 1], [.6, .52, "hurt", 1], [1.3, .52, "kneel", 1]], z: [1, 1, .66, "bite"], fx: [[.65, "blood", .58], [.65, "shake"]], dur: 1.7, tense: 1 },
+  shove: { h: [[0, .14, "stand", 1], [.35, .42, "push", 1], [1.2, .42, "armsup", 1]], b: [[0, .52, "stand", -1], [.45, .52, "hurt", -1], [.9, .84, "hurt", -1]], z: [1, 1.1, .68, "bite"], fx: [[.4, "shake"]], dur: 1.5, tense: 1 },
+  struggle: { h: [[0, .3, "reach", 1], [.8, .38, "lever", 1], [1.4, .3, "reach", 1]], b: [[0, .62, "kneel", -1], [1.3, .55, "stand", -1]], prop: [["car", .68]], dur: 1.5 },
+  shoot: { h: [[0, .22, "aim", 1]], item: "rifle", z: [5, 1.05, .6, "bite", 1.1], fx: [[.4, "muzzle"], [.7, "muzzle"], [1, "muzzle"], [1.3, "muzzle"], [1.6, "muzzle"]], zdie: 1.5, dur: 2.1, tense: 1 },
+  massfire: { h: [[0, .22, "aim", 1]], b: [[0, .1, "aim", 1]], bItem: "rifle", item: "rifle", z: [7, 1.05, .6, "bite", 1.2], fx: [[.4, "muzzle"], [.6, "muzzle"], [.85, "muzzle"], [1.1, "muzzle"], [1.35, "shake"], [1.5, "muzzle"]], zdie: 1.4, dur: 2.2, tense: 1, smoke: 1 },
+  lower: { h: [[0, .3, "aim", 1], [.8, .3, "armsup", 1], [1.4, .3, "talk", 1]], b: [[0, .68, "aim", -1], [1.1, .68, "stand", -1]], item: "rifle", itemUntil: .75, bItem: "rifle", dur: 1.6, talk: 1 },
+  give: { h: [[0, .24, "stand", 1], [.45, .38, "give", 1]], b: [[0, .72, "stand", -1], [.5, .62, "give", -1]], item: "box", dur: 1.5 },
+  hug: { h: [[0, .12, "run", 1], [.9, .44, "hug", 1]], b: [[0, .9, "run", -1], [.9, .6, "hug", -1]], dur: 1.2 },
+  grieve: { h: [[0, .28, "stand", 1], [.8, .34, "grief", 1]], prop: [["body", .64]], b: [], dur: 1.4, sad: 1 },
+  kneel: { h: [[0, .3, "kneel", 1]], b: [[0, .68, "talk", -1]], dur: .9, talk: 1, sad: 1 },
+  fall: { h: [[0, .4, "run", 1], [.4, .4, "hurt", 1], [.85, .46, "lie", 1], [1.7, .46, "crouch", 1], [2.1, .46, "stand", 1]], b: [[0, .75, "stand", -1]], fx: [[.7, "shake"], [.7, "dust", .46]], dur: 2.1 },
+  death: { h: [[0, .4, "hurt", 1], [.7, .46, "kneel", 1], [1.4, .46, "lie", 1]], b: [[0, .78, "stand", -1]], fx: [[.3, "shake"], [.4, "blood", .42]], dur: 1.8, sad: 1, tense: 1 },
+  hide: { h: [[0, .08, "walk", 1], [.8, .3, "crouch", 1]], b: [[0, -.2, "walk", 1], [.8, .1, "crouch", 1]], prop: [["crate", .46]], z: [2, 1.1, .78, "walk", 2.3], dur: 1.5 },
+  search: { h: [[0, .1, "walk", 1], [1, .38, "crouch", 1]], prop: [["door", .68]], dur: 1.2 },
+  camp: { h: [[0, .17, "sit", 1]], b: [[0, .66, "sit", -1]], third: [.88], thirdPose: "sit", prop: [["log", .17], ["log", .66], ["log", .88], ["fire", .42]], dogAt: [.3, 30], dur: .8, talk: 1 },
+  doorin: { h: [[0, .05, "walk", 1], [1, .42, "reach", 1]], prop: [["door", .68]], door: 1, z: [1, .78, .7, "bite"], fx: [[.95, "shake"]], dur: 1.5 },
+  whisper: { h: [[0, .2, "walk", 1], [.55, .4, "nod", 1]], b: [[0, .62, "stand", -1], [.6, .62, "nod", -1]], talk: 1, dur: 1.3 },
+  refuse: { h: [[0, .3, "stand", 1], [.3, .3, "palms", 1]], b: [[0, .68, "talk", -1], [.7, .78, "hurt", -1]], shakeNo: 1, dur: 1.3 },
+  deal: { h: [[0, .2, "walk", 1], [.65, .4, "shake", 1]], b: [[0, .76, "walk", -1], [.65, .6, "shake", -1]], dur: 1.3 },
+  point: { h: [[0, .28, "stand", 1], [.3, .28, "point", 1]], b: [[0, .7, "stand", -1], [.7, .7, "hurt", -1]], talk: 1, dur: 1.2 },
+  openbox: { h: [[0, .12, "walk", 1], [.6, .34, "crouch", 1]], prop: [["box", .56]], lid: 1, fx: [[.9, "spark", .56]], dur: 1.5 },
+  putdown: { h: [[0, .34, "crouch", 1], [.55, .34, "stand", 1], [.75, .34, "walk", -1], [1.6, -.25, "walk", -1]], prop: [["box", .56]], dur: 1.6 },
+  carry: { h: [[0, .12, "carry", 1], [1.3, .6, "carry", 1]], b: [[0, .28, "hurt", 1], [1.3, .76, "hurt", 1]], hWalk: 1, dur: 1.3 },
+  share: { h: [[0, .24, "stand", 1], [.45, .38, "give", 1]], b: [[0, .72, "stand", -1], [.5, .62, "give", -1]], item: "can", bItem: "can", dur: 1.3 },
+  keep: { h: [[0, .4, "hold", 1], [.5, .4, "hold", -1]], b: [[0, .72, "talk", -1], [.8, .72, "stand", -1]], item: "can", dur: 1.2, sad: 1 },
+  tend: { h: [[0, .28, "kneel", 1]], b: [[0, .52, "give", -1]], item: "bandage", dur: 1.2 },
+  ignore: { h: [[0, .3, "talk", 1], [.4, .3, "walk", -1], [1.5, -.2, "walk", -1]], b: [[0, .7, "talk", -1], [.7, .7, "reach", -1]], dur: 1.5 },
+  silence: { h: [[0, .36, "nod", 1]], b: [[0, .72, "talk", -1]], dur: .9, sad: 1 },
+  vote: { h: [[0, .3, "raise", 1]], b: [[0, .7, "raise", -1]], crowd: 1, crowdUp: 1, dur: 1.2 },
+  throw: { h: [[0, .24, "stand", 1], [.3, .24, "throw", 1], [.65, .24, "point", 1]], item: "torch", itemUntil: .65, prop: [["crate", .72]], fx: [[.85, "boom", .72], [.85, "shake"]], dur: 1.6, tense: 1 },
+  burn: { h: [[0, .26, "hold", 1], [.75, .26, "armsup", 1]], item: "paper", itemUntil: .7, fx: [[.7, "boom", .4]], dur: 1.4 },
+  sign: { h: [[0, .3, "write", 1]], item: "paper", b: [[0, .72, "stand", -1], [.9, .72, "nod", -1]], prop: [["table", .46]], dur: 1.2 },
+  inject: { h: [[0, .12, "walk", 1], [.9, .36, "reach", 1]], item: "syringe", b: [[0, .64, "lie", -1]], bY: -46, prop: [["bed", .63]], fx: [[1.25, "spark", .54]], dur: 1.6 },
+  open: { h: [[0, .3, "lever", 1]], prop: [["gate", .58]], gate: 1, b: [[0, .92, "walk", -1], [2, .12, "walk", -1]], dur: 2 },
+  lever: { h: [[0, .2, "lever", 1]], prop: [["gate", .48]], b: [[0, .36, "run", -1], [1.2, -.3, "run", -1]], z: [4, 1.15, .72, "bite", 1.8], fx: [[1.4, "shake"]], dur: 1.9, tense: 1 },
+  explode: { h: [[0, .22, "armsup", 1]], b: [[0, .1, "armsup", 1]], prop: [["crate", .68]], fx: [[.4, "boom", .68], [.4, "shake"], [.8, "boom", .78]], dur: 1.7, tense: 1 },
+  drive: { car: "truck", dur: 2, h: [] },
+  heli: { h: [[0, .08, "run", 1], [.8, .24, "stand", 1]], b: [[0, .44, "stand", -1]], heli: 1, dur: 2.2 },
+  radio: { h: [[0, .3, "mic", 1]], item: "mic", b: [[0, .7, "type", -1]], prop: [["tower", .5]], waves: 1, dur: 1.2, talk: 1 },
+  type: { h: [[0, .08, "walk", 1], [.8, .38, "type", 1]], b: [[0, .78, "stand", -1]], prop: [["desk", .56]], glow: 1, dur: 1.2 },
+  dawn: { h: [[0, .17, "stand", 1]], b: [[0, .42, "stand", 1]], dur: .8, soft: 1 },
+  threat: { h: [[0, .28, "aim", 1]], item: "pistol", b: [[0, .68, "armsup", -1]], prop: [["table", .5]], dur: 1, talk: 0, tense: 1 },
+  duel: { h: [[0, .28, "aim", 1]], item: "pistol", b: [[0, .68, "reach", -1], [.75, .68, "hurt", -1], [1.35, .72, "lie", -1]], fx: [[.65, "muzzle"], [.7, "shake"]], dur: 1.6, tense: 1 },
+  read: { h: [[0, .3, "hold", 1]], item: "paper", b: [[0, .74, "stand", -1]], dur: 1 },
+  phone: { h: [[0, .34, "hold", 1]], item: "phone", b: [[0, .68, "stand", -1]], dur: .9, talk: 1 },
+  accuse: { h: [[0, .26, "point", 1]], b: [[0, .7, "hurt", -1]], crowd: 1, dur: 1, talk: 1 },
+  dog: { h: [[0, .3, "kneel", 1]], dog: [[0, 1.2], [1.1, .52]], dur: 1.3 },
+};
+let SA = null;
+function setStage(st) { const c = (st && st.c) || [], given = c.find(x => x.startsWith("item=")); SA = { def: ACT[st && st.a] || ACT.idle, cast: c.filter(x => !x.startsWith("item=")), item: given ? given.slice(5) : null, t: 0, done: {}, fx: [], flash: 0, shake: 0 }; }
+function stageDur() { return SA ? SA.def.dur : 0; }
+function trackAt(track, t) {
+  let i = 0; while (i + 1 < track.length && track[i + 1][0] <= t) i++;
+  const a = track[i], b = track[i + 1] || a, k = b === a ? 0 : Math.min(1, (t - a[0]) / (b[0] - a[0]));
+  const blend = Math.min(1, k * 2.6);
+  const moving = (a[2] === "walk" || a[2] === "run") && b !== a && b[1] !== a[1] ? (a[2] === "run" ? 2 : 1) : 0;
+  return { x: a[1] + (b[1] - a[1]) * k, dir: k > .5 ? b[3] : a[3], pose: mixPose(POSES[a[2]] || {}, POSES[b[2]] || {}, blend), moving, name: a[2] };
+}
+function drawProp(kind, x, Y, S, D) {
+  ctx.save(); ctx.translate(x, Y); ctx.scale(S, S);
+  if (kind === "crate") { shape("#7f5a35", () => ctx.rect(-46, -80, 92, 82)); ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(-46, -80); ctx.lineTo(46, 2); ctx.moveTo(46, -80); ctx.lineTo(-46, 2); ctx.stroke(); }
+  if (kind === "car") { shape("#c9d4dd", () => { ctx.moveTo(-90, 0); ctx.lineTo(-96, -48); ctx.lineTo(-46, -92); ctx.lineTo(44, -92); ctx.lineTo(84, -48); ctx.lineTo(102, -38); ctx.lineTo(102, 0); ctx.closePath(); }); shape("#354a64", () => { ctx.moveTo(-38, -80); ctx.lineTo(-6, -80); ctx.lineTo(-6, -52); ctx.lineTo(-66, -52); ctx.closePath(); }); for (const w of [-54, 62]) { shape("#17161d", () => ctx.arc(w, 0, 21, 0, 6.3)); shape("#7f8799", () => ctx.arc(w, 0, 8, 0, 6.3)); } }
+  if (kind === "body") { shape("#d7d9df", () => { ctx.moveTo(-82, 0); ctx.quadraticCurveTo(-70, -34, -34, -32); ctx.quadraticCurveTo(10, -38, 58, -24); ctx.quadraticCurveTo(80, -14, 86, 0); ctx.closePath(); }); }
+  if (kind === "log") { shape("#6b4a2f", () => ctx.roundRect(-52, -50, 104, 50, 16)); shape("#a97c4a", () => ctx.ellipse(46, -25, 9, 24, 0, 0, 6.3)); }
+  if (kind === "box") { shape("#b58a55", () => ctx.rect(-34, -46, 68, 46)); ctx.fillStyle = "#f2e36b"; ctx.fillRect(-7, -46, 14, 46); const o = SA && SA.def.lid ? Math.min(1, SA.t / .8) : 0; if (o) { ctx.fillStyle = `rgba(123,217,255,${o * .55})`; ctx.beginPath(); ctx.moveTo(-30, -46); ctx.lineTo(-58, -160); ctx.lineTo(58, -160); ctx.lineTo(30, -46); ctx.fill(); } shape("#c39b66", () => ctx.rect(-38 - o * 34, -52 - o * 10, 76, 9)); }
+  if (kind === "bed") { shape("#8393a2", () => ctx.rect(-98, -46, 196, 15)); ctx.fillStyle = INK; ctx.fillRect(-90, -32, 8, 32); ctx.fillRect(84, -32, 8, 32); }
+  if (kind === "door") { const o = SA && SA.def.door ? Math.min(1, Math.max(0, SA.t - .7) / .4) : 0; shape("#0a0a10", () => ctx.rect(-50, -220, 100, 222)); ctx.save(); ctx.translate(-50, 0); ctx.scale(1 - o * .78, 1); ctx.translate(50, 0); shape("#3b3548", () => ctx.rect(-50, -220, 100, 222)); shape("#5a5168", () => ctx.rect(-40, -210, 80, 92)); ctx.restore(); if (o) return ctx.restore(); shape("#d9b25a", () => ctx.arc(32, -104, 7, 0, 6.3)); }
+  if (kind === "gate") { const open = SA && SA.def.gate ? Math.min(1, SA.t / 1) : 0; ctx.fillStyle = "#2a2d3a"; ctx.fillRect(-12, -230 - open * 140, 24, 232 + open * 140); for (let i = -2; i <= 2; i++) { shape("#6a6f80", () => ctx.rect(i * 44 - 8, -200 - open * 170, 16, 200)); } shape("#51566a", () => ctx.rect(-112, -212 - open * 170, 224, 20)); shape("#51566a", () => ctx.rect(-112, -40 - open * 170, 224, 20)); }
+  if (kind === "fire") { const f = Math.sin(sceneT * 13) * 6; shape("#5b3d24", () => ctx.rect(-40, -9, 80, 11)); shape("#ff8a2e", () => { ctx.moveTo(-30, -8); ctx.quadraticCurveTo(-34, -50, 0, -78 + f); ctx.quadraticCurveTo(32, -46, 30, -8); ctx.closePath(); }, 0); shape("#ffe36b", () => { ctx.moveTo(-14, -8); ctx.quadraticCurveTo(-16, -30, 0, -46 - f); ctx.quadraticCurveTo(16, -28, 14, -8); ctx.closePath(); }, 0); }
+  if (kind === "desk") { shape("#454b5c", () => ctx.rect(-74, -90, 148, 15)); ctx.fillStyle = "#24252f"; ctx.fillRect(-66, -76, 14, 76); ctx.fillRect(52, -76, 14, 76); shape("#20242e", () => ctx.rect(-40, -158, 80, 60)); const g = 110 + Math.sin(sceneT * 8) * 50; ctx.fillStyle = `rgb(60,${g + 70},${g + 100})`; ctx.fillRect(-33, -152, 66, 47); ctx.fillStyle = "#0a2230"; for (let i = 0; i < 4; i++) ctx.fillRect(-27, -146 + i * 10, 22 + (Math.floor(sceneT * 5 + i) * 13) % 32, 3); }
+  if (kind === "table") { shape("#57402c", () => ctx.rect(-86, -92, 172, 14)); ctx.fillStyle = INK; ctx.fillRect(-74, -78, 12, 78); ctx.fillRect(62, -78, 12, 78); }
+  if (kind === "tower") { ctx.strokeStyle = "#3a3d50"; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(-34, 0); ctx.lineTo(0, -260); ctx.lineTo(34, 0); ctx.moveTo(-22, -90); ctx.lineTo(22, -90); ctx.moveTo(-12, -180); ctx.lineTo(12, -180); ctx.stroke(); }
+  ctx.restore();
+}
+function drawTruck(x, Y, S) {
+  ctx.save(); ctx.translate(x, Y); ctx.scale(S, S); shape("#596349", () => ctx.rect(-170, -120, 190, 100)); shape("#46503a", () => ctx.rect(-170, -120, 190, 18)); shape("#3e4a34", () => { ctx.moveTo(26, -22); ctx.lineTo(26, -112); ctx.lineTo(82, -112); ctx.lineTo(116, -60); ctx.lineTo(116, -22); ctx.closePath(); }); shape("#9fd4e8", () => { ctx.moveTo(42, -100); ctx.lineTo(78, -100); ctx.lineTo(98, -64); ctx.lineTo(42, -64); ctx.closePath(); });
+  for (const w of [-130, -60, 80]) { const a = sceneT * 16; shape("#17161d", () => ctx.arc(w, -14, 24, 0, 6.3)); ctx.strokeStyle = "#7f8799"; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(w + Math.cos(a) * 16, -14 + Math.sin(a) * 16); ctx.lineTo(w - Math.cos(a) * 16, -14 - Math.sin(a) * 16); ctx.stroke(); } ctx.restore();
+}
+function drawHeli(x, y, S) { ctx.save(); ctx.translate(x, y); ctx.scale(S, S); shape("#2c3324", () => ctx.ellipse(0, 0, 76, 34, 0, 0, 6.3)); limb([[-60, -4], [-160, -20]], 12, "#2c3324"); shape("#8fc8dd", () => ctx.ellipse(40, -5, 25, 19, 0, 0, 6.3)); ctx.fillStyle = "#e8e8f0aa"; ctx.fillRect(-120 + Math.sin(sceneT * 60) * 10, -46, 240 - Math.sin(sceneT * 60) * 20, 5); ctx.fillStyle = INK; ctx.fillRect(-5, -44, 10, 14); ctx.fillRect(-46, 32, 94, 6); ctx.restore(); }
+function drawStage(dt, Y) {
+  if (!SA) return;
+  SA.t += dt;
+  const d = SA.def, t = SA.t, S = Math.min(W / 390, H / 780) * .98, base = Y + 30, hero = stWho === "none" ? SA.cast[0] : stWho, partner = stWho === "none" ? SA.cast[1] : (SA.cast[0] ? SA.cast[0].split(",")[0] : null);
+  let heroName = hero; const others = (SA.cast[0] || "").split(",");
+  let list = stWho === "none" ? others : [stWho].concat(others.filter(Boolean)); heroName = list[0]; const partnerName = list[1], third = list.slice(2);
+  (d.prop || []).forEach(p => drawProp(p[0], p[1] * W, base, S));
+  if (d.car) { const x = -.5 * W + (W * 1.1) * Math.min(1, t / 1.6); drawTruck(x, base, S * 1.15); if (heroName && LOOKS[heroName]) { ctx.save(); ctx.beginPath(); ctx.rect(x + 42 * S, base - 112 * S, 60 * S, 60 * S); ctx.clip(); drawPerson(heroName, x + 62 * S, base + 80 * S, S * .78, 1, POSES.stand, {}); ctx.restore(); } }
+  const actors = [];
+  if (d.z) {
+    const [n, x0, x1, pose, until] = d.z, T = until || d.dur;
+    for (let i = 0; i < n; i++) {
+      const k = Math.min(1, t / T), died = d.zdie && t > d.zdie + i * .08, x = (x0 + (x1 - x0) * k + i * (d.z[1] < .5 ? -.13 : .13)) * W;
+      const rot = died ? mixPose(POSES.bite, POSES.lie, Math.min(1, (t - d.zdie - i * .08) * 4)) : mixPose(POSES.bite, {}, 0);
+      actors.push({ y: base - 8 - i * 4, f: () => drawPerson("zombie", x, base - 8 - (i % 3) * 5, S * (.82 + (i % 2) * .08), x1 < x0 ? -1 : 1, rot, { step: t * (d.zrun ? 14 : 6) + i, moving: died ? 0 : (d.zrun ? 2 : 1), keepArms: 1, talk: 1, seed: i }) });
+    }
+  }
+  if (d.crowd) for (let i = 0; i < 5; i++) actors.push({ y: base - 30, f: () => drawPerson(i % 2 ? "man" : "woman", W * (.08 + i * .22), base - 34, S * .62, i < 2 ? 1 : -1, d.crowdUp ? POSES.raise : (Math.sin(sceneT * 3 + i) > .2 ? POSES.talk : POSES.stand), { seed: i * 3 }) });
+  const mk = (track, name, item, itemUntil, isHero) => {
+    if (!track || !track.length || !name || !LOOKS[name]) return;
+    const q = trackAt(track, t), x = q.x * W;
+    if (isHero && d.hWalk && t < track[track.length - 1][0]) { q.moving = 1; }
+    if (isHero && d.shakeNo) q.pose.head = (q.pose.head || 0) + Math.sin(t * 16) * .14 * Math.max(0, 1 - t / 1.2);
+    const lift = !isHero && d.bY ? d.bY * S : 0;
+    actors.push({ y: base + (isHero ? 2 : 0), f: () => drawPerson(name, x, base + lift, S, q.dir, q.pose, { step: t * (q.moving > 1 || q.name === "run" ? 15 : 8), moving: q.name === "run" && d.runner ? 2 : q.moving, item: itemUntil && t > itemUntil ? null : item, talk: d.talk && (Math.floor(t * .7 + (isHero ? 0 : 1)) % 2 === 0), tense: d.tense, sad: d.sad }) });
+    return x;
+  };
+  const hx = mk(d.h, heroName, SA.item || d.item, d.itemUntil, true);
+  if (d.b) mk(d.b, partnerName, d.bItem, 0, false);
+  third.forEach((name, i) => { if (LOOKS[name] && d.h && d.h[0]) actors.push({ y: base - 1, f: () => drawPerson(name, W * (d.third ? d.third[i] || .9 : .65 + i * .21), base, S * .92, -1, POSES[d.thirdPose || "stand"], { seed: i * 7, sad: d.sad }) }); });
+  actors.sort((a, b) => a.y - b.y).forEach(a => a.f());
+  const wantDog = (others.includes("dog") || (stWho === "tim" && ST && !ST.vars.dead_bublik && !d.car));
+  if (wantDog && d.dogAt) drawNiceDog(W * d.dogAt[0], base + d.dogAt[1] * S, S * .52, 1, 0, 0);
+  else if (wantDog) { let dx = (hx !== undefined ? hx : W * .5) + 104 * S, mv = 0; if (d.dog) { const k = Math.min(1, t / d.dog[1][0]); dx = (d.dog[0][1] + (d.dog[1][1] - d.dog[0][1]) * k) * W; mv = k < 1; } else if (d.runner) { dx = (hx || 0) - 112 * S; mv = 1; } drawNiceDog(dx, base, S * .72, d.dog ? -1 : (d.runner ? 1 : -1), t * 16, mv || d.runner); }
+  if (d.heli) { const lift = Math.max(0, t - .7) * 56; drawHeli(W * .76, base - 66 * S - lift, S * .9); }
+  if (d.streak) { ctx.fillStyle = "#ffffff30"; for (let i = 0; i < 14; i++) { const w = 90 + (i % 3) * 50, x = W - ((sceneT * 780 + i * 137) % (W + w)); ctx.fillRect(x, base - 16 - (i * 37) % 200, w, 2.3); } }
+  if (d.waves) { ctx.strokeStyle = "#62e0ffaa"; ctx.lineWidth = 3; for (let i = 0; i < 3; i++) { const r = ((sceneT * 70 + i * 34) % 100) + 20; ctx.globalAlpha = 1 - r / 124; ctx.beginPath(); ctx.arc(W * .5, base - 232 * S, r, -2.4, -.7); ctx.stroke(); } ctx.globalAlpha = 1; }
+  (d.fx || []).forEach((e, i) => {
+    if (t < e[0] || SA.done[i]) return; SA.done[i] = 1;
+    const fx = (e[2] !== undefined ? e[2] * W : (hx || W * .4) + 100 * S), fy = base - 130 * S;
+    if (e[1] === "shake") { SA.shake = .4; haptic("medium"); beep(90, .16, .1, "sawtooth"); }
+    if (e[1] === "muzzle") { SA.flash = .75; beep(170, .08, .1, "sawtooth"); for (let n = 0; n < 6; n++) SA.fx.push({ x: fx + 40 * S, y: fy, vx: 300 + Math.random() * 300, vy: (Math.random() - .5) * 180, life: .2, c: "#ffe36b", r: 3.5 }); }
+    if (e[1] === "blood") for (let n = 0; n < 16; n++) SA.fx.push({ x: fx, y: fy, vx: (Math.random() - .5) * 300, vy: -Math.random() * 240, g: 620, life: .6, c: "#8f1d24", r: 4 });
+    if (e[1] === "spark") for (let n = 0; n < 12; n++) SA.fx.push({ x: fx, y: fy + 80 * S, vx: (Math.random() - .5) * 120, vy: -Math.random() * 130, life: .7, c: "#8fe6ff", r: 3 });
+    if (e[1] === "dust") for (let n = 0; n < 18; n++) SA.fx.push({ x: fx, y: base, vx: (Math.random() - .5) * 240, vy: -Math.random() * 90, life: .55, c: "#b9aa95", r: 6 });
+    if (e[1] === "boom") { SA.flash = 1; beep(70, .5, .22, "sawtooth"); for (let n = 0; n < 42; n++) { const a = Math.random() * 6.28, v = 80 + Math.random() * 390; SA.fx.push({ x: fx, y: base - 80 * S, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 80, g: 300, life: .55 + Math.random() * .55, c: ["#ffe36b", "#ff8a2e", "#c93d3d", "#5a5560"][n % 4], r: 4 + (n % 4) * 3 }); } }
+  });
+  for (const p of SA.fx) { p.life -= dt; p.x += p.vx * dt; p.y += p.vy * dt; if (p.g) p.vy += p.g * dt; ctx.fillStyle = p.c; ctx.globalAlpha = Math.min(1, p.life * 4); ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.3); ctx.fill(); }
+  ctx.globalAlpha = 1; SA.fx = SA.fx.filter(p => p.life > 0);
+  if (d.smoke) { ctx.fillStyle = "#cfd1da12"; for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.arc(W * (.35 + i * .1) + Math.sin(sceneT + i) * 20, base - 120 * S - i * 10, 60 + i * 8, 0, 6.3); ctx.fill(); } }
+  if (d.glow) { ctx.fillStyle = `rgba(100,220,255,${.08 + Math.sin(sceneT * 9) * .03})`; ctx.fillRect(0, 0, W, base); }
+  if (d.soft) { const g = ctx.createRadialGradient(W * .5, Y, 20, W * .5, Y, W); g.addColorStop(0, "rgba(255,210,150,.34)"); g.addColorStop(1, "rgba(255,210,150,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, base + 20); }
+  if (SA.flash > 0) { ctx.fillStyle = `rgba(255,235,180,${SA.flash * .6})`; ctx.fillRect(0, 0, W, H); SA.flash = Math.max(0, SA.flash - dt * 8); }
+}
+
+/* ---------- Сюжет ---------- */
+let stOn = false, SI = null, ST = null, ACTS = {}, stTimer = null, stType = null, sceneT = 0, stWho = "none", stBg = "city", qteState = null;
+const STAT = { g: "Глеб", t: "Тим", s: "Соня", hum: "Человечность", rep: "Люди" };
+const newSave = () => ({ vars: {}, seen: {}, picks: {}, snaps: {}, endings: [], cur: null });
+function chk(cond, v) {
+  for (const raw of (cond || "").split(",")) {
+    const p = raw.trim(); if (!p) continue;
+    const m = p.match(/^(\w+)(>=|<=|<|>)(-?\d+)$/);
+    if (m) { const a = v[m[1]] || 0, b = +m[3]; if (!(m[2] === ">=" ? a >= b : m[2] === "<=" ? a <= b : m[2] === "<" ? a < b : a > b)) return false; }
+    else if (p[0] === "!") { if (v[p.slice(1)]) return false; }
+    else if (!v[p]) return false;
+  }
+  return true;
+}
+const STAT_TEXT = { g: ["Глеб доверяет больше", "Глеб доверяет меньше"], t: ["Тим доверяет больше", "Тим доверяет меньше"], s: ["Соня верит тебе больше", "Соня верит тебе меньше"], hum: ["Человечность растёт", "Человечность падает"], rep: ["Люди на твоей стороне", "Люди отворачиваются"] };
+function effects(fx, quiet) {
+  const v = ST.vars, out = [];
+  for (const raw of (fx || "").split(",")) {
+    const p = raw.trim(); if (!p) continue;
+    if (p[0] === "+" || p[0] === "-") { const k = p.slice(1), d = p[0] === "+" ? 1 : -1; v[k] = (v[k] || 0) + d; if (STAT[k]) { out.push([d > 0, STAT_TEXT[k][d > 0 ? 0 : 1]]); if (!quiet) toast((d > 0 ? "▲ " : "▼ ") + STAT[k]); } }
+    else if (p[0] === "!") v[p.slice(1)] = 0;
+    else v[p] = 1;
+  }
+  return out;
+}
+let saveTimer;
+function saveStory() { clearTimeout(saveTimer); saveTimer = setTimeout(() => api("/story/save", { state: ST }).catch(() => {}), 350); }
+const allMissions = () => SI.acts.flatMap(a => a.missions.map(m => Object.assign({ act: a.n }, m)));
+const actOf = n => SI.acts.find(a => a.n === n);
+
+async function openStory() {
+  try {
+    SI = await api("/story/index");
+    ST = SI.save && SI.save.vars ? SI.save : newSave();
+    for (const k of Object.keys(newSave())) if (ST[k] === undefined) ST[k] = newSave()[k];
+    stOn = true; $("hud").classList.remove("on"); $("dash").classList.remove("on"); $("menu").classList.remove("on"); $("story").classList.add("on"); Sound.setMode("menu"); showChapters();
+  } catch (err) { toast(err.message); }
+}
+function closeStory() { stopNode(); stOn = false; $("story").classList.remove("on"); $("menu").classList.add("on"); Sound.setMode("menu"); render(); }
+
+function nextMission(afterId) {
+  const list = allMissions(); let i = afterId ? list.findIndex(m => m.id === afterId) + 1 : 0;
+  for (; i < list.length; i++) if (chk(list[i].need, ST.vars)) return list[i];
+  return null;
+}
+function currentTarget() {
+  if (ST.cur) return allMissions().find(m => m.id === ST.cur.id);
+  const lastId = ST.last; return nextMission(lastId);
+}
+const NAMES = { vera: "Вера", gleb: "Глеб", tim: "Тим", sonya: "Соня", none: "" };
+const AS_WHOM = { vera: "Веру", gleb: "Глеба", tim: "Тима", sonya: "Соню", none: "всех" };
+const HCOL = { vera: "#9fdcff", gleb: "#9db8f0", tim: "#ffb15c", sonya: "#ffa8c4", none: "#f3ead6" };
+let stOpenAct = null;
+function showChapters() {
+  stopNode(); Sound.setMode("menu");
+  const list = allMissions(), target = currentTarget(), L = $("stList"), tIndex = target ? list.findIndex(m => m.id === target.id) : list.length;
+  const doneCount = Math.min(tIndex, list.length), started = ST.cur || ST.last;
+  if (stOpenAct === null) stOpenAct = target ? target.act : 1;
+  let firstLocked = true;
+  let html = `<div id="chTop"><button id="stHome" class="snd" aria-label="Закрыть">✕</button><b>Три зелёные лягушки</b><button id="chPeople" class="snd" aria-label="Герои">👥</button></div>
+    <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--dim);font-weight:700"><span>Пройдено ${doneCount} из ${list.length}</span><span>Концовки ${ST.endings.length} из ${SI.endings}</span></div>
+    <div class="prog"><i style="width:${doneCount / list.length * 100}%"></i></div>`;
+  if (target) html += `<div class="nextcard"><small>${started ? "Следующая миссия" : "Начало истории"} · играешь за <span style="color:${HCOL[target.who]}">${AS_WHOM[target.who]}</span></small><h3>${esc(target.title)}</h3><button class="big" id="stGo">${ST.cur ? "ПРОДОЛЖИТЬ" : started ? "ДАЛЬШЕ" : "НАЧАТЬ"}</button></div>`;
+  else html += `<div class="nextcard"><small>История завершена</small><h3>Другие решения — другой финал</h3><button class="big" id="stNew">ПРОЙТИ ЗАНОВО</button></div>`;
+  for (const a of SI.acts) {
+    const items = a.missions.map(m => list.findIndex(x => x.id === m.id)), inAct = items.filter(i => i < tIndex).length, open = stOpenAct === a.n;
+    html += `<button class="actbtn" data-act="${a.n}"><span>Акт ${a.n}. ${esc(a.title)}</span><small>${a.open ? inAct + " из " + a.missions.length : "🔒 закрыт"} ${open ? "▴" : "▾"}</small></button>`;
+    if (!a.open && firstLocked) { firstLocked = false; html += `<div class="paybox"><p>Акты ${a.n}–${SI.acts.length}: развязка истории и все концовки.</p><button class="big" data-pay="1">ОТКРЫТЬ ЗА ⭐ ${SI.stars}</button><button class="ghost gold ${P.coins < SI.coins ? "lock" : ""}" data-unlock="1" ${P.coins < SI.coins ? `data-why="Не хватает ${fmt(SI.coins - P.coins)} монет"` : ""}>или ${fmt(SI.coins)} монет</button></div>`; }
+    if (!open) continue;
+    for (const m of a.missions) {
+      const i = list.findIndex(x => x.id === m.id), past = i < tIndex, cur = i === tIndex, snap = ST.snaps[m.id], skip = past && !snap;
+      const state = cur ? "Сейчас" : skip ? "Герой погиб" : past ? "Пройдена" : "Закрыта", cls = cur ? "cur" : past && snap ? "done" : "off";
+      const why = cur ? "Эта миссия следующая: нажми кнопку наверху" : skip ? "Эту миссию некому пройти: герой погиб" : past ? "" : `Сначала пройди «${esc(list[Math.max(0, tIndex)] ? list[tIndex].title : "")}»`;
+      html += `<button class="mrow ${cls}" data-m="${past && snap ? m.id : ""}" data-note="${why}"><i>${past && snap ? "✓" : i + 1}</i><span><b>${esc(m.title)}</b><small style="color:${HCOL[m.who]}">${NAMES[m.who] || "Финал"}</small></span><em>${state}</em></button>`;
+    }
+  }
+  L.innerHTML = html; L.classList.add("on");
+  $("stHome").onclick = closeStory; $("chPeople").onclick = showPeople;
+  if ($("stGo")) $("stGo").onclick = () => playTarget(target);
+  if ($("stNew")) $("stNew").onclick = () => { const kept = ST.endings; ST = newSave(); ST.endings = kept; saveStory(); stOpenAct = 1; showChapters(); };
+  L.onclick = async e => {
+    const act = e.target.closest("[data-act]");
+    if (act) { const n = +act.dataset.act, top = L.scrollTop; stOpenAct = stOpenAct === n ? 0 : n; showChapters(); L.scrollTop = top; return; }
+    if (e.target.closest("[data-pay]")) return buyStory(e.target.closest("[data-pay]"));
+    if (e.target.closest("[data-unlock]")) { try { const r = await api("/story/unlock"); setProfile(r.profile); SI = await api("/story/index"); showChapters(); toast("История открыта"); } catch (err) { toast(err.message); } return; }
+    const row = e.target.closest(".mrow"); if (!row) return;
+    if (!row.dataset.m) { row.classList.remove("shake"); void row.offsetWidth; row.classList.add("shake"); return toast(row.dataset.note); }
+    const m = list.find(x => x.id === row.dataset.m);
+    openModal(`<h2>Переиграть?</h2><p class="sub">«${esc(m.title)}». Всё, что случилось после этой миссии, будет отменено.</p><button class="big" id="rpYes">ПЕРЕИГРАТЬ</button><button class="ghost" id="rpNo">Отмена</button>`);
+    $("rpNo").onclick = closeModal;
+    $("rpYes").onclick = () => {
+      closeModal(); ST.vars = JSON.parse(JSON.stringify(ST.snaps[m.id]));
+      const i = list.findIndex(x => x.id === m.id); for (const x of list.slice(i)) delete ST.snaps[x.id];
+      ST.cur = null; ST.last = i ? list[i - 1].id : null; playTarget(m);
+    };
+  };
+}
+function showPeople() {
+  const v = ST.vars, feel = n => { const x = v[n] || 0; return x >= 2 ? ["Доверяет", "var(--ok)"] : x >= 0 ? ["Присматривается", "var(--gold)"] : ["Не доверяет", "var(--bad)"]; };
+  const row = (name, dead, n) => { const f = dead ? ["Погиб", "var(--bad)"] : n ? feel(n) : ["Жив", "var(--ok)"]; return `<div class="who"><b>${name}</b><small style="color:${f[1]}">${f[0]}</small></div>`; };
+  const scale = n => { const x = v[n] || 0; return x >= 3 ? ["Высокая", "var(--ok)"] : x >= 0 ? ["Средняя", "var(--gold)"] : ["Низкая", "var(--bad)"]; };
+  const fh = scale("hum"), fr = scale("rep");
+  openModal(`<h2>Герои</h2><p class="sub">Как твои решения изменили отношения.</p>
+    ${row("Вера", v.dead_vera)}${row("Глеб", v.dead_gleb, "g")}${row("Тим", v.dead_tim, "t")}${v.dead_sonya ? row("Соня", 1) : row("Соня", 0, "s")}${row("Пёс Бублик", v.dead_bublik)}
+    <div class="who"><b>Человечность</b><small style="color:${fh[1]}">${fh[0]}</small></div><div class="who"><b>Доверие людей</b><small style="color:${fr[1]}">${fr[0]}</small></div>
+    <div style="height:13px"></div><button class="big" id="peClose">ПОНЯТНО</button>`);
+  $("peClose").onclick = closeModal;
+}
+function buyStory(btn) { buy("story_pass", btn); }
+
+async function playTarget(m) {
+  const a = actOf(m.act);
+  if (!a.open) { stOpenAct = a.n; toast("Сначала открой этот акт"); return showChapters(); }
+  try { if (!ACTS[a.n]) ACTS[a.n] = (await api("/story/act", { n: a.n })).act; } catch (err) { return toast(err.message); }
+  const full = ACTS[a.n].missions.find(x => x.id === m.id);
+  const fresh = !ST.cur || ST.cur.id !== m.id;
+  if (fresh) { ST.snaps[m.id] = JSON.parse(JSON.stringify(ST.vars)); ST.cur = { id: m.id, node: full.start, picks: [] }; }
+  $("stList").classList.remove("on");
+  $("stTitle").innerHTML = `${esc(full.title)}<small>Акт ${a.n} · миссия ${allMissions().findIndex(x => x.id === m.id) + 1} из ${allMissions().length}</small>`;
+  stBg = full.bg; stWho = full.who; stMission = full.id; sceneFade = 1;
+  stActor(full.who);
+  if (!fresh) return runNode(full, ST.cur.node);
+  const card = $("stCard"); let gone = false;
+  card.innerHTML = `<small>Акт ${a.n} · ${esc(a.title)}</small><h2>${esc(full.title)}</h2><b style="color:${HCOL[full.who]}">${full.who === "none" ? "Финал" : "Играешь за " + AS_WHOM[full.who]}</b><p>Нажми, чтобы начать</p>`;
+  card.classList.add("on");
+  const start = () => { if (gone || !ST.cur || ST.cur.id !== full.id) return; gone = true; card.classList.remove("on"); sceneFade = 1; runNode(full, ST.cur.node); };
+  card.onclick = start; setTimeout(start, 2600);
+}
+let stMission = "", sceneFade = 0, stTense = false, stAdvance = null;
+function stActor(who) { $("stName").textContent = NAMES[who] || ""; $("stName").style.color = HCOL[who]; }
+function stopNode() { cancelAnimationFrame(stTimer); clearInterval(stType); stTimer = stType = null; qteState = null; stAdvance = null; stReveal = null; clearTimeout(stWait); stTense = false; $("stTimerRow").classList.remove("on"); $("stQte").style.display = "none"; $("stHint").textContent = ""; $("stCard").classList.remove("on"); }
+
+function runNode(m, key) {
+  if (!ST.cur || ST.cur.id !== m.id) return;
+  stopNode();
+  if ($("stList").classList.contains("on")) { ST.cur.node = key; return saveStory(); }
+  if (key === "$") return endMission(m);
+  ST.cur.node = key;
+  (ST.seen[m.id] = ST.seen[m.id] || {})[key] = 1;
+  const n = m.nodes[key];
+  for (const g of n.go) if (chk(g.if, ST.vars)) return runNode(m, g.to);
+  saveStory();
+  stTense = !!(n.timer || n.qte);
+  if (stTense) { Sound.setMode("game"); Sound.setGame(1, 116); } else Sound.setMode("menu");
+  setStage(n.stage);
+  typeText(n.text);
+  const box = $("stChoices"), hint = $("stHint"); box.innerHTML = "";
+  if (n.qte) return startQte(m, n.qte);
+  if (!n.timer) {
+    let shown = false;
+    const show = () => { if (shown) return; shown = true; clearTimeout(stWait); stReveal = null; showOptions(m, n); };
+    stReveal = show; stWait = setTimeout(show, Math.min(2600, stageDur() * 1000 + 150));
+    hint.textContent = "Смотри, что происходит…";
+    return;
+  }
+  showOptions(m, n);
+}
+let stReveal = null, stWait = null;
+function showOptions(m, n) {
+  const box = $("stChoices"), hint = $("stHint"); box.innerHTML = ""; hint.textContent = "";
+  const addBtn = (text, cls, i) => { const b = document.createElement("button"); b.className = "stc " + cls; b.textContent = text; b.style.animationDelay = (i * 70) + "ms"; box.appendChild(b); return b; };
+  if (n.ending) {
+    hint.textContent = "Это одна из концовок";
+    addBtn("Завершить: «" + n.ending + "»", "stnext", 0).onclick = () => { if (!ST.endings.includes(n.ending)) ST.endings.push(n.ending); runNode(m, "$"); };
+    stAdvance = null; return;
+  }
+  if (n.next) {
+    let gone = false;
+    const go = () => { if (gone) return; gone = true; effects(n.next.fx); runNode(m, n.next.to); };
+    addBtn("Далее", "stnext", 0).onclick = go; stAdvance = go; return;
+  }
+  const opts = n.choices.filter(c => chk(c.if, ST.vars)); let picked = false;
+  const pick = (c, btn) => {
+    if (picked) return; picked = true; cancelAnimationFrame(stTimer); stAdvance = null; $("stTimerRow").classList.remove("on");
+    box.querySelectorAll(".stc").forEach(x => x.classList.add(x === btn ? "picked" : "dim"));
+    haptic("medium"); beep(560, .09, .08, "triangle");
+    const changes = effects(c.fx, true);
+    ST.cur.picks.push(c.l);
+    let chips = changes.map(x => `<span style="color:${x[0] ? "var(--ok)" : "var(--bad)"}">${x[0] ? "▲" : "▼"} ${esc(x[1])}</span>`).join("");
+    if (c.note) chips += `<span style="color:var(--gold)">${esc(c.note)}</span>`;
+    clearTimeout(toastTimer); $("toast").classList.remove("on");
+    const cap = $("stCap"); cap.innerHTML = `<b>${esc(c.l)}</b>${chips ? `<div>${chips}</div>` : ""}`; cap.classList.add("on");
+    setStage(c.stage); stTense = !!(SA && SA.def.tense);
+    let left = false;
+    setTimeout(() => { if (!left) { box.innerHTML = ""; hint.textContent = "Смотри, что происходит…"; } }, 240);
+    const go = () => { if (left) return; left = true; clearTimeout(stWait); stReveal = null; cap.classList.remove("on"); runNode(m, c.to); };
+    stReveal = go; stWait = setTimeout(go, Math.max(1500, Math.min(2300, stageDur() * 1000 + 250)));
+  };
+  const btns = opts.map((c, i) => { const b = addBtn(c.l, "", i); b.onclick = () => pick(c, b); return b; });
+  hint.textContent = n.timer ? "Решай быстро, иначе выбор сделают за тебя" : opts.length > 1 ? "Выбери, что сделать" : "";
+  if (n.timer) {
+    const row = $("stTimerRow"), fill = $("stTimer").firstElementChild, sec = $("stSec"), t0 = performance.now(), len = n.timer.s * 1000; row.classList.add("on");
+    const idx = opts.indexOf(n.choices[n.timer.def]), auto = idx >= 0 ? idx : 0;
+    const tick = now => { const left = 1 - (now - t0) / len; fill.style.width = Math.max(0, left * 100) + "%"; fill.style.background = left < .3 ? "var(--bad)" : "var(--hot)"; sec.textContent = Math.max(0, Math.ceil(left * n.timer.s)) + " с"; if (left <= 0) { toast("Время вышло"); return pick(opts[auto], btns[auto]); } stTimer = requestAnimationFrame(tick); };
+    stTimer = requestAnimationFrame(tick);
+  }
+}
+let stFull = "";
+function typeText(text) {
+  const el = $("stText"); clearInterval(stType); let i = 0; el.textContent = ""; stFull = text;
+  stType = setInterval(() => { i += 2; el.textContent = text.slice(0, i); if (i >= text.length) { clearInterval(stType); stType = null; } }, 16);
+}
+function stageTap() {
+  if ($("stCard").classList.contains("on") || qteState) return;
+  if (stType) { clearInterval(stType); stType = null; $("stText").textContent = stFull; }
+  if (stReveal) { if (SA) SA.t = SA.def.dur; stReveal(); return; }
+  if (stAdvance) return stAdvance();
+  if (!document.querySelector("#stChoices .stc")) return;
+  const cs = document.querySelectorAll("#stChoices .stc:not(.dim):not(.picked)");
+  if (cs.length) { cs.forEach(b => { b.style.animation = "none"; b.style.opacity = 1; void b.offsetWidth; b.style.animation = "pulse .4s"; }); toast("Выбери один из вариантов"); }
+}
+$("stStage").addEventListener("click", stageTap);
+$("stText").addEventListener("click", stageTap);
+function stFlash(ok) { const f = $("stFlash"); f.textContent = ok ? "УСПЕЛ!" : "НЕ УСПЕЛ"; f.style.color = ok ? "var(--ok)" : "var(--bad)"; f.classList.remove("on"); void f.offsetWidth; f.classList.add("on"); }
+function startQte(m, q) {
+  const box = $("stQte"), big = $("qteBig"), pad = $("qtePad"), arrow = $("qteArrow"), row = $("stTimerRow"), fill = $("stTimer").firstElementChild, sec = $("stSec"), label = $("qteLabel");
+  box.style.display = "block"; row.classList.add("on");
+  let left = q.n, t0 = performance.now(), done = false, want = "";
+  const DIRS = ["▲", "◀", "▼", "▶"], tap = q.kind === "tap", total = q.s * 1000;
+  const finish = ok => { if (done) return; done = true; cancelAnimationFrame(stTimer); stFlash(ok); haptic(ok ? "medium" : "heavy"); beep(ok ? 720 : 110, .22, .14, ok ? "triangle" : "sawtooth"); ST.cur.picks.push(ok ? "Быстрое действие: успел" : "Быстрое действие: не успел"); setTimeout(() => runNode(m, ok ? q.ok : q.fail), 520); };
+  big.style.display = tap ? "inline-block" : "none"; pad.style.display = tap ? "none" : "grid"; arrow.style.display = tap ? "none" : "block";
+  label.textContent = tap ? "Быстро жми на круг, пока не кончилось время!" : `Жми ту же стрелку, что показана. Осталось: ${left}`;
+  const nextDir = () => { want = DIRS[Math.floor(Math.random() * 4)]; arrow.textContent = want; t0 = performance.now(); };
+  if (tap) { big.textContent = left; big.onpointerdown = e => { e.preventDefault(); e.stopPropagation(); haptic("light"); beep(300 + (q.n - left) * 30, .05, .06, "triangle"); left--; big.textContent = Math.max(0, left); if (left <= 0) finish(true); }; }
+  else {
+    nextDir();
+    pad.querySelectorAll("button").forEach(b => b.classList.remove("good", "bad"));
+    pad.onpointerdown = e => {
+      const b = e.target.closest("[data-d]"); if (!b || done) return; e.preventDefault();
+      const ok = b.dataset.d === want; b.classList.add(ok ? "good" : "bad"); setTimeout(() => b.classList.remove("good", "bad"), 170);
+      if (!ok) return finish(false);
+      haptic("light"); beep(520, .06, .06, "triangle");
+      if (--left <= 0) finish(true); else { label.textContent = `Жми ту же стрелку, что показана. Осталось: ${left}`; nextDir(); }
+    };
+  }
+  qteState = { finish };
+  const tick = now => { if (done) return; const rest = 1 - (now - t0) / total; fill.style.width = Math.max(0, rest * 100) + "%"; fill.style.background = rest < .35 ? "var(--bad)" : "var(--hot)"; sec.textContent = Math.max(0, rest * q.s).toFixed(1) + " с"; if (rest <= 0) return finish(false); stTimer = requestAnimationFrame(tick); };
+  stTimer = requestAnimationFrame(tick);
+}
+
+function flowSvg(m) {
+  const depth = {}, order = [], q = [[m.start, 0]];
+  while (q.length) { const [k, d] = q.shift(); if (k === "$" || depth[k] !== undefined || !m.nodes[k]) continue; depth[k] = d; order.push(k); const n = m.nodes[k]; const out = n.go.map(g => g.to).concat(n.choices.map(c => c.to), n.next ? [n.next.to] : [], n.qte ? [n.qte.ok, n.qte.fail] : []); for (const t of out) q.push([t, d + 1]); }
+  const rows = {}; for (const k of order) (rows[depth[k]] = rows[depth[k]] || []).push(k);
+  const W = 340, DY = 46, pos = {}, seen = ST.seen[m.id] || {}, maxD = Math.max(...order.map(k => depth[k]));
+  for (const d in rows) rows[d].forEach((k, i) => pos[k] = [W * (i + 1) / (rows[d].length + 1), 18 + d * DY]);
+  let edges = "", dots = "";
+  for (const k of order) { const n = m.nodes[k]; const out = n.go.map(g => g.to).concat(n.choices.map(c => c.to), n.next ? [n.next.to] : [], n.qte ? [n.qte.ok, n.qte.fail] : []); for (const t of out) if (pos[t] && depth[t] > depth[k]) edges += `<line x1="${pos[k][0]}" y1="${pos[k][1]}" x2="${pos[t][0]}" y2="${pos[t][1]}" stroke="${seen[k] && seen[t] ? "#ff6b3d" : "#2b3044"}" stroke-width="${seen[k] && seen[t] ? 3 : 1.5}"/>`; }
+  for (const k of order) dots += seen[k] ? `<circle cx="${pos[k][0]}" cy="${pos[k][1]}" r="8" fill="#ff6b3d"/>` : `<circle cx="${pos[k][0]}" cy="${pos[k][1]}" r="8" fill="#191c2a" stroke="#2b3044"/><text x="${pos[k][0]}" y="${pos[k][1] + 4}" text-anchor="middle" fill="#6b7088" font-size="11" font-weight="700">?</text>`;
+  const total = order.length, open = order.filter(k => seen[k]).length;
+  return { svg: `<svg class="flow" viewBox="0 0 ${W} ${36 + maxD * DY}">${edges}${dots}</svg>`, total, open };
+}
+async function endMission(m) {
+  stopNode(); Sound.setMode("menu");
+  const picks = ST.cur.picks; ST.picks[m.id] = picks; ST.last = m.id; ST.cur = null; saveStory();
+  let given = 0;
+  try { const r = await api("/story/reward", { mission: m.id }); given = r.given; setProfile(r.profile); } catch (e) {}
+  const f = flowSvg(m), nx = nextMission(m.id);
+  openModal(`<h2>Миссия пройдена</h2><p class="sub">«${esc(m.title)}» · открыто событий ${f.open} из ${f.total}${given ? " · +" + given + " монет" : ""}</p><div class="legend"><i><span style="color:var(--hot)">●</span> твой путь</i><i>? другие варианты</i></div>${f.svg}${picks.length ? `<div class="picks"><b>Твои решения</b>${picks.map(p => `<div class="pick">• ${esc(p)}</div>`).join("")}</div>` : ""}<div style="height:12px"></div>${nx ? `<button class="big" id="stNext">ДАЛЕЕ</button>` : ""}<button class="ghost" id="stCh">К главам</button>`);
+  $("stCh").onclick = () => { closeModal(); showChapters(); };
+  if (nx) $("stNext").onclick = () => { closeModal(); const a = actOf(nx.act); if (!a.open) { toast("Дальше нужен доступ к акту " + a.n); return showChapters(); } playTarget(nx); };
+}
+$("stBack").onclick = () => { stOpenAct = null; showChapters(); };
+$("stPeople").onclick = showPeople;
+
+const BG = {
+  flat: ["#0c1024", "#2a2748", "city"], bridge: ["#101a30", "#3c3a5c", "bridge"], street: ["#10122a", "#3a2a48", "city"], roof: ["#0b0e20", "#23213f", "roof"],
+  camp: ["#141a2a", "#3f4258", "camp"], office: ["#1a1a22", "#2f2a2a", "room"], hospital: ["#1a2630", "#2c3c44", "room"], tunnel: ["#0a0a0f", "#1c1a18", "room"],
+  forest: ["#0d1a18", "#2a3a30", "forest"], road: ["#141624", "#4a3a3a", "forest"], farm: ["#1c1c30", "#5a4638", "farm"], barn: ["#161210", "#2f2318", "room"],
+  gate: ["#10141e", "#3a4048", "camp"], lab: ["#0e1a22", "#1f3a44", "lab"], tower: ["#0b0e20", "#3a3a68", "roof"], dawn: ["#3a2a58", "#ffa96b", "bridge"],
+};
+const HEROES = { vera: ["#dff3ff", 13, "ushanka0"], gleb: ["#7f9fe0", 14, "helmet"], tim: ["#ffb15c", 12.5, "cap"], sonya: ["#ffd3e0", 9.5, ""] };
+function renderScene(dt) {
+  sceneT += dt; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const b = BG[stBg] || BG.flat, Y = H * .47, g = ctx.createLinearGradient(0, 0, 0, Y); g.addColorStop(0, b[0]); g.addColorStop(1, b[1]);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, Y + 2); ctx.fillStyle = "#0d0f18"; ctx.fillRect(0, Y, W, H - Y);
+  const kind = b[2];
+  if (kind !== "room" && kind !== "lab") { if (stBg !== "dawn") drawMoon(W * .78, H * .1, Math.min(W, H) * .07, .9); else { ctx.fillStyle = "#ffe3a8"; ctx.beginPath(); ctx.arc(W * .5, Y, 58, Math.PI, 0); ctx.fill(); } }
+  ctx.fillStyle = "#07080f";
+  if (kind === "city" || kind === "roof" || kind === "camp") {
+    let x = 0, i = 0; const base = kind === "roof" ? Y - 40 : Y;
+    while (x < W) { const w = 34 + hash(i, 7) * 40, h = (kind === "roof" ? 40 : 70) + hash(i, 3) * 90; ctx.fillStyle = "#07080f"; ctx.fillRect(x, base - h, w, h + 44); ctx.fillStyle = "#ffcf6a55"; for (let a = 0; a < 5; a++) if (hash(i, a) > .72) ctx.fillRect(x + 6 + (a % 2) * 16, base - h + 10 + a * 16, 6, 8); x += w; i++; }
+    if (kind === "roof") { ctx.fillStyle = "#14121f"; ctx.fillRect(0, Y - 8, W, 12); }
+    if (kind === "camp") { ctx.fillStyle = "#222634"; for (let k = 0; k < 4; k++) { const px = W * (.12 + k * .26); ctx.beginPath(); ctx.moveTo(px - 36, Y); ctx.lineTo(px, Y - 42); ctx.lineTo(px + 36, Y); ctx.fill(); } ctx.fillStyle = "#fff3"; ctx.beginPath(); ctx.moveTo(W * .1, 0); ctx.lineTo(W * .02 + Math.sin(sceneT * .4) * 40, Y); ctx.lineTo(W * .22 + Math.sin(sceneT * .4) * 40, Y); ctx.fill(); }
+  } else if (kind === "bridge") {
+    ctx.fillStyle = "#07080f"; ctx.fillRect(0, Y - 16, W, 20); for (let x = 0; x < W; x += 56) { ctx.fillRect(x, Y - 74, 6, 60); } ctx.strokeStyle = "#07080f"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(0, Y - 70); for (let x = 0; x <= W; x += 28) ctx.lineTo(x, Y - 70 + Math.sin(x * .056) * 8); ctx.stroke();
+  } else if (kind === "forest") {
+    for (let i = 0; i < 16; i++) { const x = hash(i, 11) * W, h = 90 + hash(i, 5) * 90; ctx.fillStyle = "#050a08"; ctx.fillRect(x - 3, Y - h, 6, h); ctx.beginPath(); ctx.moveTo(x - 24, Y - h * .45); ctx.lineTo(x, Y - h - 10); ctx.lineTo(x + 24, Y - h * .45); ctx.fill(); }
+  } else if (kind === "farm") {
+    ctx.fillStyle = "#0a0806"; ctx.fillRect(W * .55, Y - 64, 92, 64); ctx.beginPath(); ctx.moveTo(W * .55 - 12, Y - 64); ctx.lineTo(W * .55 + 46, Y - 104); ctx.lineTo(W * .55 + 104, Y - 64); ctx.fill(); ctx.fillStyle = "#ffcf6a88"; ctx.fillRect(W * .55 + 34, Y - 46, 22, 22); ctx.strokeStyle = "#0a0806"; ctx.lineWidth = 4; for (let x = 0; x < W; x += 22) { ctx.beginPath(); ctx.moveTo(x, Y); ctx.lineTo(x, Y - 26); ctx.stroke(); }
+  } else {
+    ctx.fillStyle = "#0000002e"; for (let x = 0; x < W; x += 70) ctx.fillRect(x, 0, 2, Y);
+    if (kind === "lab") { ctx.fillStyle = "#6fe0ff22"; for (let x = 20; x < W; x += 92) ctx.fillRect(x, Y * .3, 72, Y * .55); ctx.fillStyle = "#6fe0ff"; ctx.fillRect(W * .1, 34, W * .8, 2); }
+    const fl = .75 + Math.sin(sceneT * 13) * .05 + (Math.sin(sceneT * 3.7) > .96 ? -.5 : 0), lamp = ctx.createRadialGradient(W / 2, 0, 10, W / 2, 0, Y * 1.1); lamp.addColorStop(0, `rgba(255,225,170,${.35 * fl})`); lamp.addColorStop(1, "rgba(255,225,170,0)"); ctx.fillStyle = lamp; ctx.fillRect(0, 0, W, Y);
+  }
+  const gnd = ctx.createLinearGradient(0, Y, 0, H * .68); gnd.addColorStop(0, b[1] + "aa"); gnd.addColorStop(1, "#0d0f18"); ctx.fillStyle = "#0d0f18"; ctx.fillRect(0, Y, W, H - Y); ctx.fillStyle = gnd; ctx.fillRect(0, Y, W, H - Y);
+  const fog = ctx.createLinearGradient(0, Y - 70, 0, Y + 12); fog.addColorStop(0, "rgba(190,200,230,0)"); fog.addColorStop(1, "rgba(190,200,230,.2)"); ctx.fillStyle = fog; ctx.fillRect(0, Y - 70, W, 82);
+  ctx.fillStyle = "#ffffff18"; for (let i = 0; i < 26; i++) { const x = (hash(i, 2) * W + sceneT * 18) % W, y = (hash(2, i) * Y + sceneT * (120 + i * 6)) % Y; if (kind !== "room" && kind !== "lab") ctx.fillRect(x, y, 1.2, 9); }
+  if (SA && SA.shake > 0) { ctx.save(); ctx.translate((Math.random() - .5) * SA.shake * 34, (Math.random() - .5) * SA.shake * 22); SA.shake = Math.max(0, SA.shake - dt * 1.6); drawStage(dt, Y); ctx.restore(); } else drawStage(dt, Y);
+  const vig = ctx.createRadialGradient(W / 2, Y * .7, Y * .35, W / 2, Y * .7, Math.max(W, Y) * .85); vig.addColorStop(0, "rgba(4,5,10,0)"); vig.addColorStop(1, "rgba(4,5,10,.72)"); ctx.fillStyle = vig; ctx.fillRect(0, 0, W, H * .7);
+  if (stTense) { ctx.fillStyle = `rgba(200,30,50,${.1 + Math.sin(sceneT * 6) * .05})`; ctx.fillRect(0, 0, W, H * .62); }
+  if (sceneFade > 0) { sceneFade = Math.max(0, sceneFade - dt * 1.6); ctx.fillStyle = `rgba(7,8,15,${sceneFade})`; ctx.fillRect(0, 0, W, H); }
+}
 let last = performance.now();
 function frame(now) {
   const dt = Math.min(.05, (now - last) / 1000); last = now;
-  if (G) { if (!G.pause) step(dt); if (G) renderGame(); } else renderIdle(dt);
+  if (G) { if (!G.pause) step(dt); if (G) renderGame(); } else if (stOn) renderScene(dt); else { renderIdle(dt); if (tab === "hero") drawPreview(dt); }
   requestAnimationFrame(frame);
 }
 
